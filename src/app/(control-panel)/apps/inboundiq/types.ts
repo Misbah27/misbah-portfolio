@@ -88,3 +88,9 @@ export interface DockDoorStatus {
 	doorNumber: number;
 	truck: Truck | null;
 }
+
+/** Chat message for the Ask the Yard feature. */
+export interface ChatMessage {
+	role: 'user' | 'assistant';
+	content: string;
+}

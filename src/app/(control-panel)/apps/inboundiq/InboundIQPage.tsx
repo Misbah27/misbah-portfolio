@@ -7,6 +7,8 @@ import trucksData from '@/data/inboundiq/trucks.json';
 import InboundIQHeader from './InboundIQHeader';
 import TruckTable from './TruckTable';
 import DockStatusPanel from './DockStatusPanel';
+import NlYardFilter from './NlYardFilter';
+import AskTheYardDrawer from './AskTheYardDrawer';
 import {
 	YARD_QUEUE_COLUMNS,
 	DOORS_PER_FC,
@@ -74,6 +76,8 @@ function InboundIQPage() {
 
 	const defaultCols = new Set<keyof Truck>(YARD_QUEUE_COLUMNS.map((c) => c.key));
 	const [visibleColumns, setVisibleColumns] = useState<Set<keyof Truck>>(defaultCols);
+	const [nlFilterVrids, setNlFilterVrids] = useState<string[] | null>(null);
+	const [nlFilterQuery, setNlFilterQuery] = useState<string | null>(null);
 
 	// Yard trucks: Arrived/PreCheckin for selected FC (ranked, waiting for a door)
 	const yardTrucks = useMemo(
@@ -113,11 +117,17 @@ function InboundIQPage() {
 			result = result.filter((t) => t.arrivalStatus === arrivalFilter);
 		}
 
+		// Apply NL filter (AI-powered)
+		if (nlFilterVrids !== null) {
+			const vridSet = new Set(nlFilterVrids);
+			result = result.filter((t) => vridSet.has(t.isaVrid));
+		}
+
 		return [...result].sort((a, b) => {
 			const cmp = compareTrucks(a, b, sort.field);
 			return sort.direction === 'asc' ? cmp : -cmp;
 		});
-	}, [yardTrucks, searchQuery, fastLane, arrivalFilter, sort]);
+	}, [yardTrucks, searchQuery, fastLane, arrivalFilter, sort, nlFilterVrids]);
 
 	const handleSort = useCallback((field: keyof Truck) => {
 		setSort((prev) =>
@@ -146,6 +156,12 @@ function InboundIQPage() {
 		setFastLane(false);
 		setArrivalFilter('ALL');
 		setSort({ field: 'rank', direction: 'asc' });
+		setPage(0);
+	}, []);
+
+	const handleNlFilter = useCallback((matchingVrids: string[] | null, query: string) => {
+		setNlFilterVrids(matchingVrids);
+		setNlFilterQuery(query || null);
 		setPage(0);
 	}, []);
 
@@ -198,6 +214,15 @@ function InboundIQPage() {
 			}
 			content={
 				<div className="w-full px-2 py-4">
+					<div className="mb-3 px-2">
+						<NlYardFilter
+							yardTrucks={yardTrucks}
+							onFilter={handleNlFilter}
+							activeQuery={nlFilterQuery}
+							matchCount={filteredYardTrucks.length}
+							totalCount={yardTrucks.length}
+						/>
+					</div>
 					<TruckTable
 						trucks={filteredYardTrucks}
 						visibleColumns={visibleColumns}
@@ -211,12 +236,19 @@ function InboundIQPage() {
 							setPage(0);
 						}}
 					/>
+					<AskTheYardDrawer
+						yardTrucks={yardTrucks}
+						dockedTrucks={checkedInTrucks}
+						fcId={selectedFc}
+					/>
 				</div>
 			}
 			rightSidebarContent={
 				<DockStatusPanel
 					checkedInTrucks={checkedInTrucks}
 					totalDoors={DOORS_PER_FC[selectedFc]}
+					yardTrucks={yardTrucks}
+					fcId={selectedFc}
 				/>
 			}
 			rightSidebarOpen

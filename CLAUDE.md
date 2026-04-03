@@ -154,25 +154,69 @@ export async function POST(request: Request) {
 Route: /apps/inboundiq
 Achievement: Reduced truck TAT from 6.7 → 2.2 hours
 
-Pages: Dashboard | Analytics | FC Map | About
+Domain: Dock door allocation engine. Each FC has 10-15 dock doors (scarce
+resource). System ranks trucks in the yard so ops knows which truck gets
+the next available door — replacing all manual decision-making.
 
-Truck table columns:
-Rank | Vehicle No | ISA/VRID | DockDoor | ApptType | Slot(hrs) |
-DM Status | Schedule Time | PreCheckin | Checkin | Unloading ETA |
-Arrival Status | Sideline Remarks | Units | Cartons | Dwell(Hours) |
-Stow Date | Stow Time Remaining
+Pages: Dashboard | Analytics | Map | About
 
-Status values: ON_TIME | LATE | DELAYED | EARLY
-DM Status: CheckedIn | Arrived | PreCheckin | Scheduled
-ApptType: CARP | AMZL | SPD | HOT
+Truck data model — 3 categories in trucks.json:
 
-Data: /data/inboundiq/trucks.json — 150 trucks, SEA1/PDX2/LAX3
+CheckedIn (at dock, actively unloading):
+  rank=null, dockDoor=assigned(1-15 unique per FC), unloadingEta=valid ISO,
+  dwellHours=null, checkinTime=valid ISO, precheckinTime=valid ISO
+
+Arrived/PreCheckin (in yard, waiting — THE RANKED ONES):
+  rank=1-N per FC, dockDoor=null, unloadingEta=null,
+  dwellHours=valid float, checkinTime=null, precheckinTime=valid ISO
+
+Scheduled (en route, not yet at FC):
+  rank=null, dockDoor=null, all times=null,
+  arrivalStatus=ON_TIME|EARLY|EXPECTED only (not DELAYED/LATE)
+
+Common fields: vehicleNo, isaVrid, apptType(CARP|AMZL|SPD|HOT),
+slotHours, dmStatus, scheduleTime, arrivalStatus, sidelineRemarks,
+units, cartons, stowDate, stowTimeRemaining, lowInstockPct(0-80), fcId
+
+lowInstockPct = how critically FC shelves need this cargo (0-80%).
+Higher = more urgent. Heaviest weight in ranking model.
+
+Ranking model (yard trucks only):
+Priority = lowInstockPct(0.35) + apptType(0.25, HOT=100/SPD=75/CARP=50/AMZL=40)
+         + dwellHours(0.20) + stowUrgency(0.12) + arrivalStatus(0.08)
+
+FC door counts: SEA1=14, PDX2=12, LAX3=13, ORD2=11, JFK4=10
+FC truck counts: SEA1=40, PDX2=30, LAX3=30, ORD2=25, JFK4=25
+
+Dashboard layout:
+- FusePageSimple fullwidth with rightSidebarContent (~420px permanent)
+- No Fuse boilerplate (no Configurator, theme switcher, language switcher)
+- No auth guard — public portfolio
+
+Main area — Yard Queue table (Arrived/PreCheckin only):
+Rank(gold/silver/bronze #1-3) | Vehicle No | ISA/VRID | Appt Type(chip,
+HOT=red) | Low Instock %(color-coded) | Arrival Status | Dwell Hours
+(Xh Ym, amber>12h, red>24h) | Units | Cartons | Slot hrs |
+Stow Time Left | Schedule Time | Pre-Checkin | Sideline Remarks | AI Insight
+Subtitle: "Yard Queue (X of Y trucks waiting for dock)"
+Scheduled trucks NOT shown on this page.
+
+Right sidebar — Dock Status Panel:
+Header: "Dock Status — X/Y doors occupied"
+Occupied doors: Door#, Vehicle No, Appt Type chip, Unloading ETA, countdown
+Available doors: green tint, "Available" label
+Sorted by ETA ascending (soonest to free up at top)
+AI Dock Intelligence panel at bottom (LLM feature 3)
 
 LLM features:
-1. "Why ranked #N?" → /api/inboundiq/explain-rank
-2. Natural language filter → /api/inboundiq/nl-filter
-3. Yard Intelligence Panel (auto-loads) → /api/inboundiq/yard-summary
-4. Ask the Yard chatbot → /api/inboundiq/chat
+1. "Why Ranked #N? ✦" icon button per row → /api/inboundiq/explain-rank
+   Popover anchored to row. References actual ranking weights.
+2. NL Yard Filter toolbar → /api/inboundiq/nl-filter
+   Returns JSON array of matching isaVrid strings only.
+3. Dock Intelligence toggle in sidebar → /api/inboundiq/dock-intelligence
+   Contextual recommendations referencing specific doors + truck IDs.
+4. Ask the Yard chat drawer (380px, slides over content) → /api/inboundiq/chat
+   Context: yardTrucks + dockedTrucks + FC state. 3 seed question chips.
 
 ---
 

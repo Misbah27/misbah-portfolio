@@ -4,6 +4,7 @@
   "private": true,
   "type": "module",
   "dependencies": {
+    "@anthropic-ai/sdk": "^0.82.0",
     "@auth/unstorage-adapter": "2.9.0",
     "@emotion/cache": "11.14.0",
     "@emotion/react": "11.14.0",

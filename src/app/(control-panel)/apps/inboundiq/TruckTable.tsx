@@ -12,6 +12,7 @@ import Chip from '@mui/material/Chip';
 import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
 import { YARD_QUEUE_COLUMNS, type Truck, type SortConfig } from './types';
+import ExplainRankPopover from './ExplainRankPopover';
 
 interface TruckTableProps {
 	trucks: Truck[];
@@ -107,6 +108,15 @@ function TruckTable({
 									</TableSortLabel>
 								</TableCell>
 							))}
+							<TableCell
+								sx={{
+									fontWeight: 700,
+									whiteSpace: 'nowrap',
+									backgroundColor: 'background.paper',
+								}}
+							>
+								AI Insight
+							</TableCell>
 						</TableRow>
 					</TableHead>
 					<TableBody>
@@ -186,11 +196,14 @@ function TruckTable({
 										)}
 									</TableCell>
 								))}
+								<TableCell sx={{ whiteSpace: 'nowrap' }}>
+									<ExplainRankPopover truck={truck} />
+								</TableCell>
 							</TableRow>
 						))}
 						{paginated.length === 0 && (
 							<TableRow>
-								<TableCell colSpan={cols.length} align="center" sx={{ py: 6 }}>
+								<TableCell colSpan={cols.length + 1} align="center" sx={{ py: 6 }}>
 									<Typography color="text.secondary">
 										No trucks match current filters
 									</Typography>

@@ -5,11 +5,14 @@ import Typography from '@mui/material/Typography';
 import Chip from '@mui/material/Chip';
 import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
+import DockIntelligence from './DockIntelligence';
 import type { Truck, DockDoorStatus } from './types';
 
 interface DockStatusPanelProps {
 	checkedInTrucks: Truck[];
 	totalDoors: number;
+	yardTrucks: Truck[];
+	fcId: string;
 }
 
 const REFERENCE_NOW = new Date('2024-11-15T12:00:00Z');
@@ -37,7 +40,7 @@ function timeRemaining(iso: string | null): string {
  * Dock Status Panel — right sidebar showing which doors are occupied,
  * which truck is there, and when each door frees up.
  */
-function DockStatusPanel({ checkedInTrucks, totalDoors }: DockStatusPanelProps) {
+function DockStatusPanel({ checkedInTrucks, totalDoors, yardTrucks, fcId }: DockStatusPanelProps) {
 	const doors: DockDoorStatus[] = useMemo(() => {
 		const truckByDoor = new Map<number, Truck>();
 		checkedInTrucks.forEach((t) => {
@@ -142,6 +145,13 @@ function DockStatusPanel({ checkedInTrucks, totalDoors }: DockStatusPanelProps) 
 					</Paper>
 				))}
 			</div>
+
+			<DockIntelligence
+				yardQueue={yardTrucks}
+				dockedTrucks={checkedInTrucks}
+				fcId={fcId}
+				totalDoors={totalDoors}
+			/>
 		</div>
 	);
 }
