@@ -14,9 +14,34 @@ const navigationConfig: FuseNavItemType[] = [
 	{
 		id: 'inboundiq',
 		title: 'InboundIQ',
-		type: 'item',
+		type: 'collapse',
 		icon: 'heroicons-outline:truck',
-		url: '/apps/inboundiq'
+		children: [
+			{
+				id: 'inboundiq-dashboard',
+				title: 'Dashboard',
+				type: 'item',
+				url: '/apps/inboundiq'
+			},
+			{
+				id: 'inboundiq-analytics',
+				title: 'Analytics',
+				type: 'item',
+				url: '/apps/inboundiq/analytics'
+			},
+			{
+				id: 'inboundiq-map',
+				title: 'Map',
+				type: 'item',
+				url: '/apps/inboundiq/map'
+			},
+			{
+				id: 'inboundiq-about',
+				title: 'About',
+				type: 'item',
+				url: '/apps/inboundiq/about'
+			}
+		]
 	},
 	{
 		id: 'freightlens',
