@@ -60,9 +60,34 @@ const navigationConfig: FuseNavItemType[] = [
 	{
 		id: 'dataops',
 		title: 'DataOps Suite',
-		type: 'item',
+		type: 'collapse',
 		icon: 'heroicons-outline:circle-stack',
-		url: '/apps/dataops'
+		children: [
+			{
+				id: 'dataops-ingest',
+				title: 'Ingest',
+				type: 'item',
+				url: '/apps/dataops/ingest'
+			},
+			{
+				id: 'dataops-catalog',
+				title: 'Catalog',
+				type: 'item',
+				url: '/apps/dataops/catalog'
+			},
+			{
+				id: 'dataops-obfuscation',
+				title: 'Obfuscation',
+				type: 'item',
+				url: '/apps/dataops/obfuscation'
+			},
+			{
+				id: 'dataops-quality',
+				title: 'Quality Dashboard',
+				type: 'item',
+				url: '/apps/dataops'
+			}
+		]
 	}
 ];
 

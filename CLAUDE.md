@@ -273,24 +273,86 @@ LLM features:
 
 ## APP 4: DATAOPS SUITE
 Route: /apps/dataops
-Achievement: 60% efficiency increase, 99% metadata accuracy,
-$1.2M savings, 3700+ jobs/month, 99.9% availability
+Original tools: Conversational Data Catalog + Automated Metadata Generation
++ Data Obfuscation Service (Amazon PX Central Science team)
+Key achievements: 60% team efficiency increase, 99% metadata accuracy,
+$1.2M annual savings, 99.9% availability
 
-Sub-tools: DataVault | MetaGen | ObfuscateIQ
+Architecture: 4 services connected by a wizard flow.
+Sidebar: Ingest (wizard) | Catalog | Obfuscation | Quality Dashboard
 
-DataVault: dataset browser, classification filters, detail panel
-(schema/lineage/metadata), conversational LLM chat.
-→ /api/dataops/catalog-chat
+12 SYNTHETIC DATASETS (500 rows each) in /data/dataops/datasets/:
+trx_product_listings  LUXURY_RESALE  brand/condition/price/imageUrl — TheRealReal
+fin_transactions      FINTECH        payments, fraud flags, PII-heavy
+ecom_orders           ECOMMERCE      orders, returns, address PII
+hr_employees          HR             highest PII — SSN/salary/equity/perf
+edu_students          EDTECH         GPA, enrollment, financial aid, FERPA
+health_appointments   HEALTHCARE     HIPAA — billing, diagnoses, insurance
+inv_inventory         SUPPLY_CHAIN   SKU/warehouse/reorder/expiry/hazardous
+mktg_campaigns        MARKETING      CTR/ROAS/spend/channel breakdown
+iot_sensor_readings   IOT            device telemetry, anomaly scores
+real_estate_listings  PROPTECH       address PII, price/sqft, school district
+streaming_events      MEDIA          userId PII, watch patterns, completion
+crypto_trades         WEB3           walletAddress PII, gas fees, txHash
+Each dataset has ~15% intentional quality issues for demo.
+/data/dataops/catalog.json — master index of all 12 with full metadata.
+/data/dataops/obfuscation-jobs.json — 200 historical obfuscation jobs.
 
-MetaGen: schema paste input, LLM metadata generation, confidence scores,
-approve/reject/edit per field.
-→ /api/dataops/generate-metadata
+INGEST WIZARD (/apps/dataops/ingest) — 4-step progress wizard:
+Step 1 Upload: drag-drop CSV/JSON, industry selector, optional SQL textarea,
+  "Use sample dataset" quick-load buttons per industry.
+Step 2 Quality: 10 deterministic checks (null rate, duplicates, temporal
+  anomalies, computed drift, referential integrity, format violations, outliers,
+  negative values, schema completeness, duplicate keys) + LLM semantic checks
+  (business logic violations, industry-specific anomalies, semantic mismatches).
+  Quality score 0-100, issues table with severity badges, column health heatmap.
+Step 3 Metadata: LLM generates description, classification, PII detection with
+  type (DIRECT/QUASI/SENSITIVE), per-column metadata, lineage from SQL (LLM-parsed),
+  retention policy, regulatory flags. Human approve/reject/edit per field.
+Step 4 Publish: classification override, owner, tags → publishes to catalog.
 
-ObfuscateIQ: dataset selector, column rule panel (mask/hash/tokenize/
-nullify/generalize/keep), LLM suggestions, job queue, 3700 history.
-→ /api/dataops/suggest-obfuscation
+CATALOG (/apps/dataops/catalog):
+Fuse.js fuzzy search + filters (industry, classification, regulatory, has-images).
+Dataset cards with industry badge, quality score, PII indicator, regulatory badges.
+Dataset Detail — 6 tabs:
+  Overview: stats, regulatory badges, "Request Re-identification" button
+  Schema: PII types (DIRECT/QUASI/SENSITIVE), obfuscation rules, null rates
+  Preview & Stats: first 20 rows, image thumbnails inline for IMAGE_URL columns,
+    raw/obfuscated toggle, Recharts charts per column, INDUSTRY-SPECIFIC stats
+    (LUXURY_RESALE: condition donut, brand bar, days-to-sell; FINTECH: fraud rate;
+    HEALTHCARE: billing anomalies; etc — extensible per industryTag)
+  Lineage: SVG DAG of upstream tables → current dataset
+  Quality: full quality report read-only with score gauge
+  Observability: 30-day synthetic trends (row count, quality score, schema changelog)
+"Ask DataVault ✦" floating chat → 420px drawer.
+POST /api/dataops/catalog-chat → { text, datasetCards: string[] }
+Renders inline dataset cards for referenced datasets in chat.
 
-Data: datasets.json (50 datasets) | obfuscation-jobs.json (3700 jobs)
+OBFUSCATION (/apps/dataops/obfuscation):
+Algorithm: HMAC-SHA256(seed, rawValue) → 64-char hex → format-preserve per type.
+Same seed + same input = same hash always → JOIN-safe across obfuscated datasets.
+Implementation: Web Crypto API (crypto.subtle.sign) in Next.js API routes.
+Seed: "DEMO_SEED_2024" for portfolio (document AWS KMS CMK for production).
+Per-type format preservation:
+  EMAIL→hash[0..4]@obfs.io | PHONE→(XXX)XXX-XXXX from hash digits |
+  SSN→XXX-XX-XXXX | NAME→hash mod 1000 index into 1000-name fictional list |
+  CREDIT_CARD→9999-XXXX-XXXX-XXXX | WALLET→0x+hash[0..39] |
+  GENERIC_ID→keep prefix+hash[0..7] | INTEGER→deterministic bounded offset
+Re-identification: seed IS the decryption key — no mapping table needed.
+  Approved user → system re-runs same HMAC on original source file → downloads.
+  Source data never deleted. Obfuscated copy is always separate.
+UI: dataset selector → PII auto-detected → LLM suggest rules →
+  preview side-by-side (run twice to visually prove determinism) →
+  submit job → animated progress → download obfuscated JSON.
+4 tabs: Job Config+Queue | Approval Queue | Audit Log | Job History.
+Audit log: JOB_SUBMITTED|COMPLETED|REID_REQUESTED|REID_APPROVED|
+  REID_REJECTED|SEED_ACCESSED — full GDPR/HIPAA compliance trail.
+
+LLM API routes:
+POST /api/dataops/quality-check       deterministic + LLM semantic checks
+POST /api/dataops/generate-metadata   full metadata per column + dataset level
+POST /api/dataops/suggest-obfuscation format-preserving rule recommendations
+POST /api/dataops/catalog-chat        conversational with inline dataset cards
 
 ---
 
@@ -514,7 +576,7 @@ Sections:
 
 2. Impact Metrics (animated count-up on scroll):
    $1.2M annual savings | 6.7→2.2hr TAT | $0.6M fraud prevented |
-   107K+ bookings | 3,700+ jobs/month | 500 hrs/month saved
+   107K+ bookings | 12 industries cataloged | 500 hrs/month saved
 
 3. App Cards (5): InboundIQ | FreightLens | Nova | DataOps Suite | LoFAT
    Each: name, tagline, 3 tech badges, key achievement, Explore → link
