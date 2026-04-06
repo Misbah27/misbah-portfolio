@@ -66,6 +66,12 @@ const navigationConfig: FuseNavItemType[] = [
 				title: 'Admin Portal',
 				type: 'item',
 				url: '/apps/freightlens/admin'
+			},
+			{
+				id: 'freightlens-about',
+				title: 'About',
+				type: 'item',
+				url: '/apps/freightlens/about'
 			}
 		]
 	},
@@ -86,6 +92,12 @@ const navigationConfig: FuseNavItemType[] = [
 				title: 'Rescue Planner',
 				type: 'item',
 				url: '/apps/nova/rescue-planner'
+			},
+			{
+				id: 'nova-about',
+				title: 'About',
+				type: 'item',
+				url: '/apps/nova/about'
 			}
 		]
 	},
@@ -118,6 +130,12 @@ const navigationConfig: FuseNavItemType[] = [
 				title: 'Quality Dashboard',
 				type: 'item',
 				url: '/apps/dataops'
+			},
+			{
+				id: 'dataops-about',
+				title: 'About',
+				type: 'item',
+				url: '/apps/dataops/about'
 			}
 		]
 	}
