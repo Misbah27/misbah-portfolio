@@ -77,17 +77,16 @@ export default function DataOpsPage() {
 	return (
 		<Root
 			header={
-				<div className="flex flex-col w-full p-6 sm:px-8">
-					<PageBreadcrumb className="mb-2" />
-					<Typography className="text-xl font-bold truncate">
-						DataOps Suite
-					</Typography>
-					<Typography
-						variant="body2"
-						color="text.secondary"
-					>
-						End-to-end data management — ingest, catalog, obfuscate, and monitor quality across 12 industries.
-					</Typography>
+				<div className="flex flex-col w-full py-2 px-6 sm:px-8">
+					<PageBreadcrumb />
+					<div className="flex items-center gap-3">
+						<Typography className="text-lg font-bold truncate">
+							DataOps Suite
+						</Typography>
+						<Typography variant="caption" color="text.secondary">
+							Ingest, catalog, obfuscate, and monitor quality across 12 industries
+						</Typography>
+					</div>
 				</div>
 			}
 			content={

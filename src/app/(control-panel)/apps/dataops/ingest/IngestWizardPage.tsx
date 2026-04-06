@@ -56,18 +56,15 @@ export default function IngestWizardPage() {
 	return (
 		<Root
 			header={
-				<div className="flex flex-col w-full p-6 sm:px-8">
-					<PageBreadcrumb className="mb-2" />
+				<div className="flex flex-col w-full py-2 px-6 sm:px-8">
+					<PageBreadcrumb />
 					<div className="flex items-center justify-between">
-						<div>
-							<Typography className="text-xl font-bold truncate">
-								Dataset Ingest Wizard
+						<div className="flex items-center gap-3">
+							<Typography className="text-lg font-bold truncate">
+								Ingest Wizard
 							</Typography>
-							<Typography
-								variant="body2"
-								color="text.secondary"
-							>
-								Upload, validate, enrich, and publish datasets to the catalog.
+							<Typography variant="caption" color="text.secondary">
+								Upload, validate, enrich, and publish
 							</Typography>
 						</div>
 						<Box className="flex items-center gap-2">

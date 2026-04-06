@@ -47,12 +47,12 @@ function MapPage() {
 		<Root
 			scroll="content"
 			header={
-				<Box className="flex flex-col gap-2 p-6 sm:px-8 w-full">
-					<Typography variant="h5" fontWeight={700}>
+				<Box className="flex items-center gap-3 py-2 px-6 sm:px-8 w-full">
+					<Typography className="text-lg font-bold">
 						FC Network Map
 					</Typography>
-					<Typography variant="body2" color="text.secondary">
-						Real-time yard pressure and dock utilization across all fulfillment centers
+					<Typography variant="caption" color="text.secondary">
+						Yard pressure and dock utilization across all FCs
 					</Typography>
 				</Box>
 			}

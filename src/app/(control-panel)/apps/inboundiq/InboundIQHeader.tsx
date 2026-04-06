@@ -63,18 +63,18 @@ function InboundIQHeader({
 	const [filterAnchor, setFilterAnchor] = useState<HTMLButtonElement | null>(null);
 
 	return (
-		<div className="flex flex-col gap-4 p-6 w-full">
+		<div className="flex flex-col gap-1 py-2 px-6 w-full">
 			<div className="flex items-center justify-between">
-				<div>
-					<Typography className="text-3xl font-bold tracking-tight">
+				<div className="flex items-center gap-3">
+					<Typography className="text-lg font-bold tracking-tight">
 						InboundIQ
 					</Typography>
-					<Typography className="text-sm" color="text.secondary">
-						Heimdall — Yard Queue ({yardCount} of {totalCount} trucks waiting for dock)
+					<Typography variant="caption" color="text.secondary">
+						Yard Queue ({yardCount} of {totalCount} trucks waiting for dock)
 					</Typography>
 				</div>
 				<Typography variant="caption" color="text.secondary">
-					All timestamps in 24-hour format
+					24-hour format
 				</Typography>
 			</div>
 

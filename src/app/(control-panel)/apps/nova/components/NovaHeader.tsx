@@ -14,22 +14,20 @@ interface NovaHeaderProps {
  */
 function NovaHeader({ lastUpdated }: NovaHeaderProps) {
 	return (
-		<div className="flex flex-col gap-1 w-full p-6 sm:px-8">
+		<div className="flex flex-col gap-1 w-full py-2 px-6 sm:px-8">
 			<PageBreadcrumb />
 
-			<div className="flex items-center justify-between mt-1">
+			<div className="flex items-center justify-between">
 				<div className="flex items-center gap-2">
-					<FuseSvgIcon size={28} color="action">
+					<FuseSvgIcon size={22} color="action">
 						heroicons-outline:bell-alert
 					</FuseSvgIcon>
-					<div>
-						<Typography className="text-2xl font-bold tracking-tight">
-							Delay Alerts
-						</Typography>
-						<Typography variant="caption" color="text.secondary">
-							Real-time linehaul delay visibility
-						</Typography>
-					</div>
+					<Typography className="text-lg font-bold tracking-tight">
+						Delay Alerts
+					</Typography>
+					<Typography variant="caption" color="text.secondary">
+						Real-time linehaul delay visibility
+					</Typography>
 				</div>
 
 				<div className="flex items-center gap-3">

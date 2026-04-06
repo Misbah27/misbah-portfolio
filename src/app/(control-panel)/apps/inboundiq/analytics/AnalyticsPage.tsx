@@ -325,11 +325,11 @@ export function AnalyticsPage() {
 		<Root
 			scroll="content"
 			header={
-				<div className="flex flex-col p-6 sm:px-8 w-full">
-					<Typography className="text-xl font-bold">
+				<div className="flex items-center gap-3 py-2 px-6 sm:px-8 w-full">
+					<Typography className="text-lg font-bold">
 						Analytics
 					</Typography>
-					<Typography variant="body2" color="text.secondary">
+					<Typography variant="caption" color="text.secondary">
 						InboundIQ operational metrics and trends
 					</Typography>
 				</div>

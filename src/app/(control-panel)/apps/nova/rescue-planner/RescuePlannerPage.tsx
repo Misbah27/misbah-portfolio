@@ -112,15 +112,13 @@ function RescuePlannerPage() {
 		<Root
 			scroll="content"
 			header={
-				<div className="flex flex-col gap-1 w-full p-6 sm:px-8">
+				<div className="flex flex-col gap-1 w-full py-2 px-6 sm:px-8">
 					<PageBreadcrumb />
-					<div className="flex items-center justify-between mt-1">
+					<div className="flex items-center justify-between">
 						<div className="flex items-center gap-2">
-							<FuseSvgIcon size={28} color="action">heroicons-outline:lifebuoy</FuseSvgIcon>
-							<div>
-								<Typography className="text-2xl font-bold tracking-tight">Rescue Planner</Typography>
-								<Typography variant="caption" color="text.secondary">Automated rescue planning for delayed shipments</Typography>
-							</div>
+							<FuseSvgIcon size={22} color="action">heroicons-outline:lifebuoy</FuseSvgIcon>
+							<Typography className="text-lg font-bold tracking-tight">Rescue Planner</Typography>
+							<Typography variant="caption" color="text.secondary">Automated rescue planning</Typography>
 						</div>
 						<div className="flex items-center gap-3">
 							<Chip label={role} size="small" color="secondary" variant="outlined" icon={<FuseSvgIcon size={14}>heroicons-outline:user-circle</FuseSvgIcon>} />

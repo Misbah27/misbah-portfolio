@@ -1,0 +1,1698 @@
+{
+  "SEA1": [
+    {
+      "date": "2026-03-16",
+      "bmPortal": 38878,
+      "vendorScheduled": 3792,
+      "saBlocked": 24233,
+      "saScheduled": 19411,
+      "saUnitsLeft": 15675,
+      "totalUnitsLeft": 15675,
+      "utilizationPct": 59.7
+    },
+    {
+      "date": "2026-03-17",
+      "bmPortal": 39839,
+      "vendorScheduled": 4753,
+      "saBlocked": 12193,
+      "saScheduled": 20372,
+      "saUnitsLeft": 14714,
+      "totalUnitsLeft": 14714,
+      "utilizationPct": 63.1
+    },
+    {
+      "date": "2026-03-18",
+      "bmPortal": 40800,
+      "vendorScheduled": 5714,
+      "saBlocked": 13154,
+      "saScheduled": 21333,
+      "saUnitsLeft": 13753,
+      "totalUnitsLeft": 13753,
+      "utilizationPct": 66.3
+    },
+    {
+      "date": "2026-03-19",
+      "bmPortal": 41761,
+      "vendorScheduled": 25057,
+      "saBlocked": 14115,
+      "saScheduled": 20881,
+      "saUnitsLeft": 0,
+      "totalUnitsLeft": 0,
+      "utilizationPct": 110
+    },
+    {
+      "date": "2026-03-20",
+      "bmPortal": 37902,
+      "vendorScheduled": 27817,
+      "saBlocked": 22256,
+      "saScheduled": 18435,
+      "saUnitsLeft": 0,
+      "totalUnitsLeft": 0,
+      "utilizationPct": 122
+    },
+    {
+      "date": "2026-03-21",
+      "bmPortal": 38863,
+      "vendorScheduled": 23318,
+      "saBlocked": 23217,
+      "saScheduled": 19432,
+      "saUnitsLeft": 0,
+      "totalUnitsLeft": 0,
+      "utilizationPct": 110
+    },
+    {
+      "date": "2026-03-22",
+      "bmPortal": 39824,
+      "vendorScheduled": 29739,
+      "saBlocked": 24178,
+      "saScheduled": 20357,
+      "saUnitsLeft": 0,
+      "totalUnitsLeft": 0,
+      "utilizationPct": 125.8
+    },
+    {
+      "date": "2026-03-23",
+      "bmPortal": 40785,
+      "vendorScheduled": 30700,
+      "saBlocked": 12138,
+      "saScheduled": 21318,
+      "saUnitsLeft": 0,
+      "totalUnitsLeft": 0,
+      "utilizationPct": 127.5
+    },
+    {
+      "date": "2026-03-24",
+      "bmPortal": 41746,
+      "vendorScheduled": 31661,
+      "saBlocked": 13099,
+      "saScheduled": 22279,
+      "saUnitsLeft": 0,
+      "totalUnitsLeft": 0,
+      "utilizationPct": 129.2
+    },
+    {
+      "date": "2026-03-25",
+      "bmPortal": 42707,
+      "vendorScheduled": 32622,
+      "saBlocked": 14060,
+      "saScheduled": 23240,
+      "saUnitsLeft": 0,
+      "totalUnitsLeft": 0,
+      "utilizationPct": 130.8
+    },
+    {
+      "date": "2026-03-26",
+      "bmPortal": 43668,
+      "vendorScheduled": 26201,
+      "saBlocked": 15021,
+      "saScheduled": 21834,
+      "saUnitsLeft": 0,
+      "totalUnitsLeft": 0,
+      "utilizationPct": 110
+    },
+    {
+      "date": "2026-03-27",
+      "bmPortal": 44629,
+      "vendorScheduled": 34544,
+      "saBlocked": 15982,
+      "saScheduled": 161,
+      "saUnitsLeft": 9924,
+      "totalUnitsLeft": 9924,
+      "utilizationPct": 77.8
+    },
+    {
+      "date": "2026-03-28",
+      "bmPortal": 20589,
+      "vendorScheduled": 12353,
+      "saBlocked": 16943,
+      "saScheduled": 10295,
+      "saUnitsLeft": 0,
+      "totalUnitsLeft": 0,
+      "utilizationPct": 110
+    },
+    {
+      "date": "2026-03-29",
+      "bmPortal": 21550,
+      "vendorScheduled": 1465,
+      "saBlocked": 17904,
+      "saScheduled": 2083,
+      "saUnitsLeft": 18002,
+      "totalUnitsLeft": 18002,
+      "utilizationPct": 16.5
+    },
+    {
+      "date": "2026-03-30",
+      "bmPortal": 42692,
+      "vendorScheduled": 22607,
+      "saBlocked": 13044,
+      "saScheduled": 23225,
+      "saUnitsLeft": 0,
+      "totalUnitsLeft": 0,
+      "utilizationPct": 107.4
+    },
+    {
+      "date": "2026-03-31",
+      "bmPortal": 43653,
+      "vendorScheduled": 23568,
+      "saBlocked": 14005,
+      "saScheduled": 24186,
+      "saUnitsLeft": 0,
+      "totalUnitsLeft": 0,
+      "utilizationPct": 109.4
+    },
+    {
+      "date": "2026-04-01",
+      "bmPortal": 32289,
+      "vendorScheduled": 2530,
+      "saBlocked": 16588,
+      "saScheduled": 12822,
+      "saUnitsLeft": 16937,
+      "totalUnitsLeft": 16937,
+      "utilizationPct": 47.5
+    },
+    {
+      "date": "2026-04-02",
+      "bmPortal": 33250,
+      "vendorScheduled": 19950,
+      "saBlocked": 17549,
+      "saScheduled": 16625,
+      "saUnitsLeft": 0,
+      "totalUnitsLeft": 0,
+      "utilizationPct": 110
+    },
+    {
+      "date": "2026-04-03",
+      "bmPortal": 34211,
+      "vendorScheduled": 4452,
+      "saBlocked": 18510,
+      "saScheduled": 14744,
+      "saUnitsLeft": 15015,
+      "totalUnitsLeft": 15015,
+      "utilizationPct": 56.1
+    },
+    {
+      "date": "2026-04-04",
+      "bmPortal": 35172,
+      "vendorScheduled": 21103,
+      "saBlocked": 19471,
+      "saScheduled": 17586,
+      "saUnitsLeft": 0,
+      "totalUnitsLeft": 0,
+      "utilizationPct": 110
+    },
+    {
+      "date": "2026-04-05",
+      "bmPortal": 36133,
+      "vendorScheduled": 6374,
+      "saBlocked": 20432,
+      "saScheduled": 16666,
+      "saUnitsLeft": 13093,
+      "totalUnitsLeft": 13093,
+      "utilizationPct": 63.8
+    }
+  ],
+  "PDX2": [
+    {
+      "date": "2026-03-16",
+      "bmPortal": 34906,
+      "vendorScheduled": 17786,
+      "saBlocked": 19451,
+      "saScheduled": 14373,
+      "saUnitsLeft": 2747,
+      "totalUnitsLeft": 2747,
+      "utilizationPct": 92.1
+    },
+    {
+      "date": "2026-03-17",
+      "bmPortal": 33945,
+      "vendorScheduled": 16825,
+      "saBlocked": 18490,
+      "saScheduled": 13412,
+      "saUnitsLeft": 3708,
+      "totalUnitsLeft": 3708,
+      "utilizationPct": 89.1
+    },
+    {
+      "date": "2026-03-18",
+      "bmPortal": 32984,
+      "vendorScheduled": 15864,
+      "saBlocked": 17529,
+      "saScheduled": 12451,
+      "saUnitsLeft": 4669,
+      "totalUnitsLeft": 4669,
+      "utilizationPct": 85.8
+    },
+    {
+      "date": "2026-03-19",
+      "bmPortal": 32023,
+      "vendorScheduled": 19214,
+      "saBlocked": 16568,
+      "saScheduled": 16012,
+      "saUnitsLeft": 0,
+      "totalUnitsLeft": 0,
+      "utilizationPct": 110
+    },
+    {
+      "date": "2026-03-20",
+      "bmPortal": 35882,
+      "vendorScheduled": 28762,
+      "saBlocked": 21428,
+      "saScheduled": 15349,
+      "saUnitsLeft": 0,
+      "totalUnitsLeft": 0,
+      "utilizationPct": 122.9
+    },
+    {
+      "date": "2026-03-21",
+      "bmPortal": 34921,
+      "vendorScheduled": 20953,
+      "saBlocked": 20467,
+      "saScheduled": 17461,
+      "saUnitsLeft": 0,
+      "totalUnitsLeft": 0,
+      "utilizationPct": 110
+    },
+    {
+      "date": "2026-03-22",
+      "bmPortal": 33960,
+      "vendorScheduled": 26840,
+      "saBlocked": 19506,
+      "saScheduled": 13427,
+      "saUnitsLeft": 0,
+      "totalUnitsLeft": 0,
+      "utilizationPct": 118.6
+    },
+    {
+      "date": "2026-03-23",
+      "bmPortal": 32999,
+      "vendorScheduled": 25879,
+      "saBlocked": 18545,
+      "saScheduled": 12466,
+      "saUnitsLeft": 0,
+      "totalUnitsLeft": 0,
+      "utilizationPct": 116.2
+    },
+    {
+      "date": "2026-03-24",
+      "bmPortal": 32038,
+      "vendorScheduled": 24918,
+      "saBlocked": 17584,
+      "saScheduled": 11505,
+      "saUnitsLeft": 0,
+      "totalUnitsLeft": 0,
+      "utilizationPct": 113.7
+    },
+    {
+      "date": "2026-03-25",
+      "bmPortal": 31077,
+      "vendorScheduled": 23957,
+      "saBlocked": 16623,
+      "saScheduled": 10544,
+      "saUnitsLeft": 0,
+      "totalUnitsLeft": 0,
+      "utilizationPct": 111
+    },
+    {
+      "date": "2026-03-26",
+      "bmPortal": 30116,
+      "vendorScheduled": 18070,
+      "saBlocked": 15662,
+      "saScheduled": 15058,
+      "saUnitsLeft": 0,
+      "totalUnitsLeft": 0,
+      "utilizationPct": 110
+    },
+    {
+      "date": "2026-03-27",
+      "bmPortal": 29155,
+      "vendorScheduled": 22035,
+      "saBlocked": 14701,
+      "saScheduled": 8622,
+      "saUnitsLeft": 0,
+      "totalUnitsLeft": 0,
+      "utilizationPct": 105.2
+    },
+    {
+      "date": "2026-03-28",
+      "bmPortal": 28194,
+      "vendorScheduled": 16916,
+      "saBlocked": 13740,
+      "saScheduled": 14097,
+      "saUnitsLeft": 0,
+      "totalUnitsLeft": 0,
+      "utilizationPct": 110
+    },
+    {
+      "date": "2026-03-29",
+      "bmPortal": 27233,
+      "vendorScheduled": 20113,
+      "saBlocked": 12779,
+      "saScheduled": 6700,
+      "saUnitsLeft": 420,
+      "totalUnitsLeft": 420,
+      "utilizationPct": 98.5
+    },
+    {
+      "date": "2026-03-30",
+      "bmPortal": 31092,
+      "vendorScheduled": 33972,
+      "saBlocked": 17639,
+      "saScheduled": 10559,
+      "saUnitsLeft": 0,
+      "totalUnitsLeft": 0,
+      "utilizationPct": 143.2
+    },
+    {
+      "date": "2026-03-31",
+      "bmPortal": 30131,
+      "vendorScheduled": 33011,
+      "saBlocked": 16678,
+      "saScheduled": 9598,
+      "saUnitsLeft": 0,
+      "totalUnitsLeft": 0,
+      "utilizationPct": 141.4
+    },
+    {
+      "date": "2026-04-01",
+      "bmPortal": 41495,
+      "vendorScheduled": 19048,
+      "saBlocked": 14095,
+      "saScheduled": 20962,
+      "saUnitsLeft": 1485,
+      "totalUnitsLeft": 1485,
+      "utilizationPct": 96.4
+    },
+    {
+      "date": "2026-04-02",
+      "bmPortal": 40534,
+      "vendorScheduled": 24320,
+      "saBlocked": 13134,
+      "saScheduled": 20267,
+      "saUnitsLeft": 0,
+      "totalUnitsLeft": 0,
+      "utilizationPct": 110
+    },
+    {
+      "date": "2026-04-03",
+      "bmPortal": 39573,
+      "vendorScheduled": 17126,
+      "saBlocked": 12173,
+      "saScheduled": 19040,
+      "saUnitsLeft": 3407,
+      "totalUnitsLeft": 3407,
+      "utilizationPct": 91.4
+    },
+    {
+      "date": "2026-04-04",
+      "bmPortal": 38612,
+      "vendorScheduled": 23167,
+      "saBlocked": 24213,
+      "saScheduled": 19306,
+      "saUnitsLeft": 0,
+      "totalUnitsLeft": 0,
+      "utilizationPct": 110
+    },
+    {
+      "date": "2026-04-05",
+      "bmPortal": 37651,
+      "vendorScheduled": 15204,
+      "saBlocked": 23252,
+      "saScheduled": 17118,
+      "saUnitsLeft": 5329,
+      "totalUnitsLeft": 5329,
+      "utilizationPct": 85.8
+    }
+  ],
+  "LAX3": [
+    {
+      "date": "2026-03-16",
+      "bmPortal": 25175,
+      "vendorScheduled": 10673,
+      "saBlocked": 12875,
+      "saScheduled": 4642,
+      "saUnitsLeft": 9860,
+      "totalUnitsLeft": 9860,
+      "utilizationPct": 60.8
+    },
+    {
+      "date": "2026-03-17",
+      "bmPortal": 24214,
+      "vendorScheduled": 9712,
+      "saBlocked": 24915,
+      "saScheduled": 3681,
+      "saUnitsLeft": 10821,
+      "totalUnitsLeft": 10821,
+      "utilizationPct": 55.3
+    },
+    {
+      "date": "2026-03-18",
+      "bmPortal": 23253,
+      "vendorScheduled": 8751,
+      "saBlocked": 23954,
+      "saScheduled": 2720,
+      "saUnitsLeft": 11782,
+      "totalUnitsLeft": 11782,
+      "utilizationPct": 49.3
+    },
+    {
+      "date": "2026-03-19",
+      "bmPortal": 22292,
+      "vendorScheduled": 13375,
+      "saBlocked": 22993,
+      "saScheduled": 11146,
+      "saUnitsLeft": 0,
+      "totalUnitsLeft": 0,
+      "utilizationPct": 110
+    },
+    {
+      "date": "2026-03-20",
+      "bmPortal": 26151,
+      "vendorScheduled": 21649,
+      "saBlocked": 14852,
+      "saScheduled": 5618,
+      "saUnitsLeft": 0,
+      "totalUnitsLeft": 0,
+      "utilizationPct": 104.3
+    },
+    {
+      "date": "2026-03-21",
+      "bmPortal": 25190,
+      "vendorScheduled": 15114,
+      "saBlocked": 13891,
+      "saScheduled": 12595,
+      "saUnitsLeft": 0,
+      "totalUnitsLeft": 0,
+      "utilizationPct": 110
+    },
+    {
+      "date": "2026-03-22",
+      "bmPortal": 24229,
+      "vendorScheduled": 19727,
+      "saBlocked": 12930,
+      "saScheduled": 3696,
+      "saUnitsLeft": 806,
+      "totalUnitsLeft": 806,
+      "utilizationPct": 96.7
+    },
+    {
+      "date": "2026-03-23",
+      "bmPortal": 23268,
+      "vendorScheduled": 18766,
+      "saBlocked": 24970,
+      "saScheduled": 2735,
+      "saUnitsLeft": 1767,
+      "totalUnitsLeft": 1767,
+      "utilizationPct": 92.4
+    },
+    {
+      "date": "2026-03-24",
+      "bmPortal": 22307,
+      "vendorScheduled": 17805,
+      "saBlocked": 24009,
+      "saScheduled": 1774,
+      "saUnitsLeft": 2728,
+      "totalUnitsLeft": 2728,
+      "utilizationPct": 87.8
+    },
+    {
+      "date": "2026-03-25",
+      "bmPortal": 21346,
+      "vendorScheduled": 16844,
+      "saBlocked": 23048,
+      "saScheduled": 813,
+      "saUnitsLeft": 3689,
+      "totalUnitsLeft": 3689,
+      "utilizationPct": 82.7
+    },
+    {
+      "date": "2026-03-26",
+      "bmPortal": 20385,
+      "vendorScheduled": 12231,
+      "saBlocked": 22087,
+      "saScheduled": 10193,
+      "saUnitsLeft": 0,
+      "totalUnitsLeft": 0,
+      "utilizationPct": 110
+    },
+    {
+      "date": "2026-03-27",
+      "bmPortal": 44425,
+      "vendorScheduled": 14922,
+      "saBlocked": 21126,
+      "saScheduled": 23892,
+      "saUnitsLeft": 5611,
+      "totalUnitsLeft": 5611,
+      "utilizationPct": 87.4
+    },
+    {
+      "date": "2026-03-28",
+      "bmPortal": 43464,
+      "vendorScheduled": 26078,
+      "saBlocked": 20165,
+      "saScheduled": 21732,
+      "saUnitsLeft": 0,
+      "totalUnitsLeft": 0,
+      "utilizationPct": 110
+    },
+    {
+      "date": "2026-03-29",
+      "bmPortal": 42503,
+      "vendorScheduled": 13000,
+      "saBlocked": 19204,
+      "saScheduled": 21970,
+      "saUnitsLeft": 7533,
+      "totalUnitsLeft": 7533,
+      "utilizationPct": 82.3
+    },
+    {
+      "date": "2026-03-30",
+      "bmPortal": 21361,
+      "vendorScheduled": 26859,
+      "saBlocked": 24064,
+      "saScheduled": 828,
+      "saUnitsLeft": 0,
+      "totalUnitsLeft": 0,
+      "utilizationPct": 129.6
+    },
+    {
+      "date": "2026-03-31",
+      "bmPortal": 20400,
+      "vendorScheduled": 25898,
+      "saBlocked": 23103,
+      "saScheduled": 24868,
+      "saUnitsLeft": 0,
+      "totalUnitsLeft": 0,
+      "utilizationPct": 248.9
+    },
+    {
+      "date": "2026-04-01",
+      "bmPortal": 31764,
+      "vendorScheduled": 11935,
+      "saBlocked": 20520,
+      "saScheduled": 11231,
+      "saUnitsLeft": 8598,
+      "totalUnitsLeft": 8598,
+      "utilizationPct": 72.9
+    },
+    {
+      "date": "2026-04-02",
+      "bmPortal": 30803,
+      "vendorScheduled": 18482,
+      "saBlocked": 19559,
+      "saScheduled": 15402,
+      "saUnitsLeft": 0,
+      "totalUnitsLeft": 0,
+      "utilizationPct": 110
+    },
+    {
+      "date": "2026-04-03",
+      "bmPortal": 29842,
+      "vendorScheduled": 10013,
+      "saBlocked": 18598,
+      "saScheduled": 9309,
+      "saUnitsLeft": 10520,
+      "totalUnitsLeft": 10520,
+      "utilizationPct": 64.7
+    },
+    {
+      "date": "2026-04-04",
+      "bmPortal": 28881,
+      "vendorScheduled": 17329,
+      "saBlocked": 17637,
+      "saScheduled": 14441,
+      "saUnitsLeft": 0,
+      "totalUnitsLeft": 0,
+      "utilizationPct": 110
+    },
+    {
+      "date": "2026-04-05",
+      "bmPortal": 27920,
+      "vendorScheduled": 8091,
+      "saBlocked": 16676,
+      "saScheduled": 7387,
+      "saUnitsLeft": 12442,
+      "totalUnitsLeft": 12442,
+      "utilizationPct": 55.4
+    }
+  ],
+  "ORD2": [
+    {
+      "date": "2026-03-16",
+      "bmPortal": 40479,
+      "vendorScheduled": 9358,
+      "saBlocked": 17407,
+      "saScheduled": 19946,
+      "saUnitsLeft": 11175,
+      "totalUnitsLeft": 11175,
+      "utilizationPct": 72.4
+    },
+    {
+      "date": "2026-03-17",
+      "bmPortal": 39518,
+      "vendorScheduled": 8397,
+      "saBlocked": 16446,
+      "saScheduled": 18985,
+      "saUnitsLeft": 12136,
+      "totalUnitsLeft": 12136,
+      "utilizationPct": 69.3
+    },
+    {
+      "date": "2026-03-18",
+      "bmPortal": 38557,
+      "vendorScheduled": 7436,
+      "saBlocked": 15485,
+      "saScheduled": 18024,
+      "saUnitsLeft": 13097,
+      "totalUnitsLeft": 13097,
+      "utilizationPct": 66
+    },
+    {
+      "date": "2026-03-19",
+      "bmPortal": 37596,
+      "vendorScheduled": 22558,
+      "saBlocked": 14524,
+      "saScheduled": 18798,
+      "saUnitsLeft": 0,
+      "totalUnitsLeft": 0,
+      "utilizationPct": 110
+    },
+    {
+      "date": "2026-03-20",
+      "bmPortal": 41455,
+      "vendorScheduled": 20334,
+      "saBlocked": 19384,
+      "saScheduled": 20922,
+      "saUnitsLeft": 199,
+      "totalUnitsLeft": 199,
+      "utilizationPct": 99.5
+    },
+    {
+      "date": "2026-03-21",
+      "bmPortal": 40494,
+      "vendorScheduled": 24296,
+      "saBlocked": 18423,
+      "saScheduled": 20247,
+      "saUnitsLeft": 0,
+      "totalUnitsLeft": 0,
+      "utilizationPct": 110
+    },
+    {
+      "date": "2026-03-22",
+      "bmPortal": 39533,
+      "vendorScheduled": 18412,
+      "saBlocked": 17462,
+      "saScheduled": 19000,
+      "saUnitsLeft": 2121,
+      "totalUnitsLeft": 2121,
+      "utilizationPct": 94.6
+    },
+    {
+      "date": "2026-03-23",
+      "bmPortal": 38572,
+      "vendorScheduled": 17451,
+      "saBlocked": 16501,
+      "saScheduled": 18039,
+      "saUnitsLeft": 3082,
+      "totalUnitsLeft": 3082,
+      "utilizationPct": 92
+    },
+    {
+      "date": "2026-03-24",
+      "bmPortal": 37611,
+      "vendorScheduled": 16490,
+      "saBlocked": 15540,
+      "saScheduled": 17078,
+      "saUnitsLeft": 4043,
+      "totalUnitsLeft": 4043,
+      "utilizationPct": 89.3
+    },
+    {
+      "date": "2026-03-25",
+      "bmPortal": 36650,
+      "vendorScheduled": 15529,
+      "saBlocked": 14579,
+      "saScheduled": 16117,
+      "saUnitsLeft": 5004,
+      "totalUnitsLeft": 5004,
+      "utilizationPct": 86.3
+    },
+    {
+      "date": "2026-03-26",
+      "bmPortal": 35689,
+      "vendorScheduled": 21413,
+      "saBlocked": 13618,
+      "saScheduled": 17845,
+      "saUnitsLeft": 0,
+      "totalUnitsLeft": 0,
+      "utilizationPct": 110
+    },
+    {
+      "date": "2026-03-27",
+      "bmPortal": 34728,
+      "vendorScheduled": 13607,
+      "saBlocked": 12657,
+      "saScheduled": 14195,
+      "saUnitsLeft": 6926,
+      "totalUnitsLeft": 6926,
+      "utilizationPct": 80.1
+    },
+    {
+      "date": "2026-03-28",
+      "bmPortal": 33767,
+      "vendorScheduled": 20260,
+      "saBlocked": 24697,
+      "saScheduled": 16884,
+      "saUnitsLeft": 0,
+      "totalUnitsLeft": 0,
+      "utilizationPct": 110
+    },
+    {
+      "date": "2026-03-29",
+      "bmPortal": 32806,
+      "vendorScheduled": 11685,
+      "saBlocked": 23736,
+      "saScheduled": 12273,
+      "saUnitsLeft": 8848,
+      "totalUnitsLeft": 8848,
+      "utilizationPct": 73
+    },
+    {
+      "date": "2026-03-30",
+      "bmPortal": 36665,
+      "vendorScheduled": 25544,
+      "saBlocked": 15595,
+      "saScheduled": 16132,
+      "saUnitsLeft": 0,
+      "totalUnitsLeft": 0,
+      "utilizationPct": 113.7
+    },
+    {
+      "date": "2026-03-31",
+      "bmPortal": 35704,
+      "vendorScheduled": 24583,
+      "saBlocked": 14634,
+      "saScheduled": 15171,
+      "saUnitsLeft": 0,
+      "totalUnitsLeft": 0,
+      "utilizationPct": 111.3
+    },
+    {
+      "date": "2026-04-01",
+      "bmPortal": 22067,
+      "vendorScheduled": 10620,
+      "saBlocked": 12051,
+      "saScheduled": 1534,
+      "saUnitsLeft": 9913,
+      "totalUnitsLeft": 9913,
+      "utilizationPct": 55.1
+    },
+    {
+      "date": "2026-04-02",
+      "bmPortal": 21106,
+      "vendorScheduled": 12664,
+      "saBlocked": 24091,
+      "saScheduled": 10553,
+      "saUnitsLeft": 0,
+      "totalUnitsLeft": 0,
+      "utilizationPct": 110
+    },
+    {
+      "date": "2026-04-03",
+      "bmPortal": 20145,
+      "vendorScheduled": 8698,
+      "saBlocked": 23130,
+      "saScheduled": 24613,
+      "saUnitsLeft": 0,
+      "totalUnitsLeft": 0,
+      "utilizationPct": 165.4
+    },
+    {
+      "date": "2026-04-04",
+      "bmPortal": 44185,
+      "vendorScheduled": 26511,
+      "saBlocked": 22169,
+      "saScheduled": 22093,
+      "saUnitsLeft": 0,
+      "totalUnitsLeft": 0,
+      "utilizationPct": 110
+    },
+    {
+      "date": "2026-04-05",
+      "bmPortal": 43224,
+      "vendorScheduled": 6776,
+      "saBlocked": 21208,
+      "saScheduled": 22691,
+      "saUnitsLeft": 13757,
+      "totalUnitsLeft": 13757,
+      "utilizationPct": 68.2
+    }
+  ],
+  "JFK4": [
+    {
+      "date": "2026-03-16",
+      "bmPortal": 21346,
+      "vendorScheduled": 33165,
+      "saBlocked": 19552,
+      "saScheduled": 1879,
+      "saUnitsLeft": 0,
+      "totalUnitsLeft": 0,
+      "utilizationPct": 164.2
+    },
+    {
+      "date": "2026-03-17",
+      "bmPortal": 22307,
+      "vendorScheduled": 34126,
+      "saBlocked": 20513,
+      "saScheduled": 2840,
+      "saUnitsLeft": 0,
+      "totalUnitsLeft": 0,
+      "utilizationPct": 165.7
+    },
+    {
+      "date": "2026-03-18",
+      "bmPortal": 23268,
+      "vendorScheduled": 86,
+      "saBlocked": 21474,
+      "saScheduled": 3801,
+      "saUnitsLeft": 19381,
+      "totalUnitsLeft": 19381,
+      "utilizationPct": 16.7
+    },
+    {
+      "date": "2026-03-19",
+      "bmPortal": 24229,
+      "vendorScheduled": 14537,
+      "saBlocked": 22435,
+      "saScheduled": 12115,
+      "saUnitsLeft": 0,
+      "totalUnitsLeft": 0,
+      "utilizationPct": 110
+    },
+    {
+      "date": "2026-03-20",
+      "bmPortal": 20370,
+      "vendorScheduled": 22189,
+      "saBlocked": 17575,
+      "saScheduled": 903,
+      "saUnitsLeft": 0,
+      "totalUnitsLeft": 0,
+      "utilizationPct": 113.4
+    },
+    {
+      "date": "2026-03-21",
+      "bmPortal": 21331,
+      "vendorScheduled": 12799,
+      "saBlocked": 18536,
+      "saScheduled": 10666,
+      "saUnitsLeft": 0,
+      "totalUnitsLeft": 0,
+      "utilizationPct": 110
+    },
+    {
+      "date": "2026-03-22",
+      "bmPortal": 22292,
+      "vendorScheduled": 24111,
+      "saBlocked": 19497,
+      "saScheduled": 2825,
+      "saUnitsLeft": 0,
+      "totalUnitsLeft": 0,
+      "utilizationPct": 120.8
+    },
+    {
+      "date": "2026-03-23",
+      "bmPortal": 23253,
+      "vendorScheduled": 25072,
+      "saBlocked": 20458,
+      "saScheduled": 3786,
+      "saUnitsLeft": 0,
+      "totalUnitsLeft": 0,
+      "utilizationPct": 124.1
+    },
+    {
+      "date": "2026-03-24",
+      "bmPortal": 24214,
+      "vendorScheduled": 26033,
+      "saBlocked": 21419,
+      "saScheduled": 4747,
+      "saUnitsLeft": 0,
+      "totalUnitsLeft": 0,
+      "utilizationPct": 127.1
+    },
+    {
+      "date": "2026-03-25",
+      "bmPortal": 25175,
+      "vendorScheduled": 26994,
+      "saBlocked": 22380,
+      "saScheduled": 5708,
+      "saUnitsLeft": 0,
+      "totalUnitsLeft": 0,
+      "utilizationPct": 129.9
+    },
+    {
+      "date": "2026-03-26",
+      "bmPortal": 26136,
+      "vendorScheduled": 15682,
+      "saBlocked": 23341,
+      "saScheduled": 13068,
+      "saUnitsLeft": 0,
+      "totalUnitsLeft": 0,
+      "utilizationPct": 110
+    },
+    {
+      "date": "2026-03-27",
+      "bmPortal": 27097,
+      "vendorScheduled": 28916,
+      "saBlocked": 24302,
+      "saScheduled": 7630,
+      "saUnitsLeft": 0,
+      "totalUnitsLeft": 0,
+      "utilizationPct": 134.9
+    },
+    {
+      "date": "2026-03-28",
+      "bmPortal": 28058,
+      "vendorScheduled": 16835,
+      "saBlocked": 12262,
+      "saScheduled": 14029,
+      "saUnitsLeft": 0,
+      "totalUnitsLeft": 0,
+      "utilizationPct": 110
+    },
+    {
+      "date": "2026-03-29",
+      "bmPortal": 29019,
+      "vendorScheduled": 30838,
+      "saBlocked": 13223,
+      "saScheduled": 9552,
+      "saUnitsLeft": 0,
+      "totalUnitsLeft": 0,
+      "utilizationPct": 139.2
+    },
+    {
+      "date": "2026-03-30",
+      "bmPortal": 25160,
+      "vendorScheduled": 16979,
+      "saBlocked": 21364,
+      "saScheduled": 5693,
+      "saUnitsLeft": 2488,
+      "totalUnitsLeft": 2488,
+      "utilizationPct": 90.1
+    },
+    {
+      "date": "2026-03-31",
+      "bmPortal": 26121,
+      "vendorScheduled": 17940,
+      "saBlocked": 22325,
+      "saScheduled": 6654,
+      "saUnitsLeft": 1527,
+      "totalUnitsLeft": 1527,
+      "utilizationPct": 94.2
+    },
+    {
+      "date": "2026-04-01",
+      "bmPortal": 39758,
+      "vendorScheduled": 31903,
+      "saBlocked": 24908,
+      "saScheduled": 20291,
+      "saUnitsLeft": 0,
+      "totalUnitsLeft": 0,
+      "utilizationPct": 131.3
+    },
+    {
+      "date": "2026-04-02",
+      "bmPortal": 40719,
+      "vendorScheduled": 24431,
+      "saBlocked": 12868,
+      "saScheduled": 20360,
+      "saUnitsLeft": 0,
+      "totalUnitsLeft": 0,
+      "utilizationPct": 110
+    },
+    {
+      "date": "2026-04-03",
+      "bmPortal": 41680,
+      "vendorScheduled": 33825,
+      "saBlocked": 13829,
+      "saScheduled": 22213,
+      "saUnitsLeft": 0,
+      "totalUnitsLeft": 0,
+      "utilizationPct": 134.4
+    },
+    {
+      "date": "2026-04-04",
+      "bmPortal": 42641,
+      "vendorScheduled": 25585,
+      "saBlocked": 14790,
+      "saScheduled": 21321,
+      "saUnitsLeft": 0,
+      "totalUnitsLeft": 0,
+      "utilizationPct": 110
+    },
+    {
+      "date": "2026-04-05",
+      "bmPortal": 43602,
+      "vendorScheduled": 746,
+      "saBlocked": 15751,
+      "saScheduled": 24135,
+      "saUnitsLeft": 18721,
+      "totalUnitsLeft": 18721,
+      "utilizationPct": 57.1
+    }
+  ],
+  "DFW3": [
+    {
+      "date": "2026-03-16",
+      "bmPortal": 30686,
+      "vendorScheduled": 4838,
+      "saBlocked": 15427,
+      "saScheduled": 10153,
+      "saUnitsLeft": 15695,
+      "totalUnitsLeft": 15695,
+      "utilizationPct": 48.9
+    },
+    {
+      "date": "2026-03-17",
+      "bmPortal": 29725,
+      "vendorScheduled": 3877,
+      "saBlocked": 14466,
+      "saScheduled": 9192,
+      "saUnitsLeft": 16656,
+      "totalUnitsLeft": 16656,
+      "utilizationPct": 44
+    },
+    {
+      "date": "2026-03-18",
+      "bmPortal": 28764,
+      "vendorScheduled": 2916,
+      "saBlocked": 13505,
+      "saScheduled": 8231,
+      "saUnitsLeft": 17617,
+      "totalUnitsLeft": 17617,
+      "utilizationPct": 38.8
+    },
+    {
+      "date": "2026-03-19",
+      "bmPortal": 27803,
+      "vendorScheduled": 16682,
+      "saBlocked": 12544,
+      "saScheduled": 13902,
+      "saUnitsLeft": 0,
+      "totalUnitsLeft": 0,
+      "utilizationPct": 110
+    },
+    {
+      "date": "2026-03-20",
+      "bmPortal": 31662,
+      "vendorScheduled": 15814,
+      "saBlocked": 17404,
+      "saScheduled": 11129,
+      "saUnitsLeft": 4719,
+      "totalUnitsLeft": 4719,
+      "utilizationPct": 85.1
+    },
+    {
+      "date": "2026-03-21",
+      "bmPortal": 30701,
+      "vendorScheduled": 18421,
+      "saBlocked": 16443,
+      "saScheduled": 15351,
+      "saUnitsLeft": 0,
+      "totalUnitsLeft": 0,
+      "utilizationPct": 110
+    },
+    {
+      "date": "2026-03-22",
+      "bmPortal": 29740,
+      "vendorScheduled": 13892,
+      "saBlocked": 15482,
+      "saScheduled": 9207,
+      "saUnitsLeft": 6641,
+      "totalUnitsLeft": 6641,
+      "utilizationPct": 77.7
+    },
+    {
+      "date": "2026-03-23",
+      "bmPortal": 28779,
+      "vendorScheduled": 12931,
+      "saBlocked": 14521,
+      "saScheduled": 8246,
+      "saUnitsLeft": 7602,
+      "totalUnitsLeft": 7602,
+      "utilizationPct": 73.6
+    },
+    {
+      "date": "2026-03-24",
+      "bmPortal": 27818,
+      "vendorScheduled": 11970,
+      "saBlocked": 13560,
+      "saScheduled": 7285,
+      "saUnitsLeft": 8563,
+      "totalUnitsLeft": 8563,
+      "utilizationPct": 69.2
+    },
+    {
+      "date": "2026-03-25",
+      "bmPortal": 26857,
+      "vendorScheduled": 11009,
+      "saBlocked": 12599,
+      "saScheduled": 6324,
+      "saUnitsLeft": 9524,
+      "totalUnitsLeft": 9524,
+      "utilizationPct": 64.5
+    },
+    {
+      "date": "2026-03-26",
+      "bmPortal": 25896,
+      "vendorScheduled": 15538,
+      "saBlocked": 24639,
+      "saScheduled": 12948,
+      "saUnitsLeft": 0,
+      "totalUnitsLeft": 0,
+      "utilizationPct": 110
+    },
+    {
+      "date": "2026-03-27",
+      "bmPortal": 24935,
+      "vendorScheduled": 9087,
+      "saBlocked": 23678,
+      "saScheduled": 4402,
+      "saUnitsLeft": 11446,
+      "totalUnitsLeft": 11446,
+      "utilizationPct": 54.1
+    },
+    {
+      "date": "2026-03-28",
+      "bmPortal": 23974,
+      "vendorScheduled": 14384,
+      "saBlocked": 22717,
+      "saScheduled": 11987,
+      "saUnitsLeft": 0,
+      "totalUnitsLeft": 0,
+      "utilizationPct": 110
+    },
+    {
+      "date": "2026-03-29",
+      "bmPortal": 23013,
+      "vendorScheduled": 7165,
+      "saBlocked": 21756,
+      "saScheduled": 2480,
+      "saUnitsLeft": 13368,
+      "totalUnitsLeft": 13368,
+      "utilizationPct": 41.9
+    },
+    {
+      "date": "2026-03-30",
+      "bmPortal": 26872,
+      "vendorScheduled": 21024,
+      "saBlocked": 13615,
+      "saScheduled": 6339,
+      "saUnitsLeft": 0,
+      "totalUnitsLeft": 0,
+      "utilizationPct": 101.8
+    },
+    {
+      "date": "2026-03-31",
+      "bmPortal": 25911,
+      "vendorScheduled": 20063,
+      "saBlocked": 12654,
+      "saScheduled": 5378,
+      "saUnitsLeft": 470,
+      "totalUnitsLeft": 470,
+      "utilizationPct": 98.2
+    },
+    {
+      "date": "2026-04-01",
+      "bmPortal": 37275,
+      "vendorScheduled": 6100,
+      "saBlocked": 23072,
+      "saScheduled": 16742,
+      "saUnitsLeft": 14433,
+      "totalUnitsLeft": 14433,
+      "utilizationPct": 61.3
+    },
+    {
+      "date": "2026-04-02",
+      "bmPortal": 36314,
+      "vendorScheduled": 21788,
+      "saBlocked": 22111,
+      "saScheduled": 18157,
+      "saUnitsLeft": 0,
+      "totalUnitsLeft": 0,
+      "utilizationPct": 110
+    },
+    {
+      "date": "2026-04-03",
+      "bmPortal": 35353,
+      "vendorScheduled": 4178,
+      "saBlocked": 21150,
+      "saScheduled": 14820,
+      "saUnitsLeft": 16355,
+      "totalUnitsLeft": 16355,
+      "utilizationPct": 53.7
+    },
+    {
+      "date": "2026-04-04",
+      "bmPortal": 34392,
+      "vendorScheduled": 20635,
+      "saBlocked": 20189,
+      "saScheduled": 17196,
+      "saUnitsLeft": 0,
+      "totalUnitsLeft": 0,
+      "utilizationPct": 110
+    },
+    {
+      "date": "2026-04-05",
+      "bmPortal": 33431,
+      "vendorScheduled": 2256,
+      "saBlocked": 19228,
+      "saScheduled": 12898,
+      "saUnitsLeft": 18277,
+      "totalUnitsLeft": 18277,
+      "utilizationPct": 45.3
+    }
+  ],
+  "ATL1": [
+    {
+      "date": "2026-03-16",
+      "bmPortal": 38671,
+      "vendorScheduled": 28979,
+      "saBlocked": 18602,
+      "saScheduled": 19204,
+      "saUnitsLeft": 0,
+      "totalUnitsLeft": 0,
+      "utilizationPct": 124.6
+    },
+    {
+      "date": "2026-03-17",
+      "bmPortal": 39632,
+      "vendorScheduled": 29940,
+      "saBlocked": 19563,
+      "saScheduled": 20165,
+      "saUnitsLeft": 0,
+      "totalUnitsLeft": 0,
+      "utilizationPct": 126.4
+    },
+    {
+      "date": "2026-03-18",
+      "bmPortal": 40593,
+      "vendorScheduled": 30901,
+      "saBlocked": 20524,
+      "saScheduled": 21126,
+      "saUnitsLeft": 0,
+      "totalUnitsLeft": 0,
+      "utilizationPct": 128.2
+    },
+    {
+      "date": "2026-03-19",
+      "bmPortal": 41554,
+      "vendorScheduled": 24932,
+      "saBlocked": 21485,
+      "saScheduled": 20777,
+      "saUnitsLeft": 0,
+      "totalUnitsLeft": 0,
+      "utilizationPct": 110
+    },
+    {
+      "date": "2026-03-20",
+      "bmPortal": 37695,
+      "vendorScheduled": 18003,
+      "saBlocked": 16625,
+      "saScheduled": 18228,
+      "saUnitsLeft": 1464,
+      "totalUnitsLeft": 1464,
+      "utilizationPct": 96.1
+    },
+    {
+      "date": "2026-03-21",
+      "bmPortal": 38656,
+      "vendorScheduled": 23194,
+      "saBlocked": 17586,
+      "saScheduled": 19328,
+      "saUnitsLeft": 0,
+      "totalUnitsLeft": 0,
+      "utilizationPct": 110
+    },
+    {
+      "date": "2026-03-22",
+      "bmPortal": 39617,
+      "vendorScheduled": 19925,
+      "saBlocked": 18547,
+      "saScheduled": 20150,
+      "saUnitsLeft": 0,
+      "totalUnitsLeft": 0,
+      "utilizationPct": 101.2
+    },
+    {
+      "date": "2026-03-23",
+      "bmPortal": 40578,
+      "vendorScheduled": 20886,
+      "saBlocked": 19508,
+      "saScheduled": 21111,
+      "saUnitsLeft": 0,
+      "totalUnitsLeft": 0,
+      "utilizationPct": 103.5
+    },
+    {
+      "date": "2026-03-24",
+      "bmPortal": 41539,
+      "vendorScheduled": 21847,
+      "saBlocked": 20469,
+      "saScheduled": 22072,
+      "saUnitsLeft": 0,
+      "totalUnitsLeft": 0,
+      "utilizationPct": 105.7
+    },
+    {
+      "date": "2026-03-25",
+      "bmPortal": 42500,
+      "vendorScheduled": 22808,
+      "saBlocked": 21430,
+      "saScheduled": 23033,
+      "saUnitsLeft": 0,
+      "totalUnitsLeft": 0,
+      "utilizationPct": 107.9
+    },
+    {
+      "date": "2026-03-26",
+      "bmPortal": 43461,
+      "vendorScheduled": 26077,
+      "saBlocked": 22391,
+      "saScheduled": 21731,
+      "saUnitsLeft": 0,
+      "totalUnitsLeft": 0,
+      "utilizationPct": 110
+    },
+    {
+      "date": "2026-03-27",
+      "bmPortal": 44422,
+      "vendorScheduled": 24730,
+      "saBlocked": 23352,
+      "saScheduled": 24955,
+      "saUnitsLeft": 0,
+      "totalUnitsLeft": 0,
+      "utilizationPct": 111.8
+    },
+    {
+      "date": "2026-03-28",
+      "bmPortal": 20382,
+      "vendorScheduled": 12229,
+      "saBlocked": 24313,
+      "saScheduled": 10191,
+      "saUnitsLeft": 0,
+      "totalUnitsLeft": 0,
+      "utilizationPct": 110
+    },
+    {
+      "date": "2026-03-29",
+      "bmPortal": 21343,
+      "vendorScheduled": 26652,
+      "saBlocked": 12273,
+      "saScheduled": 1876,
+      "saUnitsLeft": 0,
+      "totalUnitsLeft": 0,
+      "utilizationPct": 133.7
+    },
+    {
+      "date": "2026-03-30",
+      "bmPortal": 42485,
+      "vendorScheduled": 12793,
+      "saBlocked": 20414,
+      "saScheduled": 23018,
+      "saUnitsLeft": 6674,
+      "totalUnitsLeft": 6674,
+      "utilizationPct": 84.3
+    },
+    {
+      "date": "2026-03-31",
+      "bmPortal": 43446,
+      "vendorScheduled": 13754,
+      "saBlocked": 21375,
+      "saScheduled": 23979,
+      "saUnitsLeft": 5713,
+      "totalUnitsLeft": 5713,
+      "utilizationPct": 86.9
+    },
+    {
+      "date": "2026-04-01",
+      "bmPortal": 32082,
+      "vendorScheduled": 27717,
+      "saBlocked": 23958,
+      "saScheduled": 12615,
+      "saUnitsLeft": 0,
+      "totalUnitsLeft": 0,
+      "utilizationPct": 125.7
+    },
+    {
+      "date": "2026-04-02",
+      "bmPortal": 33043,
+      "vendorScheduled": 19826,
+      "saBlocked": 24919,
+      "saScheduled": 16522,
+      "saUnitsLeft": 0,
+      "totalUnitsLeft": 0,
+      "utilizationPct": 110
+    },
+    {
+      "date": "2026-04-03",
+      "bmPortal": 34004,
+      "vendorScheduled": 29639,
+      "saBlocked": 12879,
+      "saScheduled": 14537,
+      "saUnitsLeft": 0,
+      "totalUnitsLeft": 0,
+      "utilizationPct": 129.9
+    },
+    {
+      "date": "2026-04-04",
+      "bmPortal": 34965,
+      "vendorScheduled": 20979,
+      "saBlocked": 13840,
+      "saScheduled": 17483,
+      "saUnitsLeft": 0,
+      "totalUnitsLeft": 0,
+      "utilizationPct": 110
+    },
+    {
+      "date": "2026-04-05",
+      "bmPortal": 35926,
+      "vendorScheduled": 31561,
+      "saBlocked": 14801,
+      "saScheduled": 16459,
+      "saUnitsLeft": 0,
+      "totalUnitsLeft": 0,
+      "utilizationPct": 133.7
+    }
+  ],
+  "BOS2": [
+    {
+      "date": "2026-03-16",
+      "bmPortal": 41721,
+      "vendorScheduled": 24018,
+      "saBlocked": 20302,
+      "saScheduled": 21188,
+      "saUnitsLeft": 0,
+      "totalUnitsLeft": 0,
+      "utilizationPct": 108.4
+    },
+    {
+      "date": "2026-03-17",
+      "bmPortal": 40760,
+      "vendorScheduled": 23057,
+      "saBlocked": 19341,
+      "saScheduled": 20227,
+      "saUnitsLeft": 0,
+      "totalUnitsLeft": 0,
+      "utilizationPct": 106.2
+    },
+    {
+      "date": "2026-03-18",
+      "bmPortal": 39799,
+      "vendorScheduled": 22096,
+      "saBlocked": 18380,
+      "saScheduled": 19266,
+      "saUnitsLeft": 0,
+      "totalUnitsLeft": 0,
+      "utilizationPct": 103.9
+    },
+    {
+      "date": "2026-03-19",
+      "bmPortal": 38838,
+      "vendorScheduled": 23303,
+      "saBlocked": 17419,
+      "saScheduled": 19419,
+      "saUnitsLeft": 0,
+      "totalUnitsLeft": 0,
+      "utilizationPct": 110
+    },
+    {
+      "date": "2026-03-20",
+      "bmPortal": 42697,
+      "vendorScheduled": 34994,
+      "saBlocked": 22279,
+      "saScheduled": 22164,
+      "saUnitsLeft": 0,
+      "totalUnitsLeft": 0,
+      "utilizationPct": 133.9
+    },
+    {
+      "date": "2026-03-21",
+      "bmPortal": 41736,
+      "vendorScheduled": 25042,
+      "saBlocked": 21318,
+      "saScheduled": 20868,
+      "saUnitsLeft": 0,
+      "totalUnitsLeft": 0,
+      "utilizationPct": 110
+    },
+    {
+      "date": "2026-03-22",
+      "bmPortal": 40775,
+      "vendorScheduled": 33072,
+      "saBlocked": 20357,
+      "saScheduled": 20242,
+      "saUnitsLeft": 0,
+      "totalUnitsLeft": 0,
+      "utilizationPct": 130.8
+    },
+    {
+      "date": "2026-03-23",
+      "bmPortal": 39814,
+      "vendorScheduled": 32111,
+      "saBlocked": 19396,
+      "saScheduled": 19281,
+      "saUnitsLeft": 0,
+      "totalUnitsLeft": 0,
+      "utilizationPct": 129.1
+    },
+    {
+      "date": "2026-03-24",
+      "bmPortal": 38853,
+      "vendorScheduled": 31150,
+      "saBlocked": 18435,
+      "saScheduled": 18320,
+      "saUnitsLeft": 0,
+      "totalUnitsLeft": 0,
+      "utilizationPct": 127.3
+    },
+    {
+      "date": "2026-03-25",
+      "bmPortal": 37892,
+      "vendorScheduled": 30189,
+      "saBlocked": 17474,
+      "saScheduled": 17359,
+      "saUnitsLeft": 0,
+      "totalUnitsLeft": 0,
+      "utilizationPct": 125.5
+    },
+    {
+      "date": "2026-03-26",
+      "bmPortal": 36931,
+      "vendorScheduled": 22159,
+      "saBlocked": 16513,
+      "saScheduled": 18466,
+      "saUnitsLeft": 0,
+      "totalUnitsLeft": 0,
+      "utilizationPct": 110
+    },
+    {
+      "date": "2026-03-27",
+      "bmPortal": 35970,
+      "vendorScheduled": 28267,
+      "saBlocked": 15552,
+      "saScheduled": 15437,
+      "saUnitsLeft": 0,
+      "totalUnitsLeft": 0,
+      "utilizationPct": 121.5
+    },
+    {
+      "date": "2026-03-28",
+      "bmPortal": 35009,
+      "vendorScheduled": 21005,
+      "saBlocked": 14591,
+      "saScheduled": 17505,
+      "saUnitsLeft": 0,
+      "totalUnitsLeft": 0,
+      "utilizationPct": 110
+    },
+    {
+      "date": "2026-03-29",
+      "bmPortal": 34048,
+      "vendorScheduled": 26345,
+      "saBlocked": 13630,
+      "saScheduled": 13515,
+      "saUnitsLeft": 0,
+      "totalUnitsLeft": 0,
+      "utilizationPct": 117.1
+    },
+    {
+      "date": "2026-03-30",
+      "bmPortal": 37907,
+      "vendorScheduled": 5203,
+      "saBlocked": 18490,
+      "saScheduled": 17374,
+      "saUnitsLeft": 15330,
+      "totalUnitsLeft": 15330,
+      "utilizationPct": 59.6
+    },
+    {
+      "date": "2026-03-31",
+      "bmPortal": 36946,
+      "vendorScheduled": 4242,
+      "saBlocked": 17529,
+      "saScheduled": 16413,
+      "saUnitsLeft": 16291,
+      "totalUnitsLeft": 16291,
+      "utilizationPct": 55.9
+    },
+    {
+      "date": "2026-04-01",
+      "bmPortal": 23309,
+      "vendorScheduled": 25280,
+      "saBlocked": 14946,
+      "saScheduled": 2776,
+      "saUnitsLeft": 0,
+      "totalUnitsLeft": 0,
+      "utilizationPct": 120.4
+    },
+    {
+      "date": "2026-04-02",
+      "bmPortal": 22348,
+      "vendorScheduled": 13409,
+      "saBlocked": 13985,
+      "saScheduled": 11174,
+      "saUnitsLeft": 0,
+      "totalUnitsLeft": 0,
+      "utilizationPct": 110
+    },
+    {
+      "date": "2026-04-03",
+      "bmPortal": 21387,
+      "vendorScheduled": 23358,
+      "saBlocked": 13024,
+      "saScheduled": 854,
+      "saUnitsLeft": 0,
+      "totalUnitsLeft": 0,
+      "utilizationPct": 113.2
+    },
+    {
+      "date": "2026-04-04",
+      "bmPortal": 20426,
+      "vendorScheduled": 12256,
+      "saBlocked": 12063,
+      "saScheduled": 10213,
+      "saUnitsLeft": 0,
+      "totalUnitsLeft": 0,
+      "utilizationPct": 110
+    },
+    {
+      "date": "2026-04-05",
+      "bmPortal": 44466,
+      "vendorScheduled": 21436,
+      "saBlocked": 24103,
+      "saScheduled": 23933,
+      "saUnitsLeft": 0,
+      "totalUnitsLeft": 0,
+      "utilizationPct": 102
+    }
+  ]
+}

@@ -45,11 +45,11 @@ export default function ObfuscationPage() {
 		<Root
 			scroll="content"
 			header={
-				<div className="flex flex-col w-full p-6 sm:px-8">
-					<PageBreadcrumb className="mb-2" />
-					<div className="flex items-center gap-3">
-						<FuseSvgIcon size={24} color="secondary">heroicons-outline:shield-check</FuseSvgIcon>
-						<Typography className="text-xl font-bold">Data Obfuscation</Typography>
+				<div className="flex flex-col w-full py-2 px-6 sm:px-8">
+					<PageBreadcrumb />
+					<div className="flex items-center gap-2">
+						<FuseSvgIcon size={20} color="secondary">heroicons-outline:shield-check</FuseSvgIcon>
+						<Typography className="text-lg font-bold">Data Obfuscation</Typography>
 						<Chip
 							icon={<AutoAwesomeIcon />}
 							label="AI-Enhanced"
@@ -57,10 +57,10 @@ export default function ObfuscationPage() {
 							color="secondary"
 							variant="outlined"
 						/>
+						<Typography variant="caption" color="text.secondary" className="ml-1">
+							Format-preserving HMAC-SHA256 obfuscation
+						</Typography>
 					</div>
-					<Typography variant="body2" color="text.secondary">
-						Apply format-preserving, deterministic HMAC-SHA256 obfuscation to PII columns.
-					</Typography>
 				</div>
 			}
 			content={

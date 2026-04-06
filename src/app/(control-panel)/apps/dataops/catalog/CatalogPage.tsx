@@ -120,20 +120,20 @@ export default function CatalogPage() {
 			<Root
 				scroll="content"
 				header={
-					<div className="flex flex-col w-full p-6 sm:px-8">
-						<PageBreadcrumb className="mb-2" />
-						<div className="flex items-center gap-3">
-							<FuseSvgIcon size={24} color="secondary">heroicons-outline:book-open</FuseSvgIcon>
-							<Typography className="text-xl font-bold">Data Catalog</Typography>
+					<div className="flex flex-col w-full py-2 px-6 sm:px-8">
+						<PageBreadcrumb />
+						<div className="flex items-center gap-2">
+							<FuseSvgIcon size={20} color="secondary">heroicons-outline:book-open</FuseSvgIcon>
+							<Typography className="text-lg font-bold">Data Catalog</Typography>
 							<Chip
 								label={`${filtered.length} datasets`}
 								size="small"
 								variant="outlined"
 							/>
+							<Typography variant="caption" color="text.secondary" className="ml-1">
+								Browse datasets with metadata, lineage, and quality reports
+							</Typography>
 						</div>
-						<Typography variant="body2" color="text.secondary">
-							Browse and explore published datasets with full metadata, lineage, and quality reports.
-						</Typography>
 					</div>
 				}
 				leftSidebarContent={

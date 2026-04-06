@@ -40,9 +40,34 @@ const navigationConfig: FuseNavItemType[] = [
 	{
 		id: 'freightlens',
 		title: 'FreightLens',
-		type: 'item',
+		type: 'collapse',
 		icon: 'heroicons-outline:calendar',
-		url: '/apps/freightlens'
+		children: [
+			{
+				id: 'freightlens-rolling21',
+				title: 'Rolling 21 Days',
+				type: 'item',
+				url: '/apps/freightlens'
+			},
+			{
+				id: 'freightlens-standing',
+				title: 'Standing Appointments',
+				type: 'item',
+				url: '/apps/freightlens/standing'
+			},
+			{
+				id: 'freightlens-fc-metric',
+				title: 'FC Metric',
+				type: 'item',
+				url: '/apps/freightlens/fc-metric'
+			},
+			{
+				id: 'freightlens-admin',
+				title: 'Admin Portal',
+				type: 'item',
+				url: '/apps/freightlens/admin'
+			}
+		]
 	},
 	{
 		id: 'nova',
