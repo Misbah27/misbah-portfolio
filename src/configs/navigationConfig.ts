@@ -47,9 +47,22 @@ const navigationConfig: FuseNavItemType[] = [
 	{
 		id: 'nova',
 		title: 'Nova',
-		type: 'item',
+		type: 'collapse',
 		icon: 'heroicons-outline:bell-alert',
-		url: '/apps/nova'
+		children: [
+			{
+				id: 'nova-delay-alert',
+				title: 'Delay Alert',
+				type: 'item',
+				url: '/apps/nova'
+			},
+			{
+				id: 'nova-rescue',
+				title: 'Rescue Planner',
+				type: 'item',
+				url: '/apps/nova/rescue-planner'
+			}
+		]
 	},
 	{
 		id: 'dataops',
