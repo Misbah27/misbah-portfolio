@@ -13,7 +13,6 @@ import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import Skeleton from '@mui/material/Skeleton';
 import PageBreadcrumb from 'src/components/PageBreadcrumb';
 import { motion } from 'motion/react';
-import NovaSidebar from '../components/NovaSidebar';
 import HomeTab from '../components/rescue/HomeTab';
 import EditTab from '../components/rescue/EditTab';
 import PlanTab from '../components/rescue/PlanTab';
@@ -28,10 +27,6 @@ const Root = styled(FusePageSimple)(({ theme }) => ({
 		borderBottomWidth: 1, borderStyle: 'solid', borderColor: theme.vars.palette.divider,
 	},
 	'& .FusePageSimple-content': { backgroundColor: theme.vars.palette.background.default },
-	'& .FusePageSimple-leftSidebar': {
-		backgroundColor: theme.vars.palette.background.paper,
-		borderRightWidth: 1, borderStyle: 'solid', borderColor: theme.vars.palette.divider,
-	},
 }));
 
 const TAB_DEFS = [
@@ -133,10 +128,6 @@ function RescuePlannerPage() {
 					</div>
 				</div>
 			}
-			leftSidebarContent={<NovaSidebar />}
-			leftSidebarOpen
-			leftSidebarWidth={280}
-			leftSidebarVariant="permanent"
 			content={
 				<div className="w-full p-6 sm:p-8">
 					{loading ? (

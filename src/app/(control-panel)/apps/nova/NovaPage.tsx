@@ -3,7 +3,6 @@
 import { useState, useEffect } from 'react';
 import FusePageSimple from '@fuse/core/FusePageSimple';
 import { styled } from '@mui/material/styles';
-import NovaSidebar from './components/NovaSidebar';
 import NovaHeader from './components/NovaHeader';
 import DelayAlertContent from './components/DelayAlertContent';
 import DelayAlertSkeleton from './components/DelayAlertSkeleton';
@@ -21,12 +20,6 @@ const Root = styled(FusePageSimple)(({ theme }) => ({
 	},
 	'& .FusePageSimple-content': {
 		backgroundColor: theme.vars.palette.background.default,
-	},
-	'& .FusePageSimple-leftSidebar': {
-		backgroundColor: theme.vars.palette.background.paper,
-		borderRightWidth: 1,
-		borderStyle: 'solid',
-		borderColor: theme.vars.palette.divider,
 	},
 }));
 
@@ -60,10 +53,6 @@ function NovaPage() {
 		<Root
 			scroll="content"
 			header={<NovaHeader lastUpdated={lastUpdated} />}
-			leftSidebarContent={<NovaSidebar />}
-			leftSidebarOpen
-			leftSidebarWidth={280}
-			leftSidebarVariant="permanent"
 			content={
 				<div className="w-full p-6 sm:p-8">
 					{loading ? <DelayAlertSkeleton /> : <DelayAlertContent alerts={alerts} />}
