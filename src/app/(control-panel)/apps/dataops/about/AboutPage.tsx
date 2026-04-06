@@ -17,6 +17,9 @@ import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome';
 import SearchIcon from '@mui/icons-material/Search';
 import ShieldIcon from '@mui/icons-material/Shield';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+import dynamic from 'next/dynamic';
+
+const ArchitectureDiagram = dynamic(() => import('./ArchitectureDiagram'), { ssr: false });
 
 const Root = styled(FusePageSimple)(({ theme }) => ({
 	'&.FusePageSimple-scroll-content': {
@@ -260,6 +263,10 @@ export default function AboutPage() {
 									keys.
 								</Typography>
 							</Paper>
+							<Typography variant="caption" className="mt-4 mb-2 block text-gray-400 italic">
+								Animated edges show the primary request path. Dashed edges show async/secondary flows. Drag to explore, scroll to zoom.
+							</Typography>
+							<ArchitectureDiagram />
 						</Section>
 
 						{/* Data Model */}

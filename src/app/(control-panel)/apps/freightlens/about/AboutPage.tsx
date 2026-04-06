@@ -16,6 +16,9 @@ import LinearProgress from '@mui/material/LinearProgress';
 import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome';
 import TrendingUpIcon from '@mui/icons-material/TrendingUp';
 import SearchIcon from '@mui/icons-material/Search';
+import dynamic from 'next/dynamic';
+
+const ArchitectureDiagram = dynamic(() => import('./ArchitectureDiagram'), { ssr: false });
 
 const Root = styled(FusePageSimple)(({ theme }) => ({
 	'&.FusePageSimple-scroll-content': {
@@ -247,6 +250,10 @@ export default function AboutPage() {
 									notifications to the on-call team when an FC misses its reporting window.
 								</Typography>
 							</Paper>
+							<Typography variant="caption" className="mt-4 mb-2 block text-gray-400 italic">
+								Animated edges show the primary request path. Dashed edges show async/secondary flows. Drag to explore, scroll to zoom.
+							</Typography>
+							<ArchitectureDiagram />
 						</Section>
 
 						{/* Data Model */}
