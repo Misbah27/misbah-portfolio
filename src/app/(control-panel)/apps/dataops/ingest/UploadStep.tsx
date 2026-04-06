@@ -37,11 +37,14 @@ interface UploadStepProps {
 /**
  * Wizard Step 1 — Upload dataset via file upload or sample dataset selection.
  */
+const MAX_ROWS = 20;
+
 export default function UploadStep({ ctx, updateCtx, onNext }: UploadStepProps) {
 	const [dragOver, setDragOver] = useState(false);
 	const [error, setError] = useState('');
 	const [loading, setLoading] = useState(false);
 	const [fileName, setFileName] = useState('');
+	const [truncatedWarning, setTruncatedWarning] = useState('');
 	const inputRef = useRef<HTMLInputElement>(null);
 
 	const processData = useCallback(
@@ -50,9 +53,16 @@ export default function UploadStep({ ctx, updateCtx, onNext }: UploadStepProps) 
 				setError('No rows found in the file.');
 				return;
 			}
-			const schema = inferSchema(rows);
+			let finalRows = rows;
+			if (rows.length > MAX_ROWS) {
+				finalRows = rows.slice(0, MAX_ROWS);
+				setTruncatedWarning(`Dataset truncated from ${rows.length} to ${MAX_ROWS} rows (demo limit for LLM cost control).`);
+			} else {
+				setTruncatedWarning('');
+			}
+			const schema = inferSchema(finalRows);
 			updateCtx({
-				rows,
+				rows: finalRows,
 				schema,
 				datasetName: name || ctx.datasetName,
 				industryTag: industry || ctx.industryTag,
@@ -325,6 +335,11 @@ export default function UploadStep({ ctx, updateCtx, onNext }: UploadStepProps) 
 						</div>
 					</Paper>
 				</motion.div>
+			)}
+
+			{/* Truncation warning */}
+			{truncatedWarning && (
+				<Alert severity="info" className="mb-4">{truncatedWarning}</Alert>
 			)}
 
 			{/* SQL lineage textarea */}

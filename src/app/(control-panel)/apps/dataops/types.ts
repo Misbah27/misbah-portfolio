@@ -102,11 +102,13 @@ export interface DatasetCatalogEntry {
 	name: string;
 	industryTag: IndustryTag;
 	description: string;
+	businessContext?: string;
 	filePath: string;
 	schema: DatasetColumn[];
 	rowCount: number;
 	classification: DataClassification;
 	piiColumns: PiiColumnInfo[];
+	regulatoryFlags?: RegulatoryFlag[];
 	owner: string;
 	team: string;
 	domain: string;
@@ -118,6 +120,25 @@ export interface DatasetCatalogEntry {
 		qualityScore: number | null;
 	};
 	publishedToCatalog: boolean;
+}
+
+/* ------------------------------------------------------------------ */
+/* Obfuscation Job                                                     */
+/* ------------------------------------------------------------------ */
+
+export interface ObfuscationJob {
+	jobId: string;
+	datasetId: string;
+	datasetName: string;
+	submittedAt: string;
+	completedAt: string | null;
+	status: 'COMPLETED' | 'FAILED' | 'RUNNING';
+	piiColumnsObfuscated: number;
+	rowsProcessed: number;
+	processingTimeMs: number;
+	requestedBy: string;
+	seedVersion: string;
+	reidentificationRequests: number;
 }
 
 /* ------------------------------------------------------------------ */

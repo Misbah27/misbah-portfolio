@@ -58,19 +58,103 @@ BEFORE writing any component in any session, you MUST:
 4. Read the navigation config (navigationConfig or FuseNavigation)
 5. Read 2 example page components to understand patterns
 
-RULES:
-- Reuse ALL existing Fuse layout components — never rebuild from scratch
-- Use Fuse's Tailwind config — do NOT create new CSS files
-- Follow the template's App Router routing pattern
-- Use Fuse's theme provider for dark/light mode
-- Navigation sidebar must use Fuse's FuseNavigation component
+HARD RULES — DISCOVERED THROUGH SESSIONS 11-13:
+
+Icons & Components:
+- ZERO emoji anywhere in the UI — all icons must be FuseSvgIcon with
+  heroicons-outline:* or heroicons-solid:* icon names
+- ZERO raw HTML tables — all tabular data uses Fuse DataTable component
+  (Material React Table wrapper)
+- ZERO MUI Stepper for wizard steps — use inline Chip components instead
+  (Stepper is too tall and breaks single-viewport layout)
+
+Layout & Scrolling:
+- Use FusePageSimple NOT FusePageCarded — Carded creates an unwanted gap
+- Layout mode: fullwidth (not container) on all app pages
+- Footer is GLOBALLY DISABLED via settingsConfig.ts footer.display:false
+  — do not re-enable it
+- ALL FusePageSimple instances MUST use scroll="content" prop AND include
+  '&.FusePageSimple-scroll-content': { height: '100%' } in the styled
+  Root component. Without this, content doesn't scroll independently.
+- No auth guard on any page — public portfolio
+- Remove ALL Fuse boilerplate from toolbar: Configurator panel,
+  theme switcher, language switcher, fullscreen toggle
+
+Spacing (validated pattern — do NOT use p-24/gap-24):
+- Page headers: p-6 sm:px-8
+- Page content wrapper: p-6 sm:p-8
+- Grid gaps between cards/charts: gap-6
+- Card internal padding: p-4
+- NEVER use Tailwind p-24/gap-24 (=96px) — these create excessive
+  whitespace. Maximum useful padding is p-8 (32px).
+
+DataTable Defaults (CRITICAL — DataTable.tsx defaults add unwanted columns):
+- EVERY DataTable instance MUST include these props to disable defaults:
+  enableRowSelection={false} enableRowActions={false}
+  enableColumnOrdering={false} enableGrouping={false}
+  enableColumnPinning={false} enableDensityToggle={false}
+  enableHiding={false} enableStickyHeader
+  initialState={{ density: 'compact' }}
+- For read-only tables also add: enableFilters={false}
+  enablePagination={false} enableBottomToolbar={false}
+  enableTopToolbar={false}
+- Reference pattern: QualityStep.tsx DataTable props
+
+Data Persistence (Amplify-compatible):
+- Amplify filesystem is READ-ONLY — NEVER use fs.writeFileSync in API
+  routes. It works locally but fails in production.
+- User-published datasets stored in localStorage via
+  userDatasetStore.ts (catalog entry + row data)
+- Static catalog.json (12 datasets) always loads; user-published
+  datasets are merged on mount via CatalogPage useEffect
+- Wizard uploads capped at 20 rows (MAX_ROWS in UploadStep.tsx)
+  for LLM cost control
+- Publish API is stateless — validates and returns entry, client
+  persists to localStorage
+
+Catalog & Obfuscation:
+- PII data is auto-obfuscated in catalog Preview tab (no toggle) —
+  uses HMAC-SHA256 from obfuscationUtils.ts, styled amber mono font
+- IMAGE_URL columns are always visible in columnVisibility regardless
+  of column index position
+- Obfuscation uses format-preserving HMAC via crypto.subtle.sign
+  with DEMO_SEED = 'DEMO_SEED_2024'
+
+UI Patterns:
+- Loading states use Skeleton components matching exact layout shape —
+  never generic spinners
+- Animations: motion.div from motion/react with staggerChildren:0.06,
+  itemVariants opacity 0→1, y 12→0, duration 0.3
+- AI labels: <Chip icon={<AutoAwesomeIcon />} label="AI-Enhanced"
+  size="small" color="secondary" variant="outlined" />
+  NOT "AI-Enhanced ✦" text — use the Chip component
+- All form fields use InputAdornment with FuseSvgIcon icons
+- Step transitions: AnimatePresence + motion.div slide with opacity
+- Toast notifications: notistack useSnackbar (not custom toast)
+- Page headers: PageBreadcrumb + FusePageSimple (consistent pattern)
+- Color-coded quality/severity: CRITICAL=red, WARNING=amber, INFO=blue
+- Navigation: collapse-type entries with children for multi-page apps
+  (see DataOps navigationConfig: type:'collapse' with 4 children)
+
+DATA FILE LOCATION PATTERN (discovered in Session 11):
+- Synthetic data files live in /data/dataops/datasets/[fileName].json
+- A symlink src/data/dataops → data/dataops enables Next.js imports
+  via @/data/dataops/datasets/[fileName] from wizard sample loader
+- Create the same symlink pattern for each app's data directory
 
 Routes:
 - Portfolio landing:  /
-- InboundIQ:          /apps/inboundiq
+- InboundIQ:          /apps/inboundiq (collapse nav)
+  ├── Dashboard:      /apps/inboundiq
+  ├── Analytics:      /apps/inboundiq/analytics (includes FC map)
+  └── About:          /apps/inboundiq/about
 - FreightLens:        /apps/freightlens
 - Nova:               /apps/nova
-- DataOps Suite:      /apps/dataops
+- DataOps Suite:      /apps/dataops (collapse nav)
+  ├── Ingest:         /apps/dataops/ingest
+  ├── Catalog:        /apps/dataops/catalog
+  ├── Obfuscation:    /apps/dataops/obfuscation
+  └── Quality:        /apps/dataops (landing = quality dashboard)
 - LoFAT:              /apps/lofat
 
 ---
@@ -117,15 +201,21 @@ NEVER use real Amazon data. NEVER use India region data.
 ## LLM INTEGRATION RULES
 
 API key: ANTHROPIC_API_KEY from environment — NEVER hardcode
-Model: claude-sonnet-4-20250514 | Max tokens: 1000
+Model: claude-sonnet-4-20250514
+Max tokens: 1000 for most routes — EXCEPTION: generate-metadata uses 8000
+  (metadata generation requires large JSON output covering all columns)
 API routes: /apps/[appname]/app/api/
 
 Every LLM feature MUST have:
-1. Loading skeleton while waiting
-2. Error boundary with friendly fallback
+1. Skeleton loading state matching exact layout shape (not generic spinner)
+2. Error boundary with friendly fallback message
 3. Retry button on failure
-4. "AI-Enhanced ✦" label
-5. Response time displayed
+4. AI label as MUI Chip: <Chip icon={<AutoAwesomeIcon />} label="AI-Enhanced"
+   size="small" color="secondary" variant="outlined" />
+5. Response time displayed after generation
+
+LLM fails gracefully — always return deterministic results if LLM call fails.
+Never block the UI on LLM failure.
 
 Standard API route pattern:
 ```typescript
@@ -136,7 +226,7 @@ export async function POST(request: Request) {
     const body = await request.json();
     const response = await client.messages.create({
       model: 'claude-sonnet-4-20250514',
-      max_tokens: 1000,
+      max_tokens: 1000, // use 8000 for generate-metadata
       messages: [{ role: 'user', content: buildPrompt(body) }]
     });
     return Response.json({
@@ -158,7 +248,7 @@ Domain: Dock door allocation engine. Each FC has 10-15 dock doors (scarce
 resource). System ranks trucks in the yard so ops knows which truck gets
 the next available door — replacing all manual decision-making.
 
-Pages: Dashboard | Analytics | Map | About
+Pages: Dashboard | Analytics (includes FC Network Map) | About
 
 Truck data model — 3 categories in trucks.json:
 
@@ -272,87 +362,131 @@ LLM features:
 ---
 
 ## APP 4: DATAOPS SUITE
-Route: /apps/dataops
+Route: /apps/dataops (collapse nav with 4 children)
 Original tools: Conversational Data Catalog + Automated Metadata Generation
 + Data Obfuscation Service (Amazon PX Central Science team)
 Key achievements: 60% team efficiency increase, 99% metadata accuracy,
 $1.2M annual savings, 99.9% availability
 
-Architecture: 4 services connected by a wizard flow.
-Sidebar: Ingest (wizard) | Catalog | Obfuscation | Quality Dashboard
+WHAT SESSION 11 BUILT — DO NOT REBUILD IN SESSION 12:
+- types.ts: all TypeScript interfaces (DatasetColumn, DataRow, DatasetFile,
+  DatasetCatalogEntry, QualityReport, QualityIssue, ColumnHealth,
+  GeneratedMetadata, ColumnMetadata, WizardContext, INITIAL_WIZARD_CONTEXT,
+  SAMPLE_DATASETS, INDUSTRY_TAGS, INDUSTRY_LABELS, INDUSTRY_COLORS)
+- 12 synthetic datasets in /data/dataops/datasets/ (500 rows each,
+  ~15% intentional quality issues per dataset)
+- /data/dataops/catalog.json (12 entries, publishedToCatalog:true,
+  datasetId ds-001 through ds-012)
+- Symlink: src/data/dataops → data/dataops
+- DataOpsPage.tsx: landing with 4 metric Paper cards + 3 service Cards
+  with colored left-border accents (blue/purple/green)
+- IngestWizardPage.tsx: 4-step wizard using inline Chip step indicators
+  (NOT MUI Stepper), AnimatePresence slide transitions
+  Step 1: drag-drop, industry selector, SQL textarea, 12 sample buttons
+  Step 2: QualityReport display — score card, issues DataTable, heatmap
+  Step 3: GeneratedMetadata display — approve/reject/edit per column
+  Step 4: classification override, owner, tags, publish button
+- CatalogPage.tsx: PLACEHOLDER — build in Session 12
+- ObfuscationPage.tsx: PLACEHOLDER — build in Session 12
+- POST /api/dataops/quality-check: BUILT. 10 deterministic + 5 business
+  logic + LLM semantic. Graceful fallback if LLM fails.
+- POST /api/dataops/generate-metadata: BUILT. max_tokens 8000.
+  Post-processes to fill any columns LLM missed.
+- navigationConfig: DataOps as type:'collapse' 4 children
 
-12 SYNTHETIC DATASETS (500 rows each) in /data/dataops/datasets/:
-trx_product_listings  LUXURY_RESALE  brand/condition/price/imageUrl — TheRealReal
-fin_transactions      FINTECH        payments, fraud flags, PII-heavy
-ecom_orders           ECOMMERCE      orders, returns, address PII
-hr_employees          HR             highest PII — SSN/salary/equity/perf
-edu_students          EDTECH         GPA, enrollment, financial aid, FERPA
-health_appointments   HEALTHCARE     HIPAA — billing, diagnoses, insurance
-inv_inventory         SUPPLY_CHAIN   SKU/warehouse/reorder/expiry/hazardous
-mktg_campaigns        MARKETING      CTR/ROAS/spend/channel breakdown
-iot_sensor_readings   IOT            device telemetry, anomaly scores
-real_estate_listings  PROPTECH       address PII, price/sqft, school district
-streaming_events      MEDIA          userId PII, watch patterns, completion
-crypto_trades         WEB3           walletAddress PII, gas fees, txHash
-Each dataset has ~15% intentional quality issues for demo.
-/data/dataops/catalog.json — master index of all 12 with full metadata.
-/data/dataops/obfuscation-jobs.json — 200 historical obfuscation jobs.
+SESSION 11 ACTUAL COLUMN NAMES (use exactly, do not invent new ones):
+trx_product_listings  LUXURY_RESALE  listingId,brand,category,condition,
+  originalRetailPrice,listingPrice,discount_pct,imageUrl,sellerId,
+  authenticationStatus,listedAt,soldAt,daysToSell
+fin_transactions      FINTECH        transactionId,accountId,type,amount,
+  currency,merchantName,merchantCategory,isFraudulent,customerEmail,
+  customerPhone,ipAddress
+ecom_orders           ECOMMERCE      orderId,customerId,customerEmail,
+  shippingAddress,items,totalAmount,quantity,unitPrice,orderDate,
+  deliveredDate,returnStatus
+hr_employees          HR             employeeId,firstName,lastName,email,
+  ssn,phone,department,title,salary,bonus,equityGrant,hireDate,
+  terminationDate,performanceRating,managerId
+edu_students          EDTECH         studentId,firstName,lastName,email,
+  enrollmentDate,graduationDate,gpa,major,financialAidAmount,advisorId
+health_appointments   HEALTHCARE     appointmentId,patientId,patientName,
+  dateOfBirth,diagnosisCode,billingAmount,insuranceCovered,
+  patientResponsibility,provider
+inv_inventory         SUPPLY_CHAIN   itemId,sku,warehouseId,quantityOnHand,
+  quantityReserved,quantityAvailable,unitCost,sellingPrice,reorderPoint,
+  expiryDate,isHazardous
+mktg_campaigns        MARKETING      campaignId,campaignName,channel,
+  impressions,clicks,conversions,spend,budget,revenue,ctr,cvr,roas,
+  startDate,endDate
+iot_sensor_readings   IOT            readingId,deviceId,sensorType,value,
+  unit,timestamp,anomalyScore,location,firmware
+real_estate_listings  PROPTECH       listingId,address,city,state,zipCode,
+  listingPrice,squareFeet,pricePerSqFt,bedrooms,bathrooms,yearBuilt,
+  schoolDistrict,listingDate,soldDate
+streaming_events      MEDIA          eventId,userId,contentId,contentTitle,
+  contentType,durationMinutes,watchedMinutes,completionRate,timestamp,
+  device,region
+crypto_trades         WEB3           tradeId,walletAddress,pair,side,
+  quantity,priceAtTrade,totalValue,gasFee,txHash,exchange,timestamp
 
-INGEST WIZARD (/apps/dataops/ingest) — 4-step progress wizard:
-Step 1 Upload: drag-drop CSV/JSON, industry selector, optional SQL textarea,
-  "Use sample dataset" quick-load buttons per industry.
-Step 2 Quality: 10 deterministic checks (null rate, duplicates, temporal
-  anomalies, computed drift, referential integrity, format violations, outliers,
-  negative values, schema completeness, duplicate keys) + LLM semantic checks
-  (business logic violations, industry-specific anomalies, semantic mismatches).
-  Quality score 0-100, issues table with severity badges, column health heatmap.
-Step 3 Metadata: LLM generates description, classification, PII detection with
-  type (DIRECT/QUASI/SENSITIVE), per-column metadata, lineage from SQL (LLM-parsed),
-  retention policy, regulatory flags. Human approve/reject/edit per field.
-Step 4 Publish: classification override, owner, tags → publishes to catalog.
+QUALITY CHECK SCORING (built — reference for catalog Quality tab):
+Deductions: CRITICAL=8 | WARNING=3 | INFO=1. Score clamped [0,100].
+Column healthScore = max(0, 100 - nullRate×60 - (1-uniqueRate)×20)
+Issue types: NULL_RATE|DUPLICATE|DUPLICATE_KEY|TEMPORAL|COMPUTED_DRIFT|
+  REFERENTIAL|FORMAT|OUTLIER|SCHEMA_COMPLETENESS|NEGATIVE_VALUE|
+  SEMANTIC|BUSINESS_LOGIC
+
+SESSION 12 MUST BUILD (replace placeholders, do not touch wizard/API):
+- Full Catalog at /apps/dataops/catalog — 6-tab dataset detail
+- Full Obfuscation at /apps/dataops/obfuscation — 4-tab service
+- POST /api/dataops/catalog-chat (max_tokens 1000)
+- POST /api/dataops/suggest-obfuscation (max_tokens 1000, JSON only)
 
 CATALOG (/apps/dataops/catalog):
-Fuse.js fuzzy search + filters (industry, classification, regulatory, has-images).
-Dataset cards with industry badge, quality score, PII indicator, regulatory badges.
-Dataset Detail — 6 tabs:
-  Overview: stats, regulatory badges, "Request Re-identification" button
-  Schema: PII types (DIRECT/QUASI/SENSITIVE), obfuscation rules, null rates
-  Preview & Stats: first 20 rows, image thumbnails inline for IMAGE_URL columns,
-    raw/obfuscated toggle, Recharts charts per column, INDUSTRY-SPECIFIC stats
-    (LUXURY_RESALE: condition donut, brand bar, days-to-sell; FINTECH: fraud rate;
-    HEALTHCARE: billing anomalies; etc — extensible per industryTag)
-  Lineage: SVG DAG of upstream tables → current dataset
-  Quality: full quality report read-only with score gauge
-  Observability: 30-day synthetic trends (row count, quality score, schema changelog)
-"Ask DataVault ✦" floating chat → 420px drawer.
+FusePageSimple fullwidth. Left 280px panel. All DataTable, all FuseSvgIcon.
+Fuse.js fuzzy search (name/description/tags/columns/owner).
+Filters: industry chips (INDUSTRY_COLORS), classification, regulatory,
+  has-images toggle, PII-only toggle, sort options.
+Cards: INDUSTRY_COLORS border, quality score colored Badge, PII FuseSvgIcon,
+  regulatory Chips, camera FuseSvgIcon for IMAGE_URL datasets.
+Dataset Detail 6 MUI Tabs:
+  Overview: Paper stat cards, regulatory Chips, "Request Re-id" Button
+  Schema: DataTable (column|type|PII type|obfuscation rule|null rate|examples)
+    PII rows amber sx background. IMAGE_URL rows camera FuseSvgIcon.
+  Preview & Stats: first 20 rows DataTable, <img> thumbnails inline for
+    imageUrl columns (picsum.photos URLs in trx_product_listings),
+    raw/obfuscated Chip toggle, Recharts per column type,
+    INDUSTRY-SPECIFIC stat cards keyed on catalogEntry.industryTag
+  Lineage: plain SVG DAG (no D3) upstream→current
+  Quality: read-only from catalog.json, score gauge circular, heatmap grid
+  Observability: synthetic 30-day Recharts trends, schema changelog DataTable
+"Ask DataVault" Fab (AutoAwesomeIcon, secondary color) → Drawer 420px.
 POST /api/dataops/catalog-chat → { text, datasetCards: string[] }
-Renders inline dataset cards for referenced datasets in chat.
+Inline Paper cards for referenced datasetIds from catalog.json.
 
 OBFUSCATION (/apps/dataops/obfuscation):
-Algorithm: HMAC-SHA256(seed, rawValue) → 64-char hex → format-preserve per type.
-Same seed + same input = same hash always → JOIN-safe across obfuscated datasets.
-Implementation: Web Crypto API (crypto.subtle.sign) in Next.js API routes.
-Seed: "DEMO_SEED_2024" for portfolio (document AWS KMS CMK for production).
-Per-type format preservation:
-  EMAIL→hash[0..4]@obfs.io | PHONE→(XXX)XXX-XXXX from hash digits |
-  SSN→XXX-XX-XXXX | NAME→hash mod 1000 index into 1000-name fictional list |
-  CREDIT_CARD→9999-XXXX-XXXX-XXXX | WALLET→0x+hash[0..39] |
-  GENERIC_ID→keep prefix+hash[0..7] | INTEGER→deterministic bounded offset
-Re-identification: seed IS the decryption key — no mapping table needed.
-  Approved user → system re-runs same HMAC on original source file → downloads.
-  Source data never deleted. Obfuscated copy is always separate.
-UI: dataset selector → PII auto-detected → LLM suggest rules →
-  preview side-by-side (run twice to visually prove determinism) →
-  submit job → animated progress → download obfuscated JSON.
-4 tabs: Job Config+Queue | Approval Queue | Audit Log | Job History.
-Audit log: JOB_SUBMITTED|COMPLETED|REID_REQUESTED|REID_APPROVED|
-  REID_REJECTED|SEED_ACCESSED — full GDPR/HIPAA compliance trail.
+HMAC-SHA256 via crypto.subtle.sign. Seed "DEMO_SEED_2024".
+Document KMS CMK for production in About page system design.
+Format preservation per PII type (full spec in PORTFOLIO_SETUP_GUIDE.md).
+Re-id: seed IS key. Approved → download from /data/dataops/datasets/[id].json
+4 MUI Tabs: Job Config | Approval Queue | Audit Log | Job History
+Job Config: dataset selector → PII from catalog.json → LLM rules →
+  Preview (5 rows side-by-side, run twice proves determinism) →
+  submit → Pending→Running→Complete animation → download button
+Approval Queue: DataTable, admin Chip toggle, approve/reject
+Audit Log: DataTable event stream
+Job History: DataTable from /data/dataops/obfuscation-jobs.json
+Create /data/dataops/obfuscation-jobs.json — 200 jobs:
+  jobId, datasetId, datasetName, submittedAt, completedAt,
+  status(COMPLETED|FAILED|RUNNING), piiColumnsObfuscated, rowsProcessed(500),
+  processingTimeMs(800-3000), requestedBy, seedVersion, reidentificationRequests
 
-LLM API routes:
-POST /api/dataops/quality-check       deterministic + LLM semantic checks
-POST /api/dataops/generate-metadata   full metadata per column + dataset level
-POST /api/dataops/suggest-obfuscation format-preserving rule recommendations
-POST /api/dataops/catalog-chat        conversational with inline dataset cards
+LLM API routes built in Session 11 — do not rebuild:
+POST /api/dataops/quality-check
+POST /api/dataops/generate-metadata
+To build in Session 12:
+POST /api/dataops/suggest-obfuscation  JSON-only response, no prose
+POST /api/dataops/catalog-chat         { text, datasetCards: string[] }
 
 ---
 

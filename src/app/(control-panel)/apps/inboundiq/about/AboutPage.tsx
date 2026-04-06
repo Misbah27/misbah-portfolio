@@ -27,6 +27,9 @@ const ArchitectureDiagram = dynamic(() => import('./ArchitectureDiagram'), { ssr
  * Styled FusePageSimple root for the About page (no sidebars).
  */
 const Root = styled(FusePageSimple)(({ theme }) => ({
+	'&.FusePageSimple-scroll-content': {
+		height: '100%',
+	},
 	'& .FusePageSimple-header': {
 		backgroundColor: theme.vars.palette.background.paper,
 		borderBottomWidth: 1,
@@ -238,6 +241,7 @@ function Section({ title, children, id }: { title: string; children: React.React
 export function AboutPage() {
 	return (
 		<Root
+			scroll="content"
 			content={
 				<Box className="w-full">
 					{/* SECTION 1 — Hero */}

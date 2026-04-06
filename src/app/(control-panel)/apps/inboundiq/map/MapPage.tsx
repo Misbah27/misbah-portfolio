@@ -8,6 +8,9 @@ import Box from '@mui/material/Box';
 import CircularProgress from '@mui/material/CircularProgress';
 
 const Root = styled(FusePageSimple)(({ theme }) => ({
+	'&.FusePageSimple-scroll-content': {
+		height: '100%',
+	},
 	'& .FusePageSimple-header': {
 		backgroundColor: theme.vars.palette.background.paper,
 		borderBottomWidth: 1,
@@ -42,8 +45,9 @@ const MapContent = dynamic(() => import('./MapContent'), {
 function MapPage() {
 	return (
 		<Root
+			scroll="content"
 			header={
-				<Box className="flex flex-col gap-2 p-24 w-full">
+				<Box className="flex flex-col gap-2 p-6 sm:px-8 w-full">
 					<Typography variant="h5" fontWeight={700}>
 						FC Network Map
 					</Typography>
@@ -53,7 +57,7 @@ function MapPage() {
 				</Box>
 			}
 			content={
-				<Box className="w-full h-full p-24">
+				<Box className="w-full h-full p-6 sm:p-8">
 					<MapContent />
 				</Box>
 			}

@@ -1,11 +1,13 @@
 'use client';
 
 import { useMemo } from 'react';
+import dynamic from 'next/dynamic';
 import FusePageSimple from '@fuse/core/FusePageSimple';
 import { styled } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
+import CircularProgress from '@mui/material/CircularProgress';
 import {
 	BarChart,
 	Bar,
@@ -27,10 +29,22 @@ import {
 import trucksData from '@/data/inboundiq/trucks.json';
 import { type Truck, type FcOption, FC_OPTIONS, DOORS_PER_FC } from '../types';
 
+const MapContent = dynamic(() => import('../map/MapContent'), {
+	ssr: false,
+	loading: () => (
+		<Box display="flex" alignItems="center" justifyContent="center" sx={{ minHeight: 400 }}>
+			<CircularProgress />
+		</Box>
+	),
+});
+
 /**
  * Styled root following the InboundIQ page pattern (no right sidebar).
  */
 const Root = styled(FusePageSimple)(({ theme }) => ({
+	'&.FusePageSimple-scroll-content': {
+		height: '100%',
+	},
 	'& .FusePageSimple-header': {
 		backgroundColor: theme.vars.palette.background.paper,
 		borderBottomWidth: 1,
@@ -198,15 +212,15 @@ function ChartCard({
 }) {
 	return (
 		<Paper
-			className="p-24 rounded-lg"
+			className="p-4 rounded-lg"
 			elevation={0}
 			sx={{ border: '1px solid', borderColor: 'divider' }}
 		>
-			<Typography variant="h6" className="font-semibold mb-4">
+			<Typography variant="h6" className="font-semibold mb-1">
 				{title}
 			</Typography>
 			{subtitle && (
-				<Typography variant="body2" color="text.secondary" className="mb-16">
+				<Typography variant="body2" color="text.secondary" className="mb-3">
 					{subtitle}
 				</Typography>
 			)}
@@ -309,19 +323,20 @@ export function AnalyticsPage() {
 
 	return (
 		<Root
+			scroll="content"
 			header={
-				<div className="flex flex-col p-24 w-full">
-					<Typography variant="h4" className="font-bold">
+				<div className="flex flex-col p-6 sm:px-8 w-full">
+					<Typography className="text-xl font-bold">
 						Analytics
 					</Typography>
-					<Typography variant="body1" color="text.secondary">
+					<Typography variant="body2" color="text.secondary">
 						InboundIQ operational metrics and trends
 					</Typography>
 				</div>
 			}
 			content={
-				<div className="p-24 w-full">
-					<div className="grid grid-cols-1 lg:grid-cols-2 gap-24">
+				<div className="p-6 sm:p-8 w-full">
+					<div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
 						{/* Chart 1 — Yard Queue Depth by FC */}
 						<ChartCard
 							title="Yard Queue Depth by FC"
@@ -529,6 +544,21 @@ export function AnalyticsPage() {
 							</ResponsiveContainer>
 						</ChartCard>
 					</div>
+
+					{/* FC Network Map */}
+					<Paper
+						className="p-4 rounded-lg mt-6"
+						elevation={0}
+						sx={{ border: '1px solid', borderColor: 'divider' }}
+					>
+						<Typography variant="h6" className="font-semibold mb-1">
+							FC Network Map
+						</Typography>
+						<Typography variant="body2" color="text.secondary" className="mb-3">
+							Real-time yard pressure and dock utilization across all fulfillment centers
+						</Typography>
+						<MapContent />
+					</Paper>
 				</div>
 			}
 		/>

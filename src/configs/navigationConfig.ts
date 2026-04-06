@@ -30,12 +30,6 @@ const navigationConfig: FuseNavItemType[] = [
 				url: '/apps/inboundiq/analytics'
 			},
 			{
-				id: 'inboundiq-map',
-				title: 'Map',
-				type: 'item',
-				url: '/apps/inboundiq/map'
-			},
-			{
 				id: 'inboundiq-about',
 				title: 'About',
 				type: 'item',

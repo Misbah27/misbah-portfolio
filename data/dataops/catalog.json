@@ -6,28 +6,197 @@
     "description": "Luxury resale product listings from a TheRealReal-style marketplace, including authentication status, pricing, and seller information.",
     "filePath": "/data/dataops/datasets/trx_product_listings.json",
     "schema": [
-      { "name": "listingId", "inferredType": "ID", "nullable": false, "sampleValues": ["LST-00001", "LST-00002"] },
-      { "name": "brand", "inferredType": "ENUM", "nullable": false, "sampleValues": ["Gucci", "Chanel"] },
-      { "name": "category", "inferredType": "ENUM", "nullable": false, "sampleValues": ["Handbags", "Shoes"] },
-      { "name": "subCategory", "inferredType": "STRING", "nullable": false, "sampleValues": ["Tote", "Pumps"] },
-      { "name": "condition", "inferredType": "ENUM", "nullable": false, "sampleValues": ["Excellent", "Good"] },
-      { "name": "conditionNotes", "inferredType": "STRING", "nullable": true, "sampleValues": ["Minor wear on handles"] },
-      { "name": "originalRetailPrice", "inferredType": "FLOAT", "nullable": false, "sampleValues": [2500.00, 890.00] },
-      { "name": "listingPrice", "inferredType": "FLOAT", "nullable": false, "sampleValues": [1650.00, 445.00] },
-      { "name": "discount_pct", "inferredType": "FLOAT", "nullable": false, "sampleValues": [0.34, 0.50] },
-      { "name": "size", "inferredType": "STRING", "nullable": true, "sampleValues": ["M", "38"] },
-      { "name": "color", "inferredType": "STRING", "nullable": false, "sampleValues": ["Black", "Beige"] },
-      { "name": "material", "inferredType": "STRING", "nullable": false, "sampleValues": ["Leather", "Canvas"] },
-      { "name": "sku", "inferredType": "ID", "nullable": false, "sampleValues": ["SKU-A1B2C3D4"] },
-      { "name": "imageUrl", "inferredType": "IMAGE_URL", "nullable": false, "sampleValues": ["https://picsum.photos/200/200?random=1"] },
-      { "name": "sellerId", "inferredType": "ID", "nullable": false, "sampleValues": ["SLR-0001"] },
-      { "name": "sellerTier", "inferredType": "ENUM", "nullable": false, "sampleValues": ["Consignor", "Partner"] },
-      { "name": "authenticationStatus", "inferredType": "ENUM", "nullable": false, "sampleValues": ["Authenticated", "Pending"] },
-      { "name": "authenticatorId", "inferredType": "ID", "nullable": true, "sampleValues": ["AUTH-001"] },
-      { "name": "listedAt", "inferredType": "DATE", "nullable": false, "sampleValues": ["2024-03-15T10:00:00Z"] },
-      { "name": "soldAt", "inferredType": "DATE", "nullable": true, "sampleValues": ["2024-04-02T14:30:00Z"] },
-      { "name": "daysToSell", "inferredType": "INTEGER", "nullable": true, "sampleValues": [18, 45] },
-      { "name": "region", "inferredType": "STRING", "nullable": false, "sampleValues": ["West Coast", "Northeast"] }
+      {
+        "name": "listingId",
+        "inferredType": "ID",
+        "nullable": false,
+        "sampleValues": [
+          "LST-00001",
+          "LST-00002"
+        ]
+      },
+      {
+        "name": "brand",
+        "inferredType": "ENUM",
+        "nullable": false,
+        "sampleValues": [
+          "Gucci",
+          "Chanel"
+        ]
+      },
+      {
+        "name": "category",
+        "inferredType": "ENUM",
+        "nullable": false,
+        "sampleValues": [
+          "Handbags",
+          "Shoes"
+        ]
+      },
+      {
+        "name": "subCategory",
+        "inferredType": "STRING",
+        "nullable": false,
+        "sampleValues": [
+          "Tote",
+          "Pumps"
+        ]
+      },
+      {
+        "name": "condition",
+        "inferredType": "ENUM",
+        "nullable": false,
+        "sampleValues": [
+          "Excellent",
+          "Good"
+        ]
+      },
+      {
+        "name": "conditionNotes",
+        "inferredType": "STRING",
+        "nullable": true,
+        "sampleValues": [
+          "Minor wear on handles"
+        ]
+      },
+      {
+        "name": "originalRetailPrice",
+        "inferredType": "FLOAT",
+        "nullable": false,
+        "sampleValues": [
+          2500,
+          890
+        ]
+      },
+      {
+        "name": "listingPrice",
+        "inferredType": "FLOAT",
+        "nullable": false,
+        "sampleValues": [
+          1650,
+          445
+        ]
+      },
+      {
+        "name": "discount_pct",
+        "inferredType": "FLOAT",
+        "nullable": false,
+        "sampleValues": [
+          0.34,
+          0.5
+        ]
+      },
+      {
+        "name": "size",
+        "inferredType": "STRING",
+        "nullable": true,
+        "sampleValues": [
+          "M",
+          "38"
+        ]
+      },
+      {
+        "name": "color",
+        "inferredType": "STRING",
+        "nullable": false,
+        "sampleValues": [
+          "Black",
+          "Beige"
+        ]
+      },
+      {
+        "name": "material",
+        "inferredType": "STRING",
+        "nullable": false,
+        "sampleValues": [
+          "Leather",
+          "Canvas"
+        ]
+      },
+      {
+        "name": "sku",
+        "inferredType": "ID",
+        "nullable": false,
+        "sampleValues": [
+          "SKU-A1B2C3D4"
+        ]
+      },
+      {
+        "name": "imageUrl",
+        "inferredType": "IMAGE_URL",
+        "nullable": false,
+        "sampleValues": [
+          "https://picsum.photos/200/200?random=1"
+        ]
+      },
+      {
+        "name": "sellerId",
+        "inferredType": "ID",
+        "nullable": false,
+        "sampleValues": [
+          "SLR-0001"
+        ]
+      },
+      {
+        "name": "sellerTier",
+        "inferredType": "ENUM",
+        "nullable": false,
+        "sampleValues": [
+          "Consignor",
+          "Partner"
+        ]
+      },
+      {
+        "name": "authenticationStatus",
+        "inferredType": "ENUM",
+        "nullable": false,
+        "sampleValues": [
+          "Authenticated",
+          "Pending"
+        ]
+      },
+      {
+        "name": "authenticatorId",
+        "inferredType": "ID",
+        "nullable": true,
+        "sampleValues": [
+          "AUTH-001"
+        ]
+      },
+      {
+        "name": "listedAt",
+        "inferredType": "DATE",
+        "nullable": false,
+        "sampleValues": [
+          "2024-03-15T10:00:00Z"
+        ]
+      },
+      {
+        "name": "soldAt",
+        "inferredType": "DATE",
+        "nullable": true,
+        "sampleValues": [
+          "2024-04-02T14:30:00Z"
+        ]
+      },
+      {
+        "name": "daysToSell",
+        "inferredType": "INTEGER",
+        "nullable": true,
+        "sampleValues": [
+          18,
+          45
+        ]
+      },
+      {
+        "name": "region",
+        "inferredType": "STRING",
+        "nullable": false,
+        "sampleValues": [
+          "West Coast",
+          "Northeast"
+        ]
+      }
     ],
     "rowCount": 500,
     "classification": "INTERNAL",
@@ -36,10 +205,27 @@
     "team": "E-Commerce",
     "domain": "Luxury Resale",
     "lastUpdated": "2024-11-15T00:00:00Z",
-    "tags": ["luxury", "resale", "marketplace", "authentication", "pricing"],
-    "lineage": { "upstreamDatasets": [], "transformationQuery": null, "description": "Direct source" },
-    "statistics": { "completeness": null, "qualityScore": null },
-    "publishedToCatalog": false
+    "tags": [
+      "luxury",
+      "resale",
+      "marketplace",
+      "authentication",
+      "pricing"
+    ],
+    "lineage": {
+      "upstreamDatasets": [],
+      "transformationQuery": null,
+      "description": "Direct source"
+    },
+    "statistics": {
+      "completeness": 96,
+      "qualityScore": 87
+    },
+    "regulatoryFlags": [
+      "NONE"
+    ],
+    "businessContext": "Powers the luxury resale marketplace product discovery and authentication workflow. Used by merchandising and authentication teams to track listing quality, pricing trends, and seller performance across premium brands.",
+    "publishedToCatalog": true
   },
   {
     "datasetId": "ds-002",
@@ -48,43 +234,220 @@
     "description": "Financial transaction records from a digital payments platform including fraud scoring and processing details.",
     "filePath": "/data/dataops/datasets/fin_transactions.json",
     "schema": [
-      { "name": "transactionId", "inferredType": "ID", "nullable": false, "sampleValues": ["TXN-00001"] },
-      { "name": "accountId", "inferredType": "ID", "nullable": false, "sampleValues": ["ACC-10001"] },
-      { "name": "customerId", "inferredType": "ID", "nullable": false, "sampleValues": ["CUST-10001"] },
-      { "name": "customerName", "inferredType": "STRING", "nullable": false, "sampleValues": ["John Smith"] },
-      { "name": "email", "inferredType": "STRING", "nullable": true, "sampleValues": ["john.smith@example.com"] },
-      { "name": "cardLastFour", "inferredType": "STRING", "nullable": false, "sampleValues": ["4532"] },
-      { "name": "transactionType", "inferredType": "ENUM", "nullable": false, "sampleValues": ["PURCHASE", "REFUND"] },
-      { "name": "merchantName", "inferredType": "STRING", "nullable": false, "sampleValues": ["Whole Foods"] },
-      { "name": "merchantCategory", "inferredType": "ENUM", "nullable": false, "sampleValues": ["GROCERY"] },
-      { "name": "amount", "inferredType": "FLOAT", "nullable": false, "sampleValues": [47.85] },
-      { "name": "currency", "inferredType": "STRING", "nullable": false, "sampleValues": ["USD"] },
-      { "name": "transactionTime", "inferredType": "DATE", "nullable": false, "sampleValues": ["2024-06-15T14:22:00Z"] },
-      { "name": "ipAddress", "inferredType": "STRING", "nullable": false, "sampleValues": ["192.168.1.42"] },
-      { "name": "deviceId", "inferredType": "ID", "nullable": false, "sampleValues": ["DEV-0000000001"] },
-      { "name": "country", "inferredType": "STRING", "nullable": false, "sampleValues": ["US"] },
-      { "name": "fraudFlag", "inferredType": "BOOLEAN", "nullable": false, "sampleValues": [false] },
-      { "name": "fraudScore", "inferredType": "INTEGER", "nullable": false, "sampleValues": [12] },
-      { "name": "statusCode", "inferredType": "ENUM", "nullable": false, "sampleValues": ["APPROVED"] },
-      { "name": "processingFee", "inferredType": "FLOAT", "nullable": false, "sampleValues": [1.44] },
-      { "name": "exchangeRate", "inferredType": "FLOAT", "nullable": true, "sampleValues": [null] }
+      {
+        "name": "transactionId",
+        "inferredType": "ID",
+        "nullable": false,
+        "sampleValues": [
+          "TXN-00001"
+        ]
+      },
+      {
+        "name": "accountId",
+        "inferredType": "ID",
+        "nullable": false,
+        "sampleValues": [
+          "ACC-10001"
+        ]
+      },
+      {
+        "name": "customerId",
+        "inferredType": "ID",
+        "nullable": false,
+        "sampleValues": [
+          "CUST-10001"
+        ]
+      },
+      {
+        "name": "customerName",
+        "inferredType": "STRING",
+        "nullable": false,
+        "sampleValues": [
+          "John Smith"
+        ]
+      },
+      {
+        "name": "email",
+        "inferredType": "STRING",
+        "nullable": true,
+        "sampleValues": [
+          "john.smith@example.com"
+        ]
+      },
+      {
+        "name": "cardLastFour",
+        "inferredType": "STRING",
+        "nullable": false,
+        "sampleValues": [
+          "4532"
+        ]
+      },
+      {
+        "name": "transactionType",
+        "inferredType": "ENUM",
+        "nullable": false,
+        "sampleValues": [
+          "PURCHASE",
+          "REFUND"
+        ]
+      },
+      {
+        "name": "merchantName",
+        "inferredType": "STRING",
+        "nullable": false,
+        "sampleValues": [
+          "Whole Foods"
+        ]
+      },
+      {
+        "name": "merchantCategory",
+        "inferredType": "ENUM",
+        "nullable": false,
+        "sampleValues": [
+          "GROCERY"
+        ]
+      },
+      {
+        "name": "amount",
+        "inferredType": "FLOAT",
+        "nullable": false,
+        "sampleValues": [
+          47.85
+        ]
+      },
+      {
+        "name": "currency",
+        "inferredType": "STRING",
+        "nullable": false,
+        "sampleValues": [
+          "USD"
+        ]
+      },
+      {
+        "name": "transactionTime",
+        "inferredType": "DATE",
+        "nullable": false,
+        "sampleValues": [
+          "2024-06-15T14:22:00Z"
+        ]
+      },
+      {
+        "name": "ipAddress",
+        "inferredType": "STRING",
+        "nullable": false,
+        "sampleValues": [
+          "192.168.1.42"
+        ]
+      },
+      {
+        "name": "deviceId",
+        "inferredType": "ID",
+        "nullable": false,
+        "sampleValues": [
+          "DEV-0000000001"
+        ]
+      },
+      {
+        "name": "country",
+        "inferredType": "STRING",
+        "nullable": false,
+        "sampleValues": [
+          "US"
+        ]
+      },
+      {
+        "name": "fraudFlag",
+        "inferredType": "BOOLEAN",
+        "nullable": false,
+        "sampleValues": [
+          false
+        ]
+      },
+      {
+        "name": "fraudScore",
+        "inferredType": "INTEGER",
+        "nullable": false,
+        "sampleValues": [
+          12
+        ]
+      },
+      {
+        "name": "statusCode",
+        "inferredType": "ENUM",
+        "nullable": false,
+        "sampleValues": [
+          "APPROVED"
+        ]
+      },
+      {
+        "name": "processingFee",
+        "inferredType": "FLOAT",
+        "nullable": false,
+        "sampleValues": [
+          1.44
+        ]
+      },
+      {
+        "name": "exchangeRate",
+        "inferredType": "FLOAT",
+        "nullable": true,
+        "sampleValues": [
+          null
+        ]
+      }
     ],
     "rowCount": 500,
     "classification": "PII",
     "piiColumns": [
-      { "column": "customerName", "piiType": "DIRECT_IDENTIFIER", "confidence": 95 },
-      { "column": "email", "piiType": "DIRECT_IDENTIFIER", "confidence": 98 },
-      { "column": "ipAddress", "piiType": "QUASI_IDENTIFIER", "confidence": 85 },
-      { "column": "customerId", "piiType": "DIRECT_IDENTIFIER", "confidence": 90 }
+      {
+        "column": "customerName",
+        "piiType": "DIRECT_IDENTIFIER",
+        "confidence": 95
+      },
+      {
+        "column": "email",
+        "piiType": "DIRECT_IDENTIFIER",
+        "confidence": 98
+      },
+      {
+        "column": "ipAddress",
+        "piiType": "QUASI_IDENTIFIER",
+        "confidence": 85
+      },
+      {
+        "column": "customerId",
+        "piiType": "DIRECT_IDENTIFIER",
+        "confidence": 90
+      }
     ],
     "owner": "payments-team",
     "team": "Fintech",
     "domain": "Payments",
     "lastUpdated": "2024-11-15T00:00:00Z",
-    "tags": ["fintech", "payments", "fraud", "transactions", "pii"],
-    "lineage": { "upstreamDatasets": [], "transformationQuery": null, "description": "Direct source" },
-    "statistics": { "completeness": null, "qualityScore": null },
-    "publishedToCatalog": false
+    "tags": [
+      "fintech",
+      "payments",
+      "fraud",
+      "transactions",
+      "pii"
+    ],
+    "lineage": {
+      "upstreamDatasets": [
+        "ds-003"
+      ],
+      "transformationQuery": "SELECT t.*, o.customerEmail FROM raw_transactions t LEFT JOIN ecom_orders o ON t.customerId = o.customerId",
+      "description": "Enriched from e-commerce order data for cross-platform customer matching"
+    },
+    "statistics": {
+      "completeness": 89,
+      "qualityScore": 78
+    },
+    "regulatoryFlags": [
+      "PCI_DSS",
+      "SOX"
+    ],
+    "businessContext": "Core transaction ledger for the digital payments platform. Feeds fraud detection ML models and financial reconciliation dashboards. Subject to PCI-DSS audit requirements with 90-day retention.",
+    "publishedToCatalog": true
   },
   {
     "datasetId": "ds-003",
@@ -93,47 +456,250 @@
     "description": "E-commerce order records from an online retail marketplace including shipping, returns, and seller ratings.",
     "filePath": "/data/dataops/datasets/ecom_orders.json",
     "schema": [
-      { "name": "orderId", "inferredType": "ID", "nullable": false, "sampleValues": ["ORD-00001"] },
-      { "name": "customerId", "inferredType": "ID", "nullable": false, "sampleValues": ["CUST-10001"] },
-      { "name": "customerEmail", "inferredType": "STRING", "nullable": false, "sampleValues": ["jane.doe@email.com"] },
-      { "name": "customerName", "inferredType": "STRING", "nullable": false, "sampleValues": ["Jane Doe"] },
-      { "name": "shippingAddress", "inferredType": "STRING", "nullable": false, "sampleValues": ["123 Main St, Seattle, WA 98101"] },
-      { "name": "billingAddress", "inferredType": "STRING", "nullable": false, "sampleValues": ["123 Main St, Seattle, WA 98101"] },
-      { "name": "productId", "inferredType": "ID", "nullable": false, "sampleValues": ["PROD-10001"] },
-      { "name": "productName", "inferredType": "STRING", "nullable": false, "sampleValues": ["Wireless Headphones"] },
-      { "name": "category", "inferredType": "ENUM", "nullable": false, "sampleValues": ["Electronics"] },
-      { "name": "quantity", "inferredType": "INTEGER", "nullable": false, "sampleValues": [2] },
-      { "name": "unitPrice", "inferredType": "FLOAT", "nullable": false, "sampleValues": [49.99] },
-      { "name": "totalAmount", "inferredType": "FLOAT", "nullable": false, "sampleValues": [115.97] },
-      { "name": "discountCode", "inferredType": "STRING", "nullable": true, "sampleValues": ["SAVE10"] },
-      { "name": "discountAmount", "inferredType": "FLOAT", "nullable": false, "sampleValues": [5.00] },
-      { "name": "taxAmount", "inferredType": "FLOAT", "nullable": false, "sampleValues": [8.00] },
-      { "name": "shippingCost", "inferredType": "FLOAT", "nullable": false, "sampleValues": [5.99] },
-      { "name": "orderStatus", "inferredType": "ENUM", "nullable": false, "sampleValues": ["DELIVERED"] },
-      { "name": "paymentMethod", "inferredType": "ENUM", "nullable": false, "sampleValues": ["CREDIT_CARD"] },
-      { "name": "placedAt", "inferredType": "DATE", "nullable": false, "sampleValues": ["2024-05-10T08:00:00Z"] },
-      { "name": "deliveredAt", "inferredType": "DATE", "nullable": true, "sampleValues": ["2024-05-15T14:00:00Z"] },
-      { "name": "returnedAt", "inferredType": "DATE", "nullable": true, "sampleValues": [null] },
-      { "name": "returnReason", "inferredType": "STRING", "nullable": true, "sampleValues": [null] },
-      { "name": "sellerId", "inferredType": "ID", "nullable": false, "sampleValues": ["SELL-0001"] },
-      { "name": "sellerRating", "inferredType": "FLOAT", "nullable": false, "sampleValues": [4.5] }
+      {
+        "name": "orderId",
+        "inferredType": "ID",
+        "nullable": false,
+        "sampleValues": [
+          "ORD-00001"
+        ]
+      },
+      {
+        "name": "customerId",
+        "inferredType": "ID",
+        "nullable": false,
+        "sampleValues": [
+          "CUST-10001"
+        ]
+      },
+      {
+        "name": "customerEmail",
+        "inferredType": "STRING",
+        "nullable": false,
+        "sampleValues": [
+          "jane.doe@email.com"
+        ]
+      },
+      {
+        "name": "customerName",
+        "inferredType": "STRING",
+        "nullable": false,
+        "sampleValues": [
+          "Jane Doe"
+        ]
+      },
+      {
+        "name": "shippingAddress",
+        "inferredType": "STRING",
+        "nullable": false,
+        "sampleValues": [
+          "123 Main St, Seattle, WA 98101"
+        ]
+      },
+      {
+        "name": "billingAddress",
+        "inferredType": "STRING",
+        "nullable": false,
+        "sampleValues": [
+          "123 Main St, Seattle, WA 98101"
+        ]
+      },
+      {
+        "name": "productId",
+        "inferredType": "ID",
+        "nullable": false,
+        "sampleValues": [
+          "PROD-10001"
+        ]
+      },
+      {
+        "name": "productName",
+        "inferredType": "STRING",
+        "nullable": false,
+        "sampleValues": [
+          "Wireless Headphones"
+        ]
+      },
+      {
+        "name": "category",
+        "inferredType": "ENUM",
+        "nullable": false,
+        "sampleValues": [
+          "Electronics"
+        ]
+      },
+      {
+        "name": "quantity",
+        "inferredType": "INTEGER",
+        "nullable": false,
+        "sampleValues": [
+          2
+        ]
+      },
+      {
+        "name": "unitPrice",
+        "inferredType": "FLOAT",
+        "nullable": false,
+        "sampleValues": [
+          49.99
+        ]
+      },
+      {
+        "name": "totalAmount",
+        "inferredType": "FLOAT",
+        "nullable": false,
+        "sampleValues": [
+          115.97
+        ]
+      },
+      {
+        "name": "discountCode",
+        "inferredType": "STRING",
+        "nullable": true,
+        "sampleValues": [
+          "SAVE10"
+        ]
+      },
+      {
+        "name": "discountAmount",
+        "inferredType": "FLOAT",
+        "nullable": false,
+        "sampleValues": [
+          5
+        ]
+      },
+      {
+        "name": "taxAmount",
+        "inferredType": "FLOAT",
+        "nullable": false,
+        "sampleValues": [
+          8
+        ]
+      },
+      {
+        "name": "shippingCost",
+        "inferredType": "FLOAT",
+        "nullable": false,
+        "sampleValues": [
+          5.99
+        ]
+      },
+      {
+        "name": "orderStatus",
+        "inferredType": "ENUM",
+        "nullable": false,
+        "sampleValues": [
+          "DELIVERED"
+        ]
+      },
+      {
+        "name": "paymentMethod",
+        "inferredType": "ENUM",
+        "nullable": false,
+        "sampleValues": [
+          "CREDIT_CARD"
+        ]
+      },
+      {
+        "name": "placedAt",
+        "inferredType": "DATE",
+        "nullable": false,
+        "sampleValues": [
+          "2024-05-10T08:00:00Z"
+        ]
+      },
+      {
+        "name": "deliveredAt",
+        "inferredType": "DATE",
+        "nullable": true,
+        "sampleValues": [
+          "2024-05-15T14:00:00Z"
+        ]
+      },
+      {
+        "name": "returnedAt",
+        "inferredType": "DATE",
+        "nullable": true,
+        "sampleValues": [
+          null
+        ]
+      },
+      {
+        "name": "returnReason",
+        "inferredType": "STRING",
+        "nullable": true,
+        "sampleValues": [
+          null
+        ]
+      },
+      {
+        "name": "sellerId",
+        "inferredType": "ID",
+        "nullable": false,
+        "sampleValues": [
+          "SELL-0001"
+        ]
+      },
+      {
+        "name": "sellerRating",
+        "inferredType": "FLOAT",
+        "nullable": false,
+        "sampleValues": [
+          4.5
+        ]
+      }
     ],
     "rowCount": 500,
     "classification": "PII",
     "piiColumns": [
-      { "column": "customerEmail", "piiType": "DIRECT_IDENTIFIER", "confidence": 98 },
-      { "column": "customerName", "piiType": "DIRECT_IDENTIFIER", "confidence": 95 },
-      { "column": "shippingAddress", "piiType": "DIRECT_IDENTIFIER", "confidence": 95 },
-      { "column": "billingAddress", "piiType": "DIRECT_IDENTIFIER", "confidence": 95 }
+      {
+        "column": "customerEmail",
+        "piiType": "DIRECT_IDENTIFIER",
+        "confidence": 98
+      },
+      {
+        "column": "customerName",
+        "piiType": "DIRECT_IDENTIFIER",
+        "confidence": 95
+      },
+      {
+        "column": "shippingAddress",
+        "piiType": "DIRECT_IDENTIFIER",
+        "confidence": 95
+      },
+      {
+        "column": "billingAddress",
+        "piiType": "DIRECT_IDENTIFIER",
+        "confidence": 95
+      }
     ],
     "owner": "ecommerce-team",
     "team": "Retail",
     "domain": "E-Commerce",
     "lastUpdated": "2024-11-15T00:00:00Z",
-    "tags": ["ecommerce", "orders", "retail", "shipping", "returns", "pii"],
-    "lineage": { "upstreamDatasets": [], "transformationQuery": null, "description": "Direct source" },
-    "statistics": { "completeness": null, "qualityScore": null },
-    "publishedToCatalog": false
+    "tags": [
+      "ecommerce",
+      "orders",
+      "retail",
+      "shipping",
+      "returns",
+      "pii"
+    ],
+    "lineage": {
+      "upstreamDatasets": [],
+      "transformationQuery": null,
+      "description": "Direct source"
+    },
+    "statistics": {
+      "completeness": 91,
+      "qualityScore": 82
+    },
+    "regulatoryFlags": [
+      "GDPR",
+      "CCPA"
+    ],
+    "businessContext": "End-to-end order lifecycle data from the retail marketplace. Drives customer experience analytics, return rate monitoring, and seller quality scoring. Critical for quarterly business reviews.",
+    "publishedToCatalog": true
   },
   {
     "datasetId": "ds-004",
@@ -142,48 +708,244 @@
     "description": "Employee records from a large technology company HR system with compensation, performance, and employment status data.",
     "filePath": "/data/dataops/datasets/hr_employees.json",
     "schema": [
-      { "name": "employeeId", "inferredType": "ID", "nullable": false, "sampleValues": ["EMP-00001"] },
-      { "name": "firstName", "inferredType": "STRING", "nullable": false, "sampleValues": ["Sarah"] },
-      { "name": "lastName", "inferredType": "STRING", "nullable": false, "sampleValues": ["Chen"] },
-      { "name": "ssn", "inferredType": "STRING", "nullable": false, "sampleValues": ["123-45-6789"] },
-      { "name": "email", "inferredType": "STRING", "nullable": false, "sampleValues": ["sarah.chen@techcorp.com"] },
-      { "name": "phone", "inferredType": "STRING", "nullable": false, "sampleValues": ["(206) 555-0142"] },
-      { "name": "dateOfBirth", "inferredType": "DATE", "nullable": false, "sampleValues": ["1990-03-15"] },
-      { "name": "department", "inferredType": "ENUM", "nullable": false, "sampleValues": ["Engineering"] },
-      { "name": "jobTitle", "inferredType": "STRING", "nullable": false, "sampleValues": ["Senior Software Engineer"] },
-      { "name": "level", "inferredType": "ENUM", "nullable": false, "sampleValues": ["L5"] },
-      { "name": "baseSalary", "inferredType": "FLOAT", "nullable": false, "sampleValues": [165000] },
-      { "name": "bonus", "inferredType": "FLOAT", "nullable": false, "sampleValues": [24750] },
-      { "name": "equityGrant", "inferredType": "FLOAT", "nullable": false, "sampleValues": [120000] },
-      { "name": "managerId", "inferredType": "ID", "nullable": true, "sampleValues": ["EMP-00050"] },
-      { "name": "hireDate", "inferredType": "DATE", "nullable": false, "sampleValues": ["2019-06-01"] },
-      { "name": "terminationDate", "inferredType": "DATE", "nullable": true, "sampleValues": [null] },
-      { "name": "employmentStatus", "inferredType": "ENUM", "nullable": false, "sampleValues": ["ACTIVE"] },
-      { "name": "performanceScore", "inferredType": "FLOAT", "nullable": false, "sampleValues": [4.2] },
-      { "name": "location", "inferredType": "STRING", "nullable": false, "sampleValues": ["Seattle"] },
-      { "name": "remoteStatus", "inferredType": "ENUM", "nullable": false, "sampleValues": ["HYBRID"] }
+      {
+        "name": "employeeId",
+        "inferredType": "ID",
+        "nullable": false,
+        "sampleValues": [
+          "EMP-00001"
+        ]
+      },
+      {
+        "name": "firstName",
+        "inferredType": "STRING",
+        "nullable": false,
+        "sampleValues": [
+          "Sarah"
+        ]
+      },
+      {
+        "name": "lastName",
+        "inferredType": "STRING",
+        "nullable": false,
+        "sampleValues": [
+          "Chen"
+        ]
+      },
+      {
+        "name": "ssn",
+        "inferredType": "STRING",
+        "nullable": false,
+        "sampleValues": [
+          "123-45-6789"
+        ]
+      },
+      {
+        "name": "email",
+        "inferredType": "STRING",
+        "nullable": false,
+        "sampleValues": [
+          "sarah.chen@techcorp.com"
+        ]
+      },
+      {
+        "name": "phone",
+        "inferredType": "STRING",
+        "nullable": false,
+        "sampleValues": [
+          "(206) 555-0142"
+        ]
+      },
+      {
+        "name": "dateOfBirth",
+        "inferredType": "DATE",
+        "nullable": false,
+        "sampleValues": [
+          "1990-03-15"
+        ]
+      },
+      {
+        "name": "department",
+        "inferredType": "ENUM",
+        "nullable": false,
+        "sampleValues": [
+          "Engineering"
+        ]
+      },
+      {
+        "name": "jobTitle",
+        "inferredType": "STRING",
+        "nullable": false,
+        "sampleValues": [
+          "Senior Software Engineer"
+        ]
+      },
+      {
+        "name": "level",
+        "inferredType": "ENUM",
+        "nullable": false,
+        "sampleValues": [
+          "L5"
+        ]
+      },
+      {
+        "name": "baseSalary",
+        "inferredType": "FLOAT",
+        "nullable": false,
+        "sampleValues": [
+          165000
+        ]
+      },
+      {
+        "name": "bonus",
+        "inferredType": "FLOAT",
+        "nullable": false,
+        "sampleValues": [
+          24750
+        ]
+      },
+      {
+        "name": "equityGrant",
+        "inferredType": "FLOAT",
+        "nullable": false,
+        "sampleValues": [
+          120000
+        ]
+      },
+      {
+        "name": "managerId",
+        "inferredType": "ID",
+        "nullable": true,
+        "sampleValues": [
+          "EMP-00050"
+        ]
+      },
+      {
+        "name": "hireDate",
+        "inferredType": "DATE",
+        "nullable": false,
+        "sampleValues": [
+          "2019-06-01"
+        ]
+      },
+      {
+        "name": "terminationDate",
+        "inferredType": "DATE",
+        "nullable": true,
+        "sampleValues": [
+          null
+        ]
+      },
+      {
+        "name": "employmentStatus",
+        "inferredType": "ENUM",
+        "nullable": false,
+        "sampleValues": [
+          "ACTIVE"
+        ]
+      },
+      {
+        "name": "performanceScore",
+        "inferredType": "FLOAT",
+        "nullable": false,
+        "sampleValues": [
+          4.2
+        ]
+      },
+      {
+        "name": "location",
+        "inferredType": "STRING",
+        "nullable": false,
+        "sampleValues": [
+          "Seattle"
+        ]
+      },
+      {
+        "name": "remoteStatus",
+        "inferredType": "ENUM",
+        "nullable": false,
+        "sampleValues": [
+          "HYBRID"
+        ]
+      }
     ],
     "rowCount": 500,
     "classification": "PII",
     "piiColumns": [
-      { "column": "firstName", "piiType": "DIRECT_IDENTIFIER", "confidence": 95 },
-      { "column": "lastName", "piiType": "DIRECT_IDENTIFIER", "confidence": 95 },
-      { "column": "ssn", "piiType": "DIRECT_IDENTIFIER", "confidence": 99 },
-      { "column": "email", "piiType": "DIRECT_IDENTIFIER", "confidence": 98 },
-      { "column": "phone", "piiType": "DIRECT_IDENTIFIER", "confidence": 95 },
-      { "column": "dateOfBirth", "piiType": "DIRECT_IDENTIFIER", "confidence": 90 },
-      { "column": "baseSalary", "piiType": "SENSITIVE_ATTRIBUTE", "confidence": 85 },
-      { "column": "bonus", "piiType": "SENSITIVE_ATTRIBUTE", "confidence": 85 },
-      { "column": "equityGrant", "piiType": "SENSITIVE_ATTRIBUTE", "confidence": 85 }
+      {
+        "column": "firstName",
+        "piiType": "DIRECT_IDENTIFIER",
+        "confidence": 95
+      },
+      {
+        "column": "lastName",
+        "piiType": "DIRECT_IDENTIFIER",
+        "confidence": 95
+      },
+      {
+        "column": "ssn",
+        "piiType": "DIRECT_IDENTIFIER",
+        "confidence": 99
+      },
+      {
+        "column": "email",
+        "piiType": "DIRECT_IDENTIFIER",
+        "confidence": 98
+      },
+      {
+        "column": "phone",
+        "piiType": "DIRECT_IDENTIFIER",
+        "confidence": 95
+      },
+      {
+        "column": "dateOfBirth",
+        "piiType": "DIRECT_IDENTIFIER",
+        "confidence": 90
+      },
+      {
+        "column": "baseSalary",
+        "piiType": "SENSITIVE_ATTRIBUTE",
+        "confidence": 85
+      },
+      {
+        "column": "bonus",
+        "piiType": "SENSITIVE_ATTRIBUTE",
+        "confidence": 85
+      },
+      {
+        "column": "equityGrant",
+        "piiType": "SENSITIVE_ATTRIBUTE",
+        "confidence": 85
+      }
     ],
     "owner": "hr-systems-team",
     "team": "Human Resources",
     "domain": "People Data",
     "lastUpdated": "2024-11-15T00:00:00Z",
-    "tags": ["hr", "employees", "compensation", "pii", "sensitive", "performance"],
-    "lineage": { "upstreamDatasets": [], "transformationQuery": null, "description": "Direct source" },
-    "statistics": { "completeness": null, "qualityScore": null },
-    "publishedToCatalog": false
+    "tags": [
+      "hr",
+      "employees",
+      "compensation",
+      "pii",
+      "sensitive",
+      "performance"
+    ],
+    "lineage": {
+      "upstreamDatasets": [],
+      "transformationQuery": null,
+      "description": "Direct source"
+    },
+    "statistics": {
+      "completeness": 85,
+      "qualityScore": 71
+    },
+    "regulatoryFlags": [
+      "GDPR",
+      "CCPA",
+      "SOX"
+    ],
+    "businessContext": "Comprehensive employee records powering workforce analytics, compensation benchmarking, and organizational planning. Highest sensitivity classification \u2014 restricted to HR leadership and approved analytics.",
+    "publishedToCatalog": true
   },
   {
     "datasetId": "ds-005",
@@ -192,43 +954,217 @@
     "description": "Student enrollment and academic records from a university learning management system with financial aid data.",
     "filePath": "/data/dataops/datasets/edu_students.json",
     "schema": [
-      { "name": "studentId", "inferredType": "ID", "nullable": false, "sampleValues": ["STU-00001"] },
-      { "name": "firstName", "inferredType": "STRING", "nullable": false, "sampleValues": ["Emily"] },
-      { "name": "lastName", "inferredType": "STRING", "nullable": false, "sampleValues": ["Rodriguez"] },
-      { "name": "email", "inferredType": "STRING", "nullable": false, "sampleValues": ["emily.rodriguez@university.edu"] },
-      { "name": "dateOfBirth", "inferredType": "DATE", "nullable": false, "sampleValues": ["2002-08-20"] },
-      { "name": "enrollmentDate", "inferredType": "DATE", "nullable": false, "sampleValues": ["2021-09-01"] },
-      { "name": "program", "inferredType": "ENUM", "nullable": false, "sampleValues": ["Bachelor of Science"] },
-      { "name": "major", "inferredType": "ENUM", "nullable": false, "sampleValues": ["Computer Science"] },
-      { "name": "gpa", "inferredType": "FLOAT", "nullable": false, "sampleValues": [3.65] },
-      { "name": "creditHoursCompleted", "inferredType": "INTEGER", "nullable": false, "sampleValues": [90] },
-      { "name": "creditHoursRequired", "inferredType": "INTEGER", "nullable": false, "sampleValues": [120] },
-      { "name": "graduationStatus", "inferredType": "ENUM", "nullable": false, "sampleValues": ["ENROLLED"] },
-      { "name": "tuitionBalance", "inferredType": "FLOAT", "nullable": false, "sampleValues": [12500.00] },
-      { "name": "financialAidAmount", "inferredType": "FLOAT", "nullable": false, "sampleValues": [8000.00] },
-      { "name": "advisorId", "inferredType": "ID", "nullable": false, "sampleValues": ["ADV-001"] },
-      { "name": "lastLoginDate", "inferredType": "DATE", "nullable": false, "sampleValues": ["2024-11-10"] },
-      { "name": "assignmentsSubmitted", "inferredType": "INTEGER", "nullable": false, "sampleValues": [85] },
-      { "name": "assignmentsMissed", "inferredType": "INTEGER", "nullable": false, "sampleValues": [3] },
-      { "name": "averageGrade", "inferredType": "ENUM", "nullable": false, "sampleValues": ["B"] },
-      { "name": "countryOfOrigin", "inferredType": "STRING", "nullable": false, "sampleValues": ["United States"] }
+      {
+        "name": "studentId",
+        "inferredType": "ID",
+        "nullable": false,
+        "sampleValues": [
+          "STU-00001"
+        ]
+      },
+      {
+        "name": "firstName",
+        "inferredType": "STRING",
+        "nullable": false,
+        "sampleValues": [
+          "Emily"
+        ]
+      },
+      {
+        "name": "lastName",
+        "inferredType": "STRING",
+        "nullable": false,
+        "sampleValues": [
+          "Rodriguez"
+        ]
+      },
+      {
+        "name": "email",
+        "inferredType": "STRING",
+        "nullable": false,
+        "sampleValues": [
+          "emily.rodriguez@university.edu"
+        ]
+      },
+      {
+        "name": "dateOfBirth",
+        "inferredType": "DATE",
+        "nullable": false,
+        "sampleValues": [
+          "2002-08-20"
+        ]
+      },
+      {
+        "name": "enrollmentDate",
+        "inferredType": "DATE",
+        "nullable": false,
+        "sampleValues": [
+          "2021-09-01"
+        ]
+      },
+      {
+        "name": "program",
+        "inferredType": "ENUM",
+        "nullable": false,
+        "sampleValues": [
+          "Bachelor of Science"
+        ]
+      },
+      {
+        "name": "major",
+        "inferredType": "ENUM",
+        "nullable": false,
+        "sampleValues": [
+          "Computer Science"
+        ]
+      },
+      {
+        "name": "gpa",
+        "inferredType": "FLOAT",
+        "nullable": false,
+        "sampleValues": [
+          3.65
+        ]
+      },
+      {
+        "name": "creditHoursCompleted",
+        "inferredType": "INTEGER",
+        "nullable": false,
+        "sampleValues": [
+          90
+        ]
+      },
+      {
+        "name": "creditHoursRequired",
+        "inferredType": "INTEGER",
+        "nullable": false,
+        "sampleValues": [
+          120
+        ]
+      },
+      {
+        "name": "graduationStatus",
+        "inferredType": "ENUM",
+        "nullable": false,
+        "sampleValues": [
+          "ENROLLED"
+        ]
+      },
+      {
+        "name": "tuitionBalance",
+        "inferredType": "FLOAT",
+        "nullable": false,
+        "sampleValues": [
+          12500
+        ]
+      },
+      {
+        "name": "financialAidAmount",
+        "inferredType": "FLOAT",
+        "nullable": false,
+        "sampleValues": [
+          8000
+        ]
+      },
+      {
+        "name": "advisorId",
+        "inferredType": "ID",
+        "nullable": false,
+        "sampleValues": [
+          "ADV-001"
+        ]
+      },
+      {
+        "name": "lastLoginDate",
+        "inferredType": "DATE",
+        "nullable": false,
+        "sampleValues": [
+          "2024-11-10"
+        ]
+      },
+      {
+        "name": "assignmentsSubmitted",
+        "inferredType": "INTEGER",
+        "nullable": false,
+        "sampleValues": [
+          85
+        ]
+      },
+      {
+        "name": "assignmentsMissed",
+        "inferredType": "INTEGER",
+        "nullable": false,
+        "sampleValues": [
+          3
+        ]
+      },
+      {
+        "name": "averageGrade",
+        "inferredType": "ENUM",
+        "nullable": false,
+        "sampleValues": [
+          "B"
+        ]
+      },
+      {
+        "name": "countryOfOrigin",
+        "inferredType": "STRING",
+        "nullable": false,
+        "sampleValues": [
+          "United States"
+        ]
+      }
     ],
     "rowCount": 500,
     "classification": "PII",
     "piiColumns": [
-      { "column": "firstName", "piiType": "DIRECT_IDENTIFIER", "confidence": 95 },
-      { "column": "lastName", "piiType": "DIRECT_IDENTIFIER", "confidence": 95 },
-      { "column": "email", "piiType": "DIRECT_IDENTIFIER", "confidence": 98 },
-      { "column": "dateOfBirth", "piiType": "DIRECT_IDENTIFIER", "confidence": 90 }
+      {
+        "column": "firstName",
+        "piiType": "DIRECT_IDENTIFIER",
+        "confidence": 95
+      },
+      {
+        "column": "lastName",
+        "piiType": "DIRECT_IDENTIFIER",
+        "confidence": 95
+      },
+      {
+        "column": "email",
+        "piiType": "DIRECT_IDENTIFIER",
+        "confidence": 98
+      },
+      {
+        "column": "dateOfBirth",
+        "piiType": "DIRECT_IDENTIFIER",
+        "confidence": 90
+      }
     ],
     "owner": "registrar-team",
     "team": "Academic Services",
     "domain": "Education",
     "lastUpdated": "2024-11-15T00:00:00Z",
-    "tags": ["edtech", "students", "enrollment", "academic", "ferpa", "pii"],
-    "lineage": { "upstreamDatasets": [], "transformationQuery": null, "description": "Direct source" },
-    "statistics": { "completeness": null, "qualityScore": null },
-    "publishedToCatalog": false
+    "tags": [
+      "edtech",
+      "students",
+      "enrollment",
+      "academic",
+      "ferpa",
+      "pii"
+    ],
+    "lineage": {
+      "upstreamDatasets": [],
+      "transformationQuery": null,
+      "description": "Direct source"
+    },
+    "statistics": {
+      "completeness": 97,
+      "qualityScore": 91
+    },
+    "regulatoryFlags": [
+      "FERPA"
+    ],
+    "businessContext": "Student enrollment and academic performance data from the university LMS. Supports retention analytics, financial aid optimization, and academic advising workflows. FERPA-protected.",
+    "publishedToCatalog": true
   },
   {
     "datasetId": "ds-006",
@@ -237,44 +1173,223 @@
     "description": "Patient appointment and billing records from a multi-specialty healthcare network with insurance and diagnosis data.",
     "filePath": "/data/dataops/datasets/health_appointments.json",
     "schema": [
-      { "name": "appointmentId", "inferredType": "ID", "nullable": false, "sampleValues": ["APT-00001"] },
-      { "name": "patientId", "inferredType": "ID", "nullable": false, "sampleValues": ["PAT-10001"] },
-      { "name": "patientName", "inferredType": "STRING", "nullable": true, "sampleValues": ["Robert Martinez"] },
-      { "name": "dob", "inferredType": "DATE", "nullable": false, "sampleValues": ["1975-04-12"] },
-      { "name": "insuranceId", "inferredType": "ID", "nullable": false, "sampleValues": ["INS-0000000001"] },
-      { "name": "providerId", "inferredType": "ID", "nullable": false, "sampleValues": ["PRV-0001"] },
-      { "name": "providerName", "inferredType": "STRING", "nullable": false, "sampleValues": ["Dr. Sarah Chen"] },
-      { "name": "specialty", "inferredType": "ENUM", "nullable": false, "sampleValues": ["Family Medicine"] },
-      { "name": "appointmentDate", "inferredType": "DATE", "nullable": false, "sampleValues": ["2024-06-15"] },
-      { "name": "appointmentType", "inferredType": "ENUM", "nullable": false, "sampleValues": ["IN_PERSON"] },
-      { "name": "status", "inferredType": "ENUM", "nullable": false, "sampleValues": ["COMPLETED"] },
-      { "name": "diagnosisCode", "inferredType": "STRING", "nullable": false, "sampleValues": ["J06.9"] },
-      { "name": "billingAmount", "inferredType": "FLOAT", "nullable": false, "sampleValues": [350.00] },
-      { "name": "insuranceCovered", "inferredType": "FLOAT", "nullable": false, "sampleValues": [280.00] },
-      { "name": "patientResponsibility", "inferredType": "FLOAT", "nullable": false, "sampleValues": [70.00] },
-      { "name": "prescriptionIssued", "inferredType": "BOOLEAN", "nullable": false, "sampleValues": [true] },
-      { "name": "followUpRequired", "inferredType": "BOOLEAN", "nullable": false, "sampleValues": [false] },
-      { "name": "notes", "inferredType": "STRING", "nullable": false, "sampleValues": ["Patient reports improvement"] },
-      { "name": "facilityId", "inferredType": "ID", "nullable": false, "sampleValues": ["FAC-001"] },
-      { "name": "facilityName", "inferredType": "STRING", "nullable": false, "sampleValues": ["Northwest Medical Center"] }
+      {
+        "name": "appointmentId",
+        "inferredType": "ID",
+        "nullable": false,
+        "sampleValues": [
+          "APT-00001"
+        ]
+      },
+      {
+        "name": "patientId",
+        "inferredType": "ID",
+        "nullable": false,
+        "sampleValues": [
+          "PAT-10001"
+        ]
+      },
+      {
+        "name": "patientName",
+        "inferredType": "STRING",
+        "nullable": true,
+        "sampleValues": [
+          "Robert Martinez"
+        ]
+      },
+      {
+        "name": "dob",
+        "inferredType": "DATE",
+        "nullable": false,
+        "sampleValues": [
+          "1975-04-12"
+        ]
+      },
+      {
+        "name": "insuranceId",
+        "inferredType": "ID",
+        "nullable": false,
+        "sampleValues": [
+          "INS-0000000001"
+        ]
+      },
+      {
+        "name": "providerId",
+        "inferredType": "ID",
+        "nullable": false,
+        "sampleValues": [
+          "PRV-0001"
+        ]
+      },
+      {
+        "name": "providerName",
+        "inferredType": "STRING",
+        "nullable": false,
+        "sampleValues": [
+          "Dr. Sarah Chen"
+        ]
+      },
+      {
+        "name": "specialty",
+        "inferredType": "ENUM",
+        "nullable": false,
+        "sampleValues": [
+          "Family Medicine"
+        ]
+      },
+      {
+        "name": "appointmentDate",
+        "inferredType": "DATE",
+        "nullable": false,
+        "sampleValues": [
+          "2024-06-15"
+        ]
+      },
+      {
+        "name": "appointmentType",
+        "inferredType": "ENUM",
+        "nullable": false,
+        "sampleValues": [
+          "IN_PERSON"
+        ]
+      },
+      {
+        "name": "status",
+        "inferredType": "ENUM",
+        "nullable": false,
+        "sampleValues": [
+          "COMPLETED"
+        ]
+      },
+      {
+        "name": "diagnosisCode",
+        "inferredType": "STRING",
+        "nullable": false,
+        "sampleValues": [
+          "J06.9"
+        ]
+      },
+      {
+        "name": "billingAmount",
+        "inferredType": "FLOAT",
+        "nullable": false,
+        "sampleValues": [
+          350
+        ]
+      },
+      {
+        "name": "insuranceCovered",
+        "inferredType": "FLOAT",
+        "nullable": false,
+        "sampleValues": [
+          280
+        ]
+      },
+      {
+        "name": "patientResponsibility",
+        "inferredType": "FLOAT",
+        "nullable": false,
+        "sampleValues": [
+          70
+        ]
+      },
+      {
+        "name": "prescriptionIssued",
+        "inferredType": "BOOLEAN",
+        "nullable": false,
+        "sampleValues": [
+          true
+        ]
+      },
+      {
+        "name": "followUpRequired",
+        "inferredType": "BOOLEAN",
+        "nullable": false,
+        "sampleValues": [
+          false
+        ]
+      },
+      {
+        "name": "notes",
+        "inferredType": "STRING",
+        "nullable": false,
+        "sampleValues": [
+          "Patient reports improvement"
+        ]
+      },
+      {
+        "name": "facilityId",
+        "inferredType": "ID",
+        "nullable": false,
+        "sampleValues": [
+          "FAC-001"
+        ]
+      },
+      {
+        "name": "facilityName",
+        "inferredType": "STRING",
+        "nullable": false,
+        "sampleValues": [
+          "Northwest Medical Center"
+        ]
+      }
     ],
     "rowCount": 500,
     "classification": "PII",
     "piiColumns": [
-      { "column": "patientName", "piiType": "DIRECT_IDENTIFIER", "confidence": 95 },
-      { "column": "dob", "piiType": "DIRECT_IDENTIFIER", "confidence": 90 },
-      { "column": "insuranceId", "piiType": "DIRECT_IDENTIFIER", "confidence": 92 },
-      { "column": "patientId", "piiType": "DIRECT_IDENTIFIER", "confidence": 90 },
-      { "column": "diagnosisCode", "piiType": "SENSITIVE_ATTRIBUTE", "confidence": 88 }
+      {
+        "column": "patientName",
+        "piiType": "DIRECT_IDENTIFIER",
+        "confidence": 95
+      },
+      {
+        "column": "dob",
+        "piiType": "DIRECT_IDENTIFIER",
+        "confidence": 90
+      },
+      {
+        "column": "insuranceId",
+        "piiType": "DIRECT_IDENTIFIER",
+        "confidence": 92
+      },
+      {
+        "column": "patientId",
+        "piiType": "DIRECT_IDENTIFIER",
+        "confidence": 90
+      },
+      {
+        "column": "diagnosisCode",
+        "piiType": "SENSITIVE_ATTRIBUTE",
+        "confidence": 88
+      }
     ],
     "owner": "health-it-team",
     "team": "Healthcare IT",
     "domain": "Patient Care",
     "lastUpdated": "2024-11-15T00:00:00Z",
-    "tags": ["healthcare", "appointments", "billing", "hipaa", "pii", "diagnosis"],
-    "lineage": { "upstreamDatasets": [], "transformationQuery": null, "description": "Direct source" },
-    "statistics": { "completeness": null, "qualityScore": null },
-    "publishedToCatalog": false
+    "tags": [
+      "healthcare",
+      "appointments",
+      "billing",
+      "hipaa",
+      "pii",
+      "diagnosis"
+    ],
+    "lineage": {
+      "upstreamDatasets": [],
+      "transformationQuery": null,
+      "description": "Direct source"
+    },
+    "statistics": {
+      "completeness": 88,
+      "qualityScore": 75
+    },
+    "regulatoryFlags": [
+      "HIPAA",
+      "GDPR"
+    ],
+    "businessContext": "Patient appointment and billing records across the healthcare network. Powers clinical analytics, insurance reconciliation, and patient outcome tracking. HIPAA-protected with strict access controls.",
+    "publishedToCatalog": true
   },
   {
     "datasetId": "ds-007",
@@ -283,27 +1398,174 @@
     "description": "Warehouse inventory management records from a multi-facility distribution network with reorder and expiry tracking.",
     "filePath": "/data/dataops/datasets/inv_inventory.json",
     "schema": [
-      { "name": "skuId", "inferredType": "ID", "nullable": false, "sampleValues": ["SKU-00001"] },
-      { "name": "productName", "inferredType": "STRING", "nullable": false, "sampleValues": ["Industrial Ball Bearing 6205"] },
-      { "name": "category", "inferredType": "ENUM", "nullable": false, "sampleValues": ["Hardware"] },
-      { "name": "warehouseId", "inferredType": "ID", "nullable": false, "sampleValues": ["WH-001"] },
-      { "name": "warehouseLocation", "inferredType": "STRING", "nullable": false, "sampleValues": ["Seattle"] },
-      { "name": "quantityOnHand", "inferredType": "INTEGER", "nullable": false, "sampleValues": [5000] },
-      { "name": "quantityReserved", "inferredType": "INTEGER", "nullable": false, "sampleValues": [1200] },
-      { "name": "quantityAvailable", "inferredType": "INTEGER", "nullable": false, "sampleValues": [3800] },
-      { "name": "reorderPoint", "inferredType": "INTEGER", "nullable": false, "sampleValues": [200] },
-      { "name": "reorderQuantity", "inferredType": "INTEGER", "nullable": false, "sampleValues": [500] },
-      { "name": "unitCost", "inferredType": "FLOAT", "nullable": false, "sampleValues": [12.50] },
-      { "name": "sellingPrice", "inferredType": "FLOAT", "nullable": false, "sampleValues": [24.99] },
-      { "name": "supplier", "inferredType": "STRING", "nullable": false, "sampleValues": ["Pacific Components Inc"] },
-      { "name": "leadTimeDays", "inferredType": "INTEGER", "nullable": false, "sampleValues": [14] },
-      { "name": "lastRestockedAt", "inferredType": "DATE", "nullable": false, "sampleValues": ["2024-10-01"] },
-      { "name": "lastSoldAt", "inferredType": "DATE", "nullable": true, "sampleValues": ["2024-11-05"] },
-      { "name": "turnoverRate", "inferredType": "FLOAT", "nullable": false, "sampleValues": [4.5] },
-      { "name": "daysOfSupply", "inferredType": "FLOAT", "nullable": false, "sampleValues": [45.0] },
-      { "name": "expiryDate", "inferredType": "DATE", "nullable": true, "sampleValues": [null] },
-      { "name": "batchNumber", "inferredType": "ID", "nullable": false, "sampleValues": ["BATCH-A1B2C3D4"] },
-      { "name": "hazardousFlag", "inferredType": "BOOLEAN", "nullable": false, "sampleValues": [false] }
+      {
+        "name": "skuId",
+        "inferredType": "ID",
+        "nullable": false,
+        "sampleValues": [
+          "SKU-00001"
+        ]
+      },
+      {
+        "name": "productName",
+        "inferredType": "STRING",
+        "nullable": false,
+        "sampleValues": [
+          "Industrial Ball Bearing 6205"
+        ]
+      },
+      {
+        "name": "category",
+        "inferredType": "ENUM",
+        "nullable": false,
+        "sampleValues": [
+          "Hardware"
+        ]
+      },
+      {
+        "name": "warehouseId",
+        "inferredType": "ID",
+        "nullable": false,
+        "sampleValues": [
+          "WH-001"
+        ]
+      },
+      {
+        "name": "warehouseLocation",
+        "inferredType": "STRING",
+        "nullable": false,
+        "sampleValues": [
+          "Seattle"
+        ]
+      },
+      {
+        "name": "quantityOnHand",
+        "inferredType": "INTEGER",
+        "nullable": false,
+        "sampleValues": [
+          5000
+        ]
+      },
+      {
+        "name": "quantityReserved",
+        "inferredType": "INTEGER",
+        "nullable": false,
+        "sampleValues": [
+          1200
+        ]
+      },
+      {
+        "name": "quantityAvailable",
+        "inferredType": "INTEGER",
+        "nullable": false,
+        "sampleValues": [
+          3800
+        ]
+      },
+      {
+        "name": "reorderPoint",
+        "inferredType": "INTEGER",
+        "nullable": false,
+        "sampleValues": [
+          200
+        ]
+      },
+      {
+        "name": "reorderQuantity",
+        "inferredType": "INTEGER",
+        "nullable": false,
+        "sampleValues": [
+          500
+        ]
+      },
+      {
+        "name": "unitCost",
+        "inferredType": "FLOAT",
+        "nullable": false,
+        "sampleValues": [
+          12.5
+        ]
+      },
+      {
+        "name": "sellingPrice",
+        "inferredType": "FLOAT",
+        "nullable": false,
+        "sampleValues": [
+          24.99
+        ]
+      },
+      {
+        "name": "supplier",
+        "inferredType": "STRING",
+        "nullable": false,
+        "sampleValues": [
+          "Pacific Components Inc"
+        ]
+      },
+      {
+        "name": "leadTimeDays",
+        "inferredType": "INTEGER",
+        "nullable": false,
+        "sampleValues": [
+          14
+        ]
+      },
+      {
+        "name": "lastRestockedAt",
+        "inferredType": "DATE",
+        "nullable": false,
+        "sampleValues": [
+          "2024-10-01"
+        ]
+      },
+      {
+        "name": "lastSoldAt",
+        "inferredType": "DATE",
+        "nullable": true,
+        "sampleValues": [
+          "2024-11-05"
+        ]
+      },
+      {
+        "name": "turnoverRate",
+        "inferredType": "FLOAT",
+        "nullable": false,
+        "sampleValues": [
+          4.5
+        ]
+      },
+      {
+        "name": "daysOfSupply",
+        "inferredType": "FLOAT",
+        "nullable": false,
+        "sampleValues": [
+          45
+        ]
+      },
+      {
+        "name": "expiryDate",
+        "inferredType": "DATE",
+        "nullable": true,
+        "sampleValues": [
+          null
+        ]
+      },
+      {
+        "name": "batchNumber",
+        "inferredType": "ID",
+        "nullable": false,
+        "sampleValues": [
+          "BATCH-A1B2C3D4"
+        ]
+      },
+      {
+        "name": "hazardousFlag",
+        "inferredType": "BOOLEAN",
+        "nullable": false,
+        "sampleValues": [
+          false
+        ]
+      }
     ],
     "rowCount": 500,
     "classification": "INTERNAL",
@@ -312,10 +1574,27 @@
     "team": "Logistics",
     "domain": "Inventory Management",
     "lastUpdated": "2024-11-15T00:00:00Z",
-    "tags": ["inventory", "supply-chain", "warehouse", "logistics", "reorder"],
-    "lineage": { "upstreamDatasets": [], "transformationQuery": null, "description": "Direct source" },
-    "statistics": { "completeness": null, "qualityScore": null },
-    "publishedToCatalog": false
+    "tags": [
+      "inventory",
+      "supply-chain",
+      "warehouse",
+      "logistics",
+      "reorder"
+    ],
+    "lineage": {
+      "upstreamDatasets": [],
+      "transformationQuery": null,
+      "description": "Direct source"
+    },
+    "statistics": {
+      "completeness": 98,
+      "qualityScore": 94
+    },
+    "regulatoryFlags": [
+      "NONE"
+    ],
+    "businessContext": "Multi-facility inventory management data driving reorder automation, demand forecasting, and supply chain optimization. Real-time feeds from warehouse management systems across 8 distribution centers.",
+    "publishedToCatalog": true
   },
   {
     "datasetId": "ds-008",
@@ -324,24 +1603,151 @@
     "description": "Digital marketing campaign performance data across multiple channels including spend, impressions, and ROI metrics.",
     "filePath": "/data/dataops/datasets/mktg_campaigns.json",
     "schema": [
-      { "name": "campaignId", "inferredType": "ID", "nullable": false, "sampleValues": ["CMP-00001"] },
-      { "name": "campaignName", "inferredType": "STRING", "nullable": false, "sampleValues": ["Summer Flash Sale 2024"] },
-      { "name": "channel", "inferredType": "ENUM", "nullable": false, "sampleValues": ["EMAIL", "SOCIAL"] },
-      { "name": "startDate", "inferredType": "DATE", "nullable": false, "sampleValues": ["2024-06-01"] },
-      { "name": "endDate", "inferredType": "DATE", "nullable": false, "sampleValues": ["2024-06-30"] },
-      { "name": "budget", "inferredType": "FLOAT", "nullable": false, "sampleValues": [25000.00] },
-      { "name": "spend", "inferredType": "FLOAT", "nullable": false, "sampleValues": [22500.00] },
-      { "name": "impressions", "inferredType": "INTEGER", "nullable": false, "sampleValues": [500000] },
-      { "name": "clicks", "inferredType": "INTEGER", "nullable": false, "sampleValues": [15000] },
-      { "name": "conversions", "inferredType": "INTEGER", "nullable": false, "sampleValues": [750] },
-      { "name": "revenue", "inferredType": "FLOAT", "nullable": false, "sampleValues": [45000.00] },
-      { "name": "ctr", "inferredType": "FLOAT", "nullable": false, "sampleValues": [0.03] },
-      { "name": "cvr", "inferredType": "FLOAT", "nullable": false, "sampleValues": [0.05] },
-      { "name": "roas", "inferredType": "FLOAT", "nullable": false, "sampleValues": [2.0] },
-      { "name": "targetAudience", "inferredType": "STRING", "nullable": false, "sampleValues": ["18-34 Urban Professionals"] },
-      { "name": "targetRegion", "inferredType": "STRING", "nullable": false, "sampleValues": ["National"] },
-      { "name": "creativeId", "inferredType": "ID", "nullable": false, "sampleValues": ["CRE-0001"] },
-      { "name": "status", "inferredType": "ENUM", "nullable": false, "sampleValues": ["COMPLETED"] }
+      {
+        "name": "campaignId",
+        "inferredType": "ID",
+        "nullable": false,
+        "sampleValues": [
+          "CMP-00001"
+        ]
+      },
+      {
+        "name": "campaignName",
+        "inferredType": "STRING",
+        "nullable": false,
+        "sampleValues": [
+          "Summer Flash Sale 2024"
+        ]
+      },
+      {
+        "name": "channel",
+        "inferredType": "ENUM",
+        "nullable": false,
+        "sampleValues": [
+          "EMAIL",
+          "SOCIAL"
+        ]
+      },
+      {
+        "name": "startDate",
+        "inferredType": "DATE",
+        "nullable": false,
+        "sampleValues": [
+          "2024-06-01"
+        ]
+      },
+      {
+        "name": "endDate",
+        "inferredType": "DATE",
+        "nullable": false,
+        "sampleValues": [
+          "2024-06-30"
+        ]
+      },
+      {
+        "name": "budget",
+        "inferredType": "FLOAT",
+        "nullable": false,
+        "sampleValues": [
+          25000
+        ]
+      },
+      {
+        "name": "spend",
+        "inferredType": "FLOAT",
+        "nullable": false,
+        "sampleValues": [
+          22500
+        ]
+      },
+      {
+        "name": "impressions",
+        "inferredType": "INTEGER",
+        "nullable": false,
+        "sampleValues": [
+          500000
+        ]
+      },
+      {
+        "name": "clicks",
+        "inferredType": "INTEGER",
+        "nullable": false,
+        "sampleValues": [
+          15000
+        ]
+      },
+      {
+        "name": "conversions",
+        "inferredType": "INTEGER",
+        "nullable": false,
+        "sampleValues": [
+          750
+        ]
+      },
+      {
+        "name": "revenue",
+        "inferredType": "FLOAT",
+        "nullable": false,
+        "sampleValues": [
+          45000
+        ]
+      },
+      {
+        "name": "ctr",
+        "inferredType": "FLOAT",
+        "nullable": false,
+        "sampleValues": [
+          0.03
+        ]
+      },
+      {
+        "name": "cvr",
+        "inferredType": "FLOAT",
+        "nullable": false,
+        "sampleValues": [
+          0.05
+        ]
+      },
+      {
+        "name": "roas",
+        "inferredType": "FLOAT",
+        "nullable": false,
+        "sampleValues": [
+          2
+        ]
+      },
+      {
+        "name": "targetAudience",
+        "inferredType": "STRING",
+        "nullable": false,
+        "sampleValues": [
+          "18-34 Urban Professionals"
+        ]
+      },
+      {
+        "name": "targetRegion",
+        "inferredType": "STRING",
+        "nullable": false,
+        "sampleValues": [
+          "National"
+        ]
+      },
+      {
+        "name": "creativeId",
+        "inferredType": "ID",
+        "nullable": false,
+        "sampleValues": [
+          "CRE-0001"
+        ]
+      },
+      {
+        "name": "status",
+        "inferredType": "ENUM",
+        "nullable": false,
+        "sampleValues": [
+          "COMPLETED"
+        ]
+      }
     ],
     "rowCount": 500,
     "classification": "INTERNAL",
@@ -350,10 +1756,30 @@
     "team": "Marketing",
     "domain": "Campaign Analytics",
     "lastUpdated": "2024-11-15T00:00:00Z",
-    "tags": ["marketing", "campaigns", "digital", "roi", "performance"],
-    "lineage": { "upstreamDatasets": [], "transformationQuery": null, "description": "Direct source" },
-    "statistics": { "completeness": null, "qualityScore": null },
-    "publishedToCatalog": false
+    "tags": [
+      "marketing",
+      "campaigns",
+      "digital",
+      "roi",
+      "performance"
+    ],
+    "lineage": {
+      "upstreamDatasets": [
+        "ds-003",
+        "ds-011"
+      ],
+      "transformationQuery": "SELECT c.*, SUM(o.totalAmount) as attributed_revenue FROM campaigns c JOIN ecom_orders o ON c.campaignId = o.discountCode JOIN streaming_events s ON o.customerId = s.userId GROUP BY c.campaignId",
+      "description": "Attribution model joining campaign touchpoints with order conversions and streaming engagement"
+    },
+    "statistics": {
+      "completeness": 95,
+      "qualityScore": 89
+    },
+    "regulatoryFlags": [
+      "NONE"
+    ],
+    "businessContext": "Cross-channel marketing campaign performance data. Feeds ROI dashboards, budget allocation models, and A/B test analysis. Updated daily from ad platform APIs and attribution systems.",
+    "publishedToCatalog": true
   },
   {
     "datasetId": "ds-009",
@@ -362,21 +1788,126 @@
     "description": "Industrial IoT sensor telemetry data from manufacturing facility monitoring systems with anomaly detection.",
     "filePath": "/data/dataops/datasets/iot_sensor_readings.json",
     "schema": [
-      { "name": "readingId", "inferredType": "ID", "nullable": false, "sampleValues": ["RDG-00001"] },
-      { "name": "deviceId", "inferredType": "ID", "nullable": false, "sampleValues": ["IOT-0001"] },
-      { "name": "deviceType", "inferredType": "ENUM", "nullable": false, "sampleValues": ["TEMPERATURE"] },
-      { "name": "facilityId", "inferredType": "ID", "nullable": false, "sampleValues": ["FAC-001"] },
-      { "name": "zone", "inferredType": "STRING", "nullable": false, "sampleValues": ["Zone-A"] },
-      { "name": "timestamp", "inferredType": "DATE", "nullable": false, "sampleValues": ["2024-11-15T10:30:00Z"] },
-      { "name": "value", "inferredType": "FLOAT", "nullable": true, "sampleValues": [72.5] },
-      { "name": "unit", "inferredType": "STRING", "nullable": false, "sampleValues": ["°C"] },
-      { "name": "minThreshold", "inferredType": "FLOAT", "nullable": false, "sampleValues": [15.0] },
-      { "name": "maxThreshold", "inferredType": "FLOAT", "nullable": false, "sampleValues": [85.0] },
-      { "name": "isAnomaly", "inferredType": "BOOLEAN", "nullable": false, "sampleValues": [false] },
-      { "name": "anomalyScore", "inferredType": "INTEGER", "nullable": false, "sampleValues": [5] },
-      { "name": "maintenanceFlag", "inferredType": "BOOLEAN", "nullable": false, "sampleValues": [false] },
-      { "name": "firmwareVersion", "inferredType": "STRING", "nullable": false, "sampleValues": ["v2.3.1"] },
-      { "name": "signalStrength", "inferredType": "INTEGER", "nullable": false, "sampleValues": [-45] }
+      {
+        "name": "readingId",
+        "inferredType": "ID",
+        "nullable": false,
+        "sampleValues": [
+          "RDG-00001"
+        ]
+      },
+      {
+        "name": "deviceId",
+        "inferredType": "ID",
+        "nullable": false,
+        "sampleValues": [
+          "IOT-0001"
+        ]
+      },
+      {
+        "name": "deviceType",
+        "inferredType": "ENUM",
+        "nullable": false,
+        "sampleValues": [
+          "TEMPERATURE"
+        ]
+      },
+      {
+        "name": "facilityId",
+        "inferredType": "ID",
+        "nullable": false,
+        "sampleValues": [
+          "FAC-001"
+        ]
+      },
+      {
+        "name": "zone",
+        "inferredType": "STRING",
+        "nullable": false,
+        "sampleValues": [
+          "Zone-A"
+        ]
+      },
+      {
+        "name": "timestamp",
+        "inferredType": "DATE",
+        "nullable": false,
+        "sampleValues": [
+          "2024-11-15T10:30:00Z"
+        ]
+      },
+      {
+        "name": "value",
+        "inferredType": "FLOAT",
+        "nullable": true,
+        "sampleValues": [
+          72.5
+        ]
+      },
+      {
+        "name": "unit",
+        "inferredType": "STRING",
+        "nullable": false,
+        "sampleValues": [
+          "\u00b0C"
+        ]
+      },
+      {
+        "name": "minThreshold",
+        "inferredType": "FLOAT",
+        "nullable": false,
+        "sampleValues": [
+          15
+        ]
+      },
+      {
+        "name": "maxThreshold",
+        "inferredType": "FLOAT",
+        "nullable": false,
+        "sampleValues": [
+          85
+        ]
+      },
+      {
+        "name": "isAnomaly",
+        "inferredType": "BOOLEAN",
+        "nullable": false,
+        "sampleValues": [
+          false
+        ]
+      },
+      {
+        "name": "anomalyScore",
+        "inferredType": "INTEGER",
+        "nullable": false,
+        "sampleValues": [
+          5
+        ]
+      },
+      {
+        "name": "maintenanceFlag",
+        "inferredType": "BOOLEAN",
+        "nullable": false,
+        "sampleValues": [
+          false
+        ]
+      },
+      {
+        "name": "firmwareVersion",
+        "inferredType": "STRING",
+        "nullable": false,
+        "sampleValues": [
+          "v2.3.1"
+        ]
+      },
+      {
+        "name": "signalStrength",
+        "inferredType": "INTEGER",
+        "nullable": false,
+        "sampleValues": [
+          -45
+        ]
+      }
     ],
     "rowCount": 500,
     "classification": "INTERNAL",
@@ -385,10 +1916,27 @@
     "team": "Manufacturing",
     "domain": "Industrial IoT",
     "lastUpdated": "2024-11-15T00:00:00Z",
-    "tags": ["iot", "sensors", "telemetry", "manufacturing", "anomaly-detection"],
-    "lineage": { "upstreamDatasets": [], "transformationQuery": null, "description": "Direct source" },
-    "statistics": { "completeness": null, "qualityScore": null },
-    "publishedToCatalog": false
+    "tags": [
+      "iot",
+      "sensors",
+      "telemetry",
+      "manufacturing",
+      "anomaly-detection"
+    ],
+    "lineage": {
+      "upstreamDatasets": [],
+      "transformationQuery": null,
+      "description": "Direct source"
+    },
+    "statistics": {
+      "completeness": 92,
+      "qualityScore": 85
+    },
+    "regulatoryFlags": [
+      "NONE"
+    ],
+    "businessContext": "Industrial IoT sensor telemetry from manufacturing monitoring systems. Powers predictive maintenance models, anomaly detection alerts, and equipment health dashboards. High-volume streaming ingestion.",
+    "publishedToCatalog": true
   },
   {
     "datasetId": "ds-010",
@@ -397,47 +1945,259 @@
     "description": "Residential and commercial real estate listings from a multi-market brokerage platform with pricing and property details.",
     "filePath": "/data/dataops/datasets/real_estate_listings.json",
     "schema": [
-      { "name": "propertyId", "inferredType": "ID", "nullable": false, "sampleValues": ["PROP-00001"] },
-      { "name": "address", "inferredType": "STRING", "nullable": false, "sampleValues": ["1423 Oak Valley Drive"] },
-      { "name": "zipCode", "inferredType": "STRING", "nullable": false, "sampleValues": ["98101"] },
-      { "name": "city", "inferredType": "STRING", "nullable": false, "sampleValues": ["Seattle"] },
-      { "name": "state", "inferredType": "STRING", "nullable": false, "sampleValues": ["WA"] },
-      { "name": "listingType", "inferredType": "ENUM", "nullable": false, "sampleValues": ["SALE"] },
-      { "name": "propertyType", "inferredType": "ENUM", "nullable": false, "sampleValues": ["SINGLE_FAMILY"] },
-      { "name": "bedrooms", "inferredType": "INTEGER", "nullable": false, "sampleValues": [3] },
-      { "name": "bathrooms", "inferredType": "FLOAT", "nullable": false, "sampleValues": [2.5] },
-      { "name": "squareFeet", "inferredType": "INTEGER", "nullable": false, "sampleValues": [2200] },
-      { "name": "listingPrice", "inferredType": "FLOAT", "nullable": false, "sampleValues": [650000.00] },
-      { "name": "pricePerSqFt", "inferredType": "FLOAT", "nullable": false, "sampleValues": [295.45] },
-      { "name": "yearBuilt", "inferredType": "INTEGER", "nullable": false, "sampleValues": [1998] },
-      { "name": "lotSize", "inferredType": "FLOAT", "nullable": false, "sampleValues": [0.25] },
-      { "name": "hasGarage", "inferredType": "BOOLEAN", "nullable": false, "sampleValues": [true] },
-      { "name": "hasPool", "inferredType": "BOOLEAN", "nullable": false, "sampleValues": [false] },
-      { "name": "hoaFee", "inferredType": "FLOAT", "nullable": true, "sampleValues": [250.00] },
-      { "name": "listingDate", "inferredType": "DATE", "nullable": false, "sampleValues": ["2024-08-01"] },
-      { "name": "soldDate", "inferredType": "DATE", "nullable": true, "sampleValues": ["2024-09-15"] },
-      { "name": "soldPrice", "inferredType": "FLOAT", "nullable": true, "sampleValues": [645000.00] },
-      { "name": "daysOnMarket", "inferredType": "INTEGER", "nullable": true, "sampleValues": [45] },
-      { "name": "agentId", "inferredType": "ID", "nullable": false, "sampleValues": ["AGT-0001"] },
-      { "name": "agentName", "inferredType": "STRING", "nullable": false, "sampleValues": ["Lisa Thompson"] },
-      { "name": "brokerageName", "inferredType": "STRING", "nullable": false, "sampleValues": ["Pacific Realty Group"] },
-      { "name": "schoolDistrict", "inferredType": "STRING", "nullable": false, "sampleValues": ["Northshore School District"] },
-      { "name": "walkScore", "inferredType": "INTEGER", "nullable": false, "sampleValues": [72] },
-      { "name": "transitScore", "inferredType": "INTEGER", "nullable": false, "sampleValues": [55] }
+      {
+        "name": "propertyId",
+        "inferredType": "ID",
+        "nullable": false,
+        "sampleValues": [
+          "PROP-00001"
+        ]
+      },
+      {
+        "name": "address",
+        "inferredType": "STRING",
+        "nullable": false,
+        "sampleValues": [
+          "1423 Oak Valley Drive"
+        ]
+      },
+      {
+        "name": "zipCode",
+        "inferredType": "STRING",
+        "nullable": false,
+        "sampleValues": [
+          "98101"
+        ]
+      },
+      {
+        "name": "city",
+        "inferredType": "STRING",
+        "nullable": false,
+        "sampleValues": [
+          "Seattle"
+        ]
+      },
+      {
+        "name": "state",
+        "inferredType": "STRING",
+        "nullable": false,
+        "sampleValues": [
+          "WA"
+        ]
+      },
+      {
+        "name": "listingType",
+        "inferredType": "ENUM",
+        "nullable": false,
+        "sampleValues": [
+          "SALE"
+        ]
+      },
+      {
+        "name": "propertyType",
+        "inferredType": "ENUM",
+        "nullable": false,
+        "sampleValues": [
+          "SINGLE_FAMILY"
+        ]
+      },
+      {
+        "name": "bedrooms",
+        "inferredType": "INTEGER",
+        "nullable": false,
+        "sampleValues": [
+          3
+        ]
+      },
+      {
+        "name": "bathrooms",
+        "inferredType": "FLOAT",
+        "nullable": false,
+        "sampleValues": [
+          2.5
+        ]
+      },
+      {
+        "name": "squareFeet",
+        "inferredType": "INTEGER",
+        "nullable": false,
+        "sampleValues": [
+          2200
+        ]
+      },
+      {
+        "name": "listingPrice",
+        "inferredType": "FLOAT",
+        "nullable": false,
+        "sampleValues": [
+          650000
+        ]
+      },
+      {
+        "name": "pricePerSqFt",
+        "inferredType": "FLOAT",
+        "nullable": false,
+        "sampleValues": [
+          295.45
+        ]
+      },
+      {
+        "name": "yearBuilt",
+        "inferredType": "INTEGER",
+        "nullable": false,
+        "sampleValues": [
+          1998
+        ]
+      },
+      {
+        "name": "lotSize",
+        "inferredType": "FLOAT",
+        "nullable": false,
+        "sampleValues": [
+          0.25
+        ]
+      },
+      {
+        "name": "hasGarage",
+        "inferredType": "BOOLEAN",
+        "nullable": false,
+        "sampleValues": [
+          true
+        ]
+      },
+      {
+        "name": "hasPool",
+        "inferredType": "BOOLEAN",
+        "nullable": false,
+        "sampleValues": [
+          false
+        ]
+      },
+      {
+        "name": "hoaFee",
+        "inferredType": "FLOAT",
+        "nullable": true,
+        "sampleValues": [
+          250
+        ]
+      },
+      {
+        "name": "listingDate",
+        "inferredType": "DATE",
+        "nullable": false,
+        "sampleValues": [
+          "2024-08-01"
+        ]
+      },
+      {
+        "name": "soldDate",
+        "inferredType": "DATE",
+        "nullable": true,
+        "sampleValues": [
+          "2024-09-15"
+        ]
+      },
+      {
+        "name": "soldPrice",
+        "inferredType": "FLOAT",
+        "nullable": true,
+        "sampleValues": [
+          645000
+        ]
+      },
+      {
+        "name": "daysOnMarket",
+        "inferredType": "INTEGER",
+        "nullable": true,
+        "sampleValues": [
+          45
+        ]
+      },
+      {
+        "name": "agentId",
+        "inferredType": "ID",
+        "nullable": false,
+        "sampleValues": [
+          "AGT-0001"
+        ]
+      },
+      {
+        "name": "agentName",
+        "inferredType": "STRING",
+        "nullable": false,
+        "sampleValues": [
+          "Lisa Thompson"
+        ]
+      },
+      {
+        "name": "brokerageName",
+        "inferredType": "STRING",
+        "nullable": false,
+        "sampleValues": [
+          "Pacific Realty Group"
+        ]
+      },
+      {
+        "name": "schoolDistrict",
+        "inferredType": "STRING",
+        "nullable": false,
+        "sampleValues": [
+          "Northshore School District"
+        ]
+      },
+      {
+        "name": "walkScore",
+        "inferredType": "INTEGER",
+        "nullable": false,
+        "sampleValues": [
+          72
+        ]
+      },
+      {
+        "name": "transitScore",
+        "inferredType": "INTEGER",
+        "nullable": false,
+        "sampleValues": [
+          55
+        ]
+      }
     ],
     "rowCount": 500,
     "classification": "CONFIDENTIAL",
     "piiColumns": [
-      { "column": "address", "piiType": "QUASI_IDENTIFIER", "confidence": 80 }
+      {
+        "column": "address",
+        "piiType": "QUASI_IDENTIFIER",
+        "confidence": 80
+      }
     ],
     "owner": "proptech-team",
     "team": "Real Estate",
     "domain": "Property Listings",
     "lastUpdated": "2024-11-15T00:00:00Z",
-    "tags": ["real-estate", "proptech", "listings", "property", "pricing"],
-    "lineage": { "upstreamDatasets": [], "transformationQuery": null, "description": "Direct source" },
-    "statistics": { "completeness": null, "qualityScore": null },
-    "publishedToCatalog": false
+    "tags": [
+      "real-estate",
+      "proptech",
+      "listings",
+      "property",
+      "pricing"
+    ],
+    "lineage": {
+      "upstreamDatasets": [
+        "ds-009"
+      ],
+      "transformationQuery": null,
+      "description": "Property sensor data enrichment from IoT monitoring systems"
+    },
+    "statistics": {
+      "completeness": 90,
+      "qualityScore": 80
+    },
+    "regulatoryFlags": [
+      "CCPA"
+    ],
+    "businessContext": "Multi-market real estate listing data from the brokerage platform. Supports comparative market analysis, pricing models, and agent performance tracking. Contains location-sensitive PII.",
+    "publishedToCatalog": true
   },
   {
     "datasetId": "ds-011",
@@ -446,40 +2206,202 @@
     "description": "User streaming activity events from a video and podcast platform with viewing patterns and engagement data.",
     "filePath": "/data/dataops/datasets/streaming_events.json",
     "schema": [
-      { "name": "eventId", "inferredType": "ID", "nullable": false, "sampleValues": ["EVT-00001"] },
-      { "name": "userId", "inferredType": "ID", "nullable": true, "sampleValues": ["USR-10001"] },
-      { "name": "sessionId", "inferredType": "ID", "nullable": false, "sampleValues": ["SES-0000000001"] },
-      { "name": "contentId", "inferredType": "ID", "nullable": false, "sampleValues": ["CNT-10001"] },
-      { "name": "contentTitle", "inferredType": "STRING", "nullable": false, "sampleValues": ["The Last Algorithm"] },
-      { "name": "contentType", "inferredType": "ENUM", "nullable": false, "sampleValues": ["MOVIE"] },
-      { "name": "genre", "inferredType": "ENUM", "nullable": false, "sampleValues": ["Drama"] },
-      { "name": "durationMinutes", "inferredType": "INTEGER", "nullable": false, "sampleValues": [120] },
-      { "name": "watchedMinutes", "inferredType": "INTEGER", "nullable": false, "sampleValues": [95] },
-      { "name": "completionRate", "inferredType": "FLOAT", "nullable": false, "sampleValues": [0.79] },
-      { "name": "deviceType", "inferredType": "ENUM", "nullable": false, "sampleValues": ["MOBILE"] },
-      { "name": "os", "inferredType": "STRING", "nullable": false, "sampleValues": ["iOS"] },
-      { "name": "country", "inferredType": "STRING", "nullable": false, "sampleValues": ["US"] },
-      { "name": "timestamp", "inferredType": "DATE", "nullable": false, "sampleValues": ["2024-09-15T20:30:00Z"] },
-      { "name": "subscriptionTier", "inferredType": "ENUM", "nullable": false, "sampleValues": ["PREMIUM"] },
-      { "name": "rating", "inferredType": "INTEGER", "nullable": true, "sampleValues": [4] },
-      { "name": "inWatchlist", "inferredType": "BOOLEAN", "nullable": false, "sampleValues": [true] },
-      { "name": "subtitlesEnabled", "inferredType": "BOOLEAN", "nullable": false, "sampleValues": [false] },
-      { "name": "audioLanguage", "inferredType": "STRING", "nullable": false, "sampleValues": ["en"] },
-      { "name": "contentLanguage", "inferredType": "STRING", "nullable": false, "sampleValues": ["en"] }
+      {
+        "name": "eventId",
+        "inferredType": "ID",
+        "nullable": false,
+        "sampleValues": [
+          "EVT-00001"
+        ]
+      },
+      {
+        "name": "userId",
+        "inferredType": "ID",
+        "nullable": true,
+        "sampleValues": [
+          "USR-10001"
+        ]
+      },
+      {
+        "name": "sessionId",
+        "inferredType": "ID",
+        "nullable": false,
+        "sampleValues": [
+          "SES-0000000001"
+        ]
+      },
+      {
+        "name": "contentId",
+        "inferredType": "ID",
+        "nullable": false,
+        "sampleValues": [
+          "CNT-10001"
+        ]
+      },
+      {
+        "name": "contentTitle",
+        "inferredType": "STRING",
+        "nullable": false,
+        "sampleValues": [
+          "The Last Algorithm"
+        ]
+      },
+      {
+        "name": "contentType",
+        "inferredType": "ENUM",
+        "nullable": false,
+        "sampleValues": [
+          "MOVIE"
+        ]
+      },
+      {
+        "name": "genre",
+        "inferredType": "ENUM",
+        "nullable": false,
+        "sampleValues": [
+          "Drama"
+        ]
+      },
+      {
+        "name": "durationMinutes",
+        "inferredType": "INTEGER",
+        "nullable": false,
+        "sampleValues": [
+          120
+        ]
+      },
+      {
+        "name": "watchedMinutes",
+        "inferredType": "INTEGER",
+        "nullable": false,
+        "sampleValues": [
+          95
+        ]
+      },
+      {
+        "name": "completionRate",
+        "inferredType": "FLOAT",
+        "nullable": false,
+        "sampleValues": [
+          0.79
+        ]
+      },
+      {
+        "name": "deviceType",
+        "inferredType": "ENUM",
+        "nullable": false,
+        "sampleValues": [
+          "MOBILE"
+        ]
+      },
+      {
+        "name": "os",
+        "inferredType": "STRING",
+        "nullable": false,
+        "sampleValues": [
+          "iOS"
+        ]
+      },
+      {
+        "name": "country",
+        "inferredType": "STRING",
+        "nullable": false,
+        "sampleValues": [
+          "US"
+        ]
+      },
+      {
+        "name": "timestamp",
+        "inferredType": "DATE",
+        "nullable": false,
+        "sampleValues": [
+          "2024-09-15T20:30:00Z"
+        ]
+      },
+      {
+        "name": "subscriptionTier",
+        "inferredType": "ENUM",
+        "nullable": false,
+        "sampleValues": [
+          "PREMIUM"
+        ]
+      },
+      {
+        "name": "rating",
+        "inferredType": "INTEGER",
+        "nullable": true,
+        "sampleValues": [
+          4
+        ]
+      },
+      {
+        "name": "inWatchlist",
+        "inferredType": "BOOLEAN",
+        "nullable": false,
+        "sampleValues": [
+          true
+        ]
+      },
+      {
+        "name": "subtitlesEnabled",
+        "inferredType": "BOOLEAN",
+        "nullable": false,
+        "sampleValues": [
+          false
+        ]
+      },
+      {
+        "name": "audioLanguage",
+        "inferredType": "STRING",
+        "nullable": false,
+        "sampleValues": [
+          "en"
+        ]
+      },
+      {
+        "name": "contentLanguage",
+        "inferredType": "STRING",
+        "nullable": false,
+        "sampleValues": [
+          "en"
+        ]
+      }
     ],
     "rowCount": 500,
     "classification": "PII",
     "piiColumns": [
-      { "column": "userId", "piiType": "DIRECT_IDENTIFIER", "confidence": 92 }
+      {
+        "column": "userId",
+        "piiType": "DIRECT_IDENTIFIER",
+        "confidence": 92
+      }
     ],
     "owner": "streaming-analytics-team",
     "team": "Media",
     "domain": "Content Streaming",
     "lastUpdated": "2024-11-15T00:00:00Z",
-    "tags": ["media", "streaming", "content", "engagement", "user-behavior"],
-    "lineage": { "upstreamDatasets": [], "transformationQuery": null, "description": "Direct source" },
-    "statistics": { "completeness": null, "qualityScore": null },
-    "publishedToCatalog": false
+    "tags": [
+      "media",
+      "streaming",
+      "content",
+      "engagement",
+      "user-behavior"
+    ],
+    "lineage": {
+      "upstreamDatasets": [],
+      "transformationQuery": null,
+      "description": "Direct source"
+    },
+    "statistics": {
+      "completeness": 93,
+      "qualityScore": 88
+    },
+    "regulatoryFlags": [
+      "GDPR",
+      "CCPA"
+    ],
+    "businessContext": "User streaming behavior events from the content platform. Drives recommendation engine training, content performance analytics, and engagement optimization. Contains user identifiers requiring consent management.",
+    "publishedToCatalog": true
   },
   {
     "datasetId": "ds-012",
@@ -488,38 +2410,192 @@
     "description": "Cryptocurrency trading records from a multi-exchange aggregation platform with blockchain transaction data.",
     "filePath": "/data/dataops/datasets/crypto_trades.json",
     "schema": [
-      { "name": "tradeId", "inferredType": "ID", "nullable": false, "sampleValues": ["TRD-00001"] },
-      { "name": "walletAddress", "inferredType": "STRING", "nullable": false, "sampleValues": ["0x1a2b3c4d5e6f..."] },
-      { "name": "traderId", "inferredType": "ID", "nullable": false, "sampleValues": ["TRADER-10001"] },
-      { "name": "exchange", "inferredType": "ENUM", "nullable": false, "sampleValues": ["Coinbase"] },
-      { "name": "tradingPair", "inferredType": "STRING", "nullable": false, "sampleValues": ["BTC-USD"] },
-      { "name": "tradeType", "inferredType": "ENUM", "nullable": false, "sampleValues": ["BUY"] },
-      { "name": "quantity", "inferredType": "FLOAT", "nullable": false, "sampleValues": [0.15] },
-      { "name": "priceAtTrade", "inferredType": "FLOAT", "nullable": false, "sampleValues": [42500.00] },
-      { "name": "totalValue", "inferredType": "FLOAT", "nullable": false, "sampleValues": [6375.00] },
-      { "name": "fee", "inferredType": "FLOAT", "nullable": false, "sampleValues": [31.88] },
-      { "name": "feeToken", "inferredType": "STRING", "nullable": false, "sampleValues": ["USD"] },
-      { "name": "networkGasFee", "inferredType": "FLOAT", "nullable": false, "sampleValues": [5.25] },
-      { "name": "slippage", "inferredType": "FLOAT", "nullable": false, "sampleValues": [0.002] },
-      { "name": "timestamp", "inferredType": "DATE", "nullable": false, "sampleValues": ["2024-07-20T14:00:00Z"] },
-      { "name": "blockNumber", "inferredType": "INTEGER", "nullable": true, "sampleValues": [19500000] },
-      { "name": "txHash", "inferredType": "STRING", "nullable": true, "sampleValues": ["0xabc123..."] },
-      { "name": "status", "inferredType": "ENUM", "nullable": false, "sampleValues": ["CONFIRMED"] },
-      { "name": "profitLoss", "inferredType": "FLOAT", "nullable": true, "sampleValues": [250.00] }
+      {
+        "name": "tradeId",
+        "inferredType": "ID",
+        "nullable": false,
+        "sampleValues": [
+          "TRD-00001"
+        ]
+      },
+      {
+        "name": "walletAddress",
+        "inferredType": "STRING",
+        "nullable": false,
+        "sampleValues": [
+          "0x1a2b3c4d5e6f..."
+        ]
+      },
+      {
+        "name": "traderId",
+        "inferredType": "ID",
+        "nullable": false,
+        "sampleValues": [
+          "TRADER-10001"
+        ]
+      },
+      {
+        "name": "exchange",
+        "inferredType": "ENUM",
+        "nullable": false,
+        "sampleValues": [
+          "Coinbase"
+        ]
+      },
+      {
+        "name": "tradingPair",
+        "inferredType": "STRING",
+        "nullable": false,
+        "sampleValues": [
+          "BTC-USD"
+        ]
+      },
+      {
+        "name": "tradeType",
+        "inferredType": "ENUM",
+        "nullable": false,
+        "sampleValues": [
+          "BUY"
+        ]
+      },
+      {
+        "name": "quantity",
+        "inferredType": "FLOAT",
+        "nullable": false,
+        "sampleValues": [
+          0.15
+        ]
+      },
+      {
+        "name": "priceAtTrade",
+        "inferredType": "FLOAT",
+        "nullable": false,
+        "sampleValues": [
+          42500
+        ]
+      },
+      {
+        "name": "totalValue",
+        "inferredType": "FLOAT",
+        "nullable": false,
+        "sampleValues": [
+          6375
+        ]
+      },
+      {
+        "name": "fee",
+        "inferredType": "FLOAT",
+        "nullable": false,
+        "sampleValues": [
+          31.88
+        ]
+      },
+      {
+        "name": "feeToken",
+        "inferredType": "STRING",
+        "nullable": false,
+        "sampleValues": [
+          "USD"
+        ]
+      },
+      {
+        "name": "networkGasFee",
+        "inferredType": "FLOAT",
+        "nullable": false,
+        "sampleValues": [
+          5.25
+        ]
+      },
+      {
+        "name": "slippage",
+        "inferredType": "FLOAT",
+        "nullable": false,
+        "sampleValues": [
+          0.002
+        ]
+      },
+      {
+        "name": "timestamp",
+        "inferredType": "DATE",
+        "nullable": false,
+        "sampleValues": [
+          "2024-07-20T14:00:00Z"
+        ]
+      },
+      {
+        "name": "blockNumber",
+        "inferredType": "INTEGER",
+        "nullable": true,
+        "sampleValues": [
+          19500000
+        ]
+      },
+      {
+        "name": "txHash",
+        "inferredType": "STRING",
+        "nullable": true,
+        "sampleValues": [
+          "0xabc123..."
+        ]
+      },
+      {
+        "name": "status",
+        "inferredType": "ENUM",
+        "nullable": false,
+        "sampleValues": [
+          "CONFIRMED"
+        ]
+      },
+      {
+        "name": "profitLoss",
+        "inferredType": "FLOAT",
+        "nullable": true,
+        "sampleValues": [
+          250
+        ]
+      }
     ],
     "rowCount": 500,
     "classification": "PII",
     "piiColumns": [
-      { "column": "walletAddress", "piiType": "DIRECT_IDENTIFIER", "confidence": 88 },
-      { "column": "traderId", "piiType": "DIRECT_IDENTIFIER", "confidence": 90 }
+      {
+        "column": "walletAddress",
+        "piiType": "DIRECT_IDENTIFIER",
+        "confidence": 88
+      },
+      {
+        "column": "traderId",
+        "piiType": "DIRECT_IDENTIFIER",
+        "confidence": 90
+      }
     ],
     "owner": "web3-platform-team",
     "team": "Web3",
     "domain": "Crypto Trading",
     "lastUpdated": "2024-11-15T00:00:00Z",
-    "tags": ["web3", "crypto", "trading", "blockchain", "defi", "pii"],
-    "lineage": { "upstreamDatasets": [], "transformationQuery": null, "description": "Direct source" },
-    "statistics": { "completeness": null, "qualityScore": null },
-    "publishedToCatalog": false
+    "tags": [
+      "web3",
+      "crypto",
+      "trading",
+      "blockchain",
+      "defi",
+      "pii"
+    ],
+    "lineage": {
+      "upstreamDatasets": [
+        "ds-002"
+      ],
+      "transformationQuery": "SELECT ct.*, ft.fraudScore FROM crypto_trades ct LEFT JOIN fin_transactions ft ON ct.traderId = ft.customerId",
+      "description": "Cross-referenced with financial transaction fraud scores"
+    },
+    "statistics": {
+      "completeness": 86,
+      "qualityScore": 73
+    },
+    "regulatoryFlags": [
+      "SOX"
+    ],
+    "businessContext": "Cryptocurrency trading records aggregated across multiple exchanges. Powers portfolio analytics, tax reporting, and compliance monitoring. Contains wallet addresses classified as PII under emerging regulations.",
+    "publishedToCatalog": true
   }
 ]

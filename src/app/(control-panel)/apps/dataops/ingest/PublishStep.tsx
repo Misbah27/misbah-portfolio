@@ -17,8 +17,10 @@ import Divider from '@mui/material/Divider';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import { useSnackbar } from 'notistack';
 import { motion } from 'motion/react';
-import type { WizardContext, DataClassification } from '../types';
+import type { WizardContext, DataClassification, DatasetCatalogEntry } from '../types';
 import { INDUSTRY_LABELS } from '../types';
+import catalogJson from '@/data/dataops/catalog.json';
+import { saveUserDataset, generateNextDatasetId } from '../catalog/userDatasetStore';
 
 interface PublishStepProps {
 	ctx: WizardContext;
@@ -47,15 +49,54 @@ const itemVariants = {
  */
 export default function PublishStep({ ctx, updateCtx, onBack }: PublishStepProps) {
 	const [published, setPublished] = useState(false);
+	const [publishing, setPublishing] = useState(false);
 	const { enqueueSnackbar } = useSnackbar();
 
 	const meta = ctx.generatedMetadata;
 	const quality = ctx.qualityReport;
 
-	const handlePublish = useCallback(() => {
-		setPublished(true);
-		enqueueSnackbar('Dataset published successfully!', { variant: 'success' });
-	}, [enqueueSnackbar]);
+	const handlePublish = useCallback(async () => {
+		if (!meta || !quality) return;
+		setPublishing(true);
+		try {
+			const classification = ctx.classificationOverride ?? meta.dataClassification;
+			const staticCatalog = catalogJson as DatasetCatalogEntry[];
+			const datasetId = generateNextDatasetId(staticCatalog);
+			const res = await fetch('/api/dataops/publish', {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify({
+					datasetId,
+					datasetName: ctx.datasetName,
+					industryTag: ctx.industryTag,
+					sqlQuery: ctx.sqlQuery,
+					schema: ctx.schema,
+					rowCount: ctx.rows.length,
+					qualityScore: quality.qualityScore,
+					completeness: quality.columnHealth
+						? Math.round(quality.columnHealth.reduce((s, c) => s + c.healthScore, 0) / quality.columnHealth.length)
+						: 90,
+					classification,
+					piiColumns: meta.piiColumns,
+					description: meta.datasetDescription,
+					businessContext: meta.businessContext,
+					lineage: meta.lineage,
+					regulatoryFlags: meta.regulatoryFlags,
+					owner: ctx.owner,
+					tags: [...ctx.tags, ...meta.suggestedTags],
+				}),
+			});
+			if (!res.ok) throw new Error('Publish failed');
+			const data = await res.json();
+			saveUserDataset(data.entry as DatasetCatalogEntry, ctx.rows);
+			setPublished(true);
+			enqueueSnackbar('Dataset published successfully!', { variant: 'success' });
+		} catch {
+			enqueueSnackbar('Failed to publish dataset. Please try again.', { variant: 'error' });
+		} finally {
+			setPublishing(false);
+		}
+	}, [ctx, meta, quality, enqueueSnackbar]);
 
 	if (!meta || !quality) {
 		return (
@@ -500,12 +541,13 @@ export default function PublishStep({ ctx, updateCtx, onBack }: PublishStepProps
 								variant="contained"
 								color="success"
 								onClick={handlePublish}
+								disabled={publishing}
 								size="large"
 								startIcon={
 									<FuseSvgIcon size={18}>heroicons-outline:rocket-launch</FuseSvgIcon>
 								}
 							>
-								Publish to Catalog
+								{publishing ? 'Publishing...' : 'Publish to Catalog'}
 							</Button>
 						</Box>
 					</motion.div>

@@ -18,6 +18,9 @@ import {
 } from './types';
 
 const Root = styled(FusePageSimple)(({ theme }) => ({
+	'&.FusePageSimple-scroll-content': {
+		height: '100%',
+	},
 	'& .FusePageSimple-header': {
 		backgroundColor: theme.vars.palette.background.paper,
 		borderBottomWidth: 1,
@@ -184,6 +187,7 @@ function InboundIQPage() {
 
 	return (
 		<Root
+			scroll="content"
 			header={
 				<InboundIQHeader
 					selectedFc={selectedFc}
