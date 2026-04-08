@@ -138,6 +138,32 @@ const navigationConfig: FuseNavItemType[] = [
 				url: '/apps/dataops/about'
 			}
 		]
+	},
+	{
+		id: 'lofat',
+		title: 'LoFAT',
+		type: 'collapse',
+		icon: 'heroicons-outline:shield-exclamation',
+		children: [
+			{
+				id: 'lofat-monitor',
+				title: 'Live Monitor',
+				type: 'item',
+				url: '/apps/lofat'
+			},
+			{
+				id: 'lofat-analytics',
+				title: 'Analytics',
+				type: 'item',
+				url: '/apps/lofat/analytics'
+			},
+			{
+				id: 'lofat-cases',
+				title: 'Cases',
+				type: 'item',
+				url: '/apps/lofat/cases'
+			}
+		]
 	}
 ];
 

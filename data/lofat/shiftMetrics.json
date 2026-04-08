@@ -1,0 +1,1442 @@
+[
+  {
+    "date": "2026-01-08",
+    "dailyActiveDrivers": 168,
+    "dailyFlaggedDrivers": 13,
+    "totalDeliveries": 1078,
+    "totalFraudAlerts": 21,
+    "patternBreakdown": {
+      "rosterAvoidance": 0,
+      "gpsSpoofing": 21,
+      "ghostDelivery": 0,
+      "phantomRoute": 0,
+      "clusterFraud": 0
+    },
+    "estimatedDailyLoss": 2646,
+    "preventedAmount": 601
+  },
+  {
+    "date": "2026-01-09",
+    "dailyActiveDrivers": 164,
+    "dailyFlaggedDrivers": 16,
+    "totalDeliveries": 910,
+    "totalFraudAlerts": 19,
+    "patternBreakdown": {
+      "rosterAvoidance": 11,
+      "gpsSpoofing": 6,
+      "ghostDelivery": 0,
+      "phantomRoute": 2,
+      "clusterFraud": 0
+    },
+    "estimatedDailyLoss": 2450,
+    "preventedAmount": 680
+  },
+  {
+    "date": "2026-01-10",
+    "dailyActiveDrivers": 173,
+    "dailyFlaggedDrivers": 14,
+    "totalDeliveries": 1037,
+    "totalFraudAlerts": 18,
+    "patternBreakdown": {
+      "rosterAvoidance": 1,
+      "gpsSpoofing": 5,
+      "ghostDelivery": 10,
+      "phantomRoute": 2,
+      "clusterFraud": 0
+    },
+    "estimatedDailyLoss": 2341,
+    "preventedAmount": 772
+  },
+  {
+    "date": "2026-01-11",
+    "dailyActiveDrivers": 159,
+    "dailyFlaggedDrivers": 15,
+    "totalDeliveries": 1173,
+    "totalFraudAlerts": 15,
+    "patternBreakdown": {
+      "rosterAvoidance": 5,
+      "gpsSpoofing": 10,
+      "ghostDelivery": 0,
+      "phantomRoute": 0,
+      "clusterFraud": 0
+    },
+    "estimatedDailyLoss": 2267,
+    "preventedAmount": 623
+  },
+  {
+    "date": "2026-01-12",
+    "dailyActiveDrivers": 164,
+    "dailyFlaggedDrivers": 14,
+    "totalDeliveries": 855,
+    "totalFraudAlerts": 20,
+    "patternBreakdown": {
+      "rosterAvoidance": 6,
+      "gpsSpoofing": 5,
+      "ghostDelivery": 0,
+      "phantomRoute": 4,
+      "clusterFraud": 5
+    },
+    "estimatedDailyLoss": 2309,
+    "preventedAmount": 759
+  },
+  {
+    "date": "2026-01-13",
+    "dailyActiveDrivers": 158,
+    "dailyFlaggedDrivers": 13,
+    "totalDeliveries": 954,
+    "totalFraudAlerts": 16,
+    "patternBreakdown": {
+      "rosterAvoidance": 14,
+      "gpsSpoofing": 0,
+      "ghostDelivery": 2,
+      "phantomRoute": 0,
+      "clusterFraud": 0
+    },
+    "estimatedDailyLoss": 2436,
+    "preventedAmount": 831
+  },
+  {
+    "date": "2026-01-14",
+    "dailyActiveDrivers": 165,
+    "dailyFlaggedDrivers": 15,
+    "totalDeliveries": 883,
+    "totalFraudAlerts": 17,
+    "patternBreakdown": {
+      "rosterAvoidance": 0,
+      "gpsSpoofing": 4,
+      "ghostDelivery": 4,
+      "phantomRoute": 0,
+      "clusterFraud": 9
+    },
+    "estimatedDailyLoss": 2495,
+    "preventedAmount": 593
+  },
+  {
+    "date": "2026-01-15",
+    "dailyActiveDrivers": 154,
+    "dailyFlaggedDrivers": 13,
+    "totalDeliveries": 1133,
+    "totalFraudAlerts": 14,
+    "patternBreakdown": {
+      "rosterAvoidance": 13,
+      "gpsSpoofing": 0,
+      "ghostDelivery": 1,
+      "phantomRoute": 0,
+      "clusterFraud": 0
+    },
+    "estimatedDailyLoss": 2311,
+    "preventedAmount": 717
+  },
+  {
+    "date": "2026-01-16",
+    "dailyActiveDrivers": 177,
+    "dailyFlaggedDrivers": 13,
+    "totalDeliveries": 1074,
+    "totalFraudAlerts": 15,
+    "patternBreakdown": {
+      "rosterAvoidance": 0,
+      "gpsSpoofing": 5,
+      "ghostDelivery": 1,
+      "phantomRoute": 7,
+      "clusterFraud": 2
+    },
+    "estimatedDailyLoss": 2564,
+    "preventedAmount": 747
+  },
+  {
+    "date": "2026-01-17",
+    "dailyActiveDrivers": 172,
+    "dailyFlaggedDrivers": 15,
+    "totalDeliveries": 1092,
+    "totalFraudAlerts": 20,
+    "patternBreakdown": {
+      "rosterAvoidance": 2,
+      "gpsSpoofing": 16,
+      "ghostDelivery": 0,
+      "phantomRoute": 0,
+      "clusterFraud": 2
+    },
+    "estimatedDailyLoss": 2189,
+    "preventedAmount": 754
+  },
+  {
+    "date": "2026-01-18",
+    "dailyActiveDrivers": 185,
+    "dailyFlaggedDrivers": 12,
+    "totalDeliveries": 858,
+    "totalFraudAlerts": 18,
+    "patternBreakdown": {
+      "rosterAvoidance": 16,
+      "gpsSpoofing": 1,
+      "ghostDelivery": 0,
+      "phantomRoute": 1,
+      "clusterFraud": 0
+    },
+    "estimatedDailyLoss": 2151,
+    "preventedAmount": 666
+  },
+  {
+    "date": "2026-01-19",
+    "dailyActiveDrivers": 162,
+    "dailyFlaggedDrivers": 12,
+    "totalDeliveries": 1031,
+    "totalFraudAlerts": 14,
+    "patternBreakdown": {
+      "rosterAvoidance": 9,
+      "gpsSpoofing": 0,
+      "ghostDelivery": 2,
+      "phantomRoute": 2,
+      "clusterFraud": 1
+    },
+    "estimatedDailyLoss": 2332,
+    "preventedAmount": 775
+  },
+  {
+    "date": "2026-01-20",
+    "dailyActiveDrivers": 169,
+    "dailyFlaggedDrivers": 12,
+    "totalDeliveries": 994,
+    "totalFraudAlerts": 19,
+    "patternBreakdown": {
+      "rosterAvoidance": 14,
+      "gpsSpoofing": 5,
+      "ghostDelivery": 0,
+      "phantomRoute": 0,
+      "clusterFraud": 0
+    },
+    "estimatedDailyLoss": 2174,
+    "preventedAmount": 905
+  },
+  {
+    "date": "2026-01-21",
+    "dailyActiveDrivers": 161,
+    "dailyFlaggedDrivers": 13,
+    "totalDeliveries": 1131,
+    "totalFraudAlerts": 14,
+    "patternBreakdown": {
+      "rosterAvoidance": 4,
+      "gpsSpoofing": 1,
+      "ghostDelivery": 3,
+      "phantomRoute": 0,
+      "clusterFraud": 6
+    },
+    "estimatedDailyLoss": 2220,
+    "preventedAmount": 901
+  },
+  {
+    "date": "2026-01-22",
+    "dailyActiveDrivers": 154,
+    "dailyFlaggedDrivers": 12,
+    "totalDeliveries": 1006,
+    "totalFraudAlerts": 16,
+    "patternBreakdown": {
+      "rosterAvoidance": 3,
+      "gpsSpoofing": 0,
+      "ghostDelivery": 7,
+      "phantomRoute": 1,
+      "clusterFraud": 5
+    },
+    "estimatedDailyLoss": 2217,
+    "preventedAmount": 739
+  },
+  {
+    "date": "2026-01-23",
+    "dailyActiveDrivers": 177,
+    "dailyFlaggedDrivers": 13,
+    "totalDeliveries": 1029,
+    "totalFraudAlerts": 15,
+    "patternBreakdown": {
+      "rosterAvoidance": 5,
+      "gpsSpoofing": 2,
+      "ghostDelivery": 8,
+      "phantomRoute": 0,
+      "clusterFraud": 0
+    },
+    "estimatedDailyLoss": 2071,
+    "preventedAmount": 774
+  },
+  {
+    "date": "2026-01-24",
+    "dailyActiveDrivers": 172,
+    "dailyFlaggedDrivers": 12,
+    "totalDeliveries": 1085,
+    "totalFraudAlerts": 17,
+    "patternBreakdown": {
+      "rosterAvoidance": 2,
+      "gpsSpoofing": 13,
+      "ghostDelivery": 1,
+      "phantomRoute": 0,
+      "clusterFraud": 1
+    },
+    "estimatedDailyLoss": 2241,
+    "preventedAmount": 917
+  },
+  {
+    "date": "2026-01-25",
+    "dailyActiveDrivers": 172,
+    "dailyFlaggedDrivers": 14,
+    "totalDeliveries": 923,
+    "totalFraudAlerts": 16,
+    "patternBreakdown": {
+      "rosterAvoidance": 12,
+      "gpsSpoofing": 1,
+      "ghostDelivery": 3,
+      "phantomRoute": 0,
+      "clusterFraud": 0
+    },
+    "estimatedDailyLoss": 2306,
+    "preventedAmount": 1001
+  },
+  {
+    "date": "2026-01-26",
+    "dailyActiveDrivers": 182,
+    "dailyFlaggedDrivers": 12,
+    "totalDeliveries": 934,
+    "totalFraudAlerts": 15,
+    "patternBreakdown": {
+      "rosterAvoidance": 3,
+      "gpsSpoofing": 0,
+      "ghostDelivery": 4,
+      "phantomRoute": 5,
+      "clusterFraud": 3
+    },
+    "estimatedDailyLoss": 2394,
+    "preventedAmount": 1071
+  },
+  {
+    "date": "2026-01-27",
+    "dailyActiveDrivers": 156,
+    "dailyFlaggedDrivers": 14,
+    "totalDeliveries": 1139,
+    "totalFraudAlerts": 18,
+    "patternBreakdown": {
+      "rosterAvoidance": 13,
+      "gpsSpoofing": 3,
+      "ghostDelivery": 1,
+      "phantomRoute": 0,
+      "clusterFraud": 1
+    },
+    "estimatedDailyLoss": 2052,
+    "preventedAmount": 930
+  },
+  {
+    "date": "2026-01-28",
+    "dailyActiveDrivers": 152,
+    "dailyFlaggedDrivers": 11,
+    "totalDeliveries": 1044,
+    "totalFraudAlerts": 16,
+    "patternBreakdown": {
+      "rosterAvoidance": 3,
+      "gpsSpoofing": 7,
+      "ghostDelivery": 4,
+      "phantomRoute": 0,
+      "clusterFraud": 2
+    },
+    "estimatedDailyLoss": 2181,
+    "preventedAmount": 875
+  },
+  {
+    "date": "2026-01-29",
+    "dailyActiveDrivers": 173,
+    "dailyFlaggedDrivers": 12,
+    "totalDeliveries": 804,
+    "totalFraudAlerts": 15,
+    "patternBreakdown": {
+      "rosterAvoidance": 13,
+      "gpsSpoofing": 1,
+      "ghostDelivery": 0,
+      "phantomRoute": 1,
+      "clusterFraud": 0
+    },
+    "estimatedDailyLoss": 2218,
+    "preventedAmount": 864
+  },
+  {
+    "date": "2026-01-30",
+    "dailyActiveDrivers": 166,
+    "dailyFlaggedDrivers": 11,
+    "totalDeliveries": 1152,
+    "totalFraudAlerts": 17,
+    "patternBreakdown": {
+      "rosterAvoidance": 0,
+      "gpsSpoofing": 8,
+      "ghostDelivery": 2,
+      "phantomRoute": 7,
+      "clusterFraud": 0
+    },
+    "estimatedDailyLoss": 2312,
+    "preventedAmount": 1088
+  },
+  {
+    "date": "2026-01-31",
+    "dailyActiveDrivers": 184,
+    "dailyFlaggedDrivers": 10,
+    "totalDeliveries": 1137,
+    "totalFraudAlerts": 18,
+    "patternBreakdown": {
+      "rosterAvoidance": 18,
+      "gpsSpoofing": 0,
+      "ghostDelivery": 0,
+      "phantomRoute": 0,
+      "clusterFraud": 0
+    },
+    "estimatedDailyLoss": 2282,
+    "preventedAmount": 887
+  },
+  {
+    "date": "2026-02-01",
+    "dailyActiveDrivers": 155,
+    "dailyFlaggedDrivers": 14,
+    "totalDeliveries": 995,
+    "totalFraudAlerts": 13,
+    "patternBreakdown": {
+      "rosterAvoidance": 7,
+      "gpsSpoofing": 0,
+      "ghostDelivery": 6,
+      "phantomRoute": 0,
+      "clusterFraud": 0
+    },
+    "estimatedDailyLoss": 2255,
+    "preventedAmount": 915
+  },
+  {
+    "date": "2026-02-02",
+    "dailyActiveDrivers": 185,
+    "dailyFlaggedDrivers": 11,
+    "totalDeliveries": 820,
+    "totalFraudAlerts": 17,
+    "patternBreakdown": {
+      "rosterAvoidance": 3,
+      "gpsSpoofing": 10,
+      "ghostDelivery": 4,
+      "phantomRoute": 0,
+      "clusterFraud": 0
+    },
+    "estimatedDailyLoss": 2203,
+    "preventedAmount": 984
+  },
+  {
+    "date": "2026-02-03",
+    "dailyActiveDrivers": 182,
+    "dailyFlaggedDrivers": 11,
+    "totalDeliveries": 1179,
+    "totalFraudAlerts": 17,
+    "patternBreakdown": {
+      "rosterAvoidance": 12,
+      "gpsSpoofing": 4,
+      "ghostDelivery": 0,
+      "phantomRoute": 0,
+      "clusterFraud": 1
+    },
+    "estimatedDailyLoss": 2172,
+    "preventedAmount": 1204
+  },
+  {
+    "date": "2026-02-04",
+    "dailyActiveDrivers": 158,
+    "dailyFlaggedDrivers": 13,
+    "totalDeliveries": 1107,
+    "totalFraudAlerts": 15,
+    "patternBreakdown": {
+      "rosterAvoidance": 1,
+      "gpsSpoofing": 8,
+      "ghostDelivery": 1,
+      "phantomRoute": 5,
+      "clusterFraud": 0
+    },
+    "estimatedDailyLoss": 2068,
+    "preventedAmount": 1001
+  },
+  {
+    "date": "2026-02-05",
+    "dailyActiveDrivers": 161,
+    "dailyFlaggedDrivers": 12,
+    "totalDeliveries": 1068,
+    "totalFraudAlerts": 14,
+    "patternBreakdown": {
+      "rosterAvoidance": 4,
+      "gpsSpoofing": 0,
+      "ghostDelivery": 5,
+      "phantomRoute": 0,
+      "clusterFraud": 5
+    },
+    "estimatedDailyLoss": 2085,
+    "preventedAmount": 1186
+  },
+  {
+    "date": "2026-02-06",
+    "dailyActiveDrivers": 173,
+    "dailyFlaggedDrivers": 11,
+    "totalDeliveries": 1084,
+    "totalFraudAlerts": 15,
+    "patternBreakdown": {
+      "rosterAvoidance": 8,
+      "gpsSpoofing": 0,
+      "ghostDelivery": 0,
+      "phantomRoute": 6,
+      "clusterFraud": 1
+    },
+    "estimatedDailyLoss": 2184,
+    "preventedAmount": 1024
+  },
+  {
+    "date": "2026-02-07",
+    "dailyActiveDrivers": 185,
+    "dailyFlaggedDrivers": 10,
+    "totalDeliveries": 903,
+    "totalFraudAlerts": 12,
+    "patternBreakdown": {
+      "rosterAvoidance": 0,
+      "gpsSpoofing": 6,
+      "ghostDelivery": 4,
+      "phantomRoute": 2,
+      "clusterFraud": 0
+    },
+    "estimatedDailyLoss": 1935,
+    "preventedAmount": 1023
+  },
+  {
+    "date": "2026-02-08",
+    "dailyActiveDrivers": 175,
+    "dailyFlaggedDrivers": 12,
+    "totalDeliveries": 818,
+    "totalFraudAlerts": 15,
+    "patternBreakdown": {
+      "rosterAvoidance": 14,
+      "gpsSpoofing": 0,
+      "ghostDelivery": 1,
+      "phantomRoute": 0,
+      "clusterFraud": 0
+    },
+    "estimatedDailyLoss": 1965,
+    "preventedAmount": 1051
+  },
+  {
+    "date": "2026-02-09",
+    "dailyActiveDrivers": 164,
+    "dailyFlaggedDrivers": 10,
+    "totalDeliveries": 1193,
+    "totalFraudAlerts": 12,
+    "patternBreakdown": {
+      "rosterAvoidance": 10,
+      "gpsSpoofing": 0,
+      "ghostDelivery": 2,
+      "phantomRoute": 0,
+      "clusterFraud": 0
+    },
+    "estimatedDailyLoss": 1967,
+    "preventedAmount": 1181
+  },
+  {
+    "date": "2026-02-10",
+    "dailyActiveDrivers": 150,
+    "dailyFlaggedDrivers": 10,
+    "totalDeliveries": 1168,
+    "totalFraudAlerts": 13,
+    "patternBreakdown": {
+      "rosterAvoidance": 0,
+      "gpsSpoofing": 9,
+      "ghostDelivery": 1,
+      "phantomRoute": 0,
+      "clusterFraud": 3
+    },
+    "estimatedDailyLoss": 1794,
+    "preventedAmount": 1134
+  },
+  {
+    "date": "2026-02-11",
+    "dailyActiveDrivers": 160,
+    "dailyFlaggedDrivers": 11,
+    "totalDeliveries": 1055,
+    "totalFraudAlerts": 14,
+    "patternBreakdown": {
+      "rosterAvoidance": 0,
+      "gpsSpoofing": 12,
+      "ghostDelivery": 2,
+      "phantomRoute": 0,
+      "clusterFraud": 0
+    },
+    "estimatedDailyLoss": 2080,
+    "preventedAmount": 1128
+  },
+  {
+    "date": "2026-02-12",
+    "dailyActiveDrivers": 162,
+    "dailyFlaggedDrivers": 13,
+    "totalDeliveries": 1120,
+    "totalFraudAlerts": 11,
+    "patternBreakdown": {
+      "rosterAvoidance": 9,
+      "gpsSpoofing": 1,
+      "ghostDelivery": 1,
+      "phantomRoute": 0,
+      "clusterFraud": 0
+    },
+    "estimatedDailyLoss": 1724,
+    "preventedAmount": 1295
+  },
+  {
+    "date": "2026-02-13",
+    "dailyActiveDrivers": 167,
+    "dailyFlaggedDrivers": 13,
+    "totalDeliveries": 976,
+    "totalFraudAlerts": 15,
+    "patternBreakdown": {
+      "rosterAvoidance": 5,
+      "gpsSpoofing": 5,
+      "ghostDelivery": 2,
+      "phantomRoute": 3,
+      "clusterFraud": 0
+    },
+    "estimatedDailyLoss": 2004,
+    "preventedAmount": 1292
+  },
+  {
+    "date": "2026-02-14",
+    "dailyActiveDrivers": 183,
+    "dailyFlaggedDrivers": 9,
+    "totalDeliveries": 1052,
+    "totalFraudAlerts": 13,
+    "patternBreakdown": {
+      "rosterAvoidance": 6,
+      "gpsSpoofing": 3,
+      "ghostDelivery": 1,
+      "phantomRoute": 3,
+      "clusterFraud": 0
+    },
+    "estimatedDailyLoss": 2050,
+    "preventedAmount": 1294
+  },
+  {
+    "date": "2026-02-15",
+    "dailyActiveDrivers": 155,
+    "dailyFlaggedDrivers": 12,
+    "totalDeliveries": 934,
+    "totalFraudAlerts": 11,
+    "patternBreakdown": {
+      "rosterAvoidance": 5,
+      "gpsSpoofing": 6,
+      "ghostDelivery": 0,
+      "phantomRoute": 0,
+      "clusterFraud": 0
+    },
+    "estimatedDailyLoss": 1895,
+    "preventedAmount": 1288
+  },
+  {
+    "date": "2026-02-16",
+    "dailyActiveDrivers": 175,
+    "dailyFlaggedDrivers": 11,
+    "totalDeliveries": 1130,
+    "totalFraudAlerts": 12,
+    "patternBreakdown": {
+      "rosterAvoidance": 5,
+      "gpsSpoofing": 1,
+      "ghostDelivery": 0,
+      "phantomRoute": 0,
+      "clusterFraud": 6
+    },
+    "estimatedDailyLoss": 1731,
+    "preventedAmount": 1420
+  },
+  {
+    "date": "2026-02-17",
+    "dailyActiveDrivers": 184,
+    "dailyFlaggedDrivers": 10,
+    "totalDeliveries": 899,
+    "totalFraudAlerts": 10,
+    "patternBreakdown": {
+      "rosterAvoidance": 3,
+      "gpsSpoofing": 4,
+      "ghostDelivery": 1,
+      "phantomRoute": 2,
+      "clusterFraud": 0
+    },
+    "estimatedDailyLoss": 1684,
+    "preventedAmount": 1251
+  },
+  {
+    "date": "2026-02-18",
+    "dailyActiveDrivers": 177,
+    "dailyFlaggedDrivers": 9,
+    "totalDeliveries": 941,
+    "totalFraudAlerts": 14,
+    "patternBreakdown": {
+      "rosterAvoidance": 11,
+      "gpsSpoofing": 0,
+      "ghostDelivery": 1,
+      "phantomRoute": 0,
+      "clusterFraud": 2
+    },
+    "estimatedDailyLoss": 1886,
+    "preventedAmount": 1214
+  },
+  {
+    "date": "2026-02-19",
+    "dailyActiveDrivers": 172,
+    "dailyFlaggedDrivers": 9,
+    "totalDeliveries": 930,
+    "totalFraudAlerts": 12,
+    "patternBreakdown": {
+      "rosterAvoidance": 12,
+      "gpsSpoofing": 0,
+      "ghostDelivery": 0,
+      "phantomRoute": 0,
+      "clusterFraud": 0
+    },
+    "estimatedDailyLoss": 1666,
+    "preventedAmount": 1234
+  },
+  {
+    "date": "2026-02-20",
+    "dailyActiveDrivers": 154,
+    "dailyFlaggedDrivers": 8,
+    "totalDeliveries": 1151,
+    "totalFraudAlerts": 14,
+    "patternBreakdown": {
+      "rosterAvoidance": 9,
+      "gpsSpoofing": 0,
+      "ghostDelivery": 5,
+      "phantomRoute": 0,
+      "clusterFraud": 0
+    },
+    "estimatedDailyLoss": 1640,
+    "preventedAmount": 1407
+  },
+  {
+    "date": "2026-02-21",
+    "dailyActiveDrivers": 159,
+    "dailyFlaggedDrivers": 12,
+    "totalDeliveries": 1129,
+    "totalFraudAlerts": 12,
+    "patternBreakdown": {
+      "rosterAvoidance": 10,
+      "gpsSpoofing": 2,
+      "ghostDelivery": 0,
+      "phantomRoute": 0,
+      "clusterFraud": 0
+    },
+    "estimatedDailyLoss": 1654,
+    "preventedAmount": 1258
+  },
+  {
+    "date": "2026-02-22",
+    "dailyActiveDrivers": 181,
+    "dailyFlaggedDrivers": 9,
+    "totalDeliveries": 1135,
+    "totalFraudAlerts": 13,
+    "patternBreakdown": {
+      "rosterAvoidance": 12,
+      "gpsSpoofing": 0,
+      "ghostDelivery": 1,
+      "phantomRoute": 0,
+      "clusterFraud": 0
+    },
+    "estimatedDailyLoss": 1670,
+    "preventedAmount": 1397
+  },
+  {
+    "date": "2026-02-23",
+    "dailyActiveDrivers": 155,
+    "dailyFlaggedDrivers": 9,
+    "totalDeliveries": 911,
+    "totalFraudAlerts": 14,
+    "patternBreakdown": {
+      "rosterAvoidance": 4,
+      "gpsSpoofing": 8,
+      "ghostDelivery": 2,
+      "phantomRoute": 0,
+      "clusterFraud": 0
+    },
+    "estimatedDailyLoss": 1907,
+    "preventedAmount": 1568
+  },
+  {
+    "date": "2026-02-24",
+    "dailyActiveDrivers": 171,
+    "dailyFlaggedDrivers": 9,
+    "totalDeliveries": 1094,
+    "totalFraudAlerts": 12,
+    "patternBreakdown": {
+      "rosterAvoidance": 3,
+      "gpsSpoofing": 8,
+      "ghostDelivery": 0,
+      "phantomRoute": 1,
+      "clusterFraud": 0
+    },
+    "estimatedDailyLoss": 1561,
+    "preventedAmount": 1590
+  },
+  {
+    "date": "2026-02-25",
+    "dailyActiveDrivers": 183,
+    "dailyFlaggedDrivers": 11,
+    "totalDeliveries": 1159,
+    "totalFraudAlerts": 9,
+    "patternBreakdown": {
+      "rosterAvoidance": 4,
+      "gpsSpoofing": 1,
+      "ghostDelivery": 2,
+      "phantomRoute": 2,
+      "clusterFraud": 0
+    },
+    "estimatedDailyLoss": 1743,
+    "preventedAmount": 1397
+  },
+  {
+    "date": "2026-02-26",
+    "dailyActiveDrivers": 162,
+    "dailyFlaggedDrivers": 8,
+    "totalDeliveries": 880,
+    "totalFraudAlerts": 9,
+    "patternBreakdown": {
+      "rosterAvoidance": 1,
+      "gpsSpoofing": 0,
+      "ghostDelivery": 3,
+      "phantomRoute": 1,
+      "clusterFraud": 4
+    },
+    "estimatedDailyLoss": 1740,
+    "preventedAmount": 1432
+  },
+  {
+    "date": "2026-02-27",
+    "dailyActiveDrivers": 165,
+    "dailyFlaggedDrivers": 9,
+    "totalDeliveries": 853,
+    "totalFraudAlerts": 10,
+    "patternBreakdown": {
+      "rosterAvoidance": 1,
+      "gpsSpoofing": 5,
+      "ghostDelivery": 3,
+      "phantomRoute": 0,
+      "clusterFraud": 1
+    },
+    "estimatedDailyLoss": 1650,
+    "preventedAmount": 1544
+  },
+  {
+    "date": "2026-02-28",
+    "dailyActiveDrivers": 170,
+    "dailyFlaggedDrivers": 8,
+    "totalDeliveries": 875,
+    "totalFraudAlerts": 13,
+    "patternBreakdown": {
+      "rosterAvoidance": 13,
+      "gpsSpoofing": 0,
+      "ghostDelivery": 0,
+      "phantomRoute": 0,
+      "clusterFraud": 0
+    },
+    "estimatedDailyLoss": 1670,
+    "preventedAmount": 1550
+  },
+  {
+    "date": "2026-03-01",
+    "dailyActiveDrivers": 156,
+    "dailyFlaggedDrivers": 8,
+    "totalDeliveries": 988,
+    "totalFraudAlerts": 11,
+    "patternBreakdown": {
+      "rosterAvoidance": 4,
+      "gpsSpoofing": 0,
+      "ghostDelivery": 1,
+      "phantomRoute": 6,
+      "clusterFraud": 0
+    },
+    "estimatedDailyLoss": 1684,
+    "preventedAmount": 1400
+  },
+  {
+    "date": "2026-03-02",
+    "dailyActiveDrivers": 152,
+    "dailyFlaggedDrivers": 10,
+    "totalDeliveries": 1073,
+    "totalFraudAlerts": 14,
+    "patternBreakdown": {
+      "rosterAvoidance": 9,
+      "gpsSpoofing": 4,
+      "ghostDelivery": 0,
+      "phantomRoute": 1,
+      "clusterFraud": 0
+    },
+    "estimatedDailyLoss": 1598,
+    "preventedAmount": 1522
+  },
+  {
+    "date": "2026-03-03",
+    "dailyActiveDrivers": 150,
+    "dailyFlaggedDrivers": 8,
+    "totalDeliveries": 1083,
+    "totalFraudAlerts": 8,
+    "patternBreakdown": {
+      "rosterAvoidance": 5,
+      "gpsSpoofing": 3,
+      "ghostDelivery": 0,
+      "phantomRoute": 0,
+      "clusterFraud": 0
+    },
+    "estimatedDailyLoss": 1467,
+    "preventedAmount": 1606
+  },
+  {
+    "date": "2026-03-04",
+    "dailyActiveDrivers": 163,
+    "dailyFlaggedDrivers": 8,
+    "totalDeliveries": 807,
+    "totalFraudAlerts": 8,
+    "patternBreakdown": {
+      "rosterAvoidance": 8,
+      "gpsSpoofing": 0,
+      "ghostDelivery": 0,
+      "phantomRoute": 0,
+      "clusterFraud": 0
+    },
+    "estimatedDailyLoss": 1650,
+    "preventedAmount": 1485
+  },
+  {
+    "date": "2026-03-05",
+    "dailyActiveDrivers": 163,
+    "dailyFlaggedDrivers": 10,
+    "totalDeliveries": 960,
+    "totalFraudAlerts": 11,
+    "patternBreakdown": {
+      "rosterAvoidance": 7,
+      "gpsSpoofing": 2,
+      "ghostDelivery": 2,
+      "phantomRoute": 0,
+      "clusterFraud": 0
+    },
+    "estimatedDailyLoss": 1431,
+    "preventedAmount": 1497
+  },
+  {
+    "date": "2026-03-06",
+    "dailyActiveDrivers": 154,
+    "dailyFlaggedDrivers": 7,
+    "totalDeliveries": 1164,
+    "totalFraudAlerts": 13,
+    "patternBreakdown": {
+      "rosterAvoidance": 3,
+      "gpsSpoofing": 4,
+      "ghostDelivery": 5,
+      "phantomRoute": 1,
+      "clusterFraud": 0
+    },
+    "estimatedDailyLoss": 1554,
+    "preventedAmount": 1705
+  },
+  {
+    "date": "2026-03-07",
+    "dailyActiveDrivers": 161,
+    "dailyFlaggedDrivers": 9,
+    "totalDeliveries": 1148,
+    "totalFraudAlerts": 12,
+    "patternBreakdown": {
+      "rosterAvoidance": 4,
+      "gpsSpoofing": 2,
+      "ghostDelivery": 4,
+      "phantomRoute": 1,
+      "clusterFraud": 1
+    },
+    "estimatedDailyLoss": 1666,
+    "preventedAmount": 1606
+  },
+  {
+    "date": "2026-03-08",
+    "dailyActiveDrivers": 158,
+    "dailyFlaggedDrivers": 9,
+    "totalDeliveries": 822,
+    "totalFraudAlerts": 11,
+    "patternBreakdown": {
+      "rosterAvoidance": 2,
+      "gpsSpoofing": 6,
+      "ghostDelivery": 1,
+      "phantomRoute": 1,
+      "clusterFraud": 1
+    },
+    "estimatedDailyLoss": 1634,
+    "preventedAmount": 1655
+  },
+  {
+    "date": "2026-03-09",
+    "dailyActiveDrivers": 181,
+    "dailyFlaggedDrivers": 10,
+    "totalDeliveries": 1021,
+    "totalFraudAlerts": 11,
+    "patternBreakdown": {
+      "rosterAvoidance": 6,
+      "gpsSpoofing": 0,
+      "ghostDelivery": 0,
+      "phantomRoute": 5,
+      "clusterFraud": 0
+    },
+    "estimatedDailyLoss": 1435,
+    "preventedAmount": 1627
+  },
+  {
+    "date": "2026-03-10",
+    "dailyActiveDrivers": 185,
+    "dailyFlaggedDrivers": 9,
+    "totalDeliveries": 970,
+    "totalFraudAlerts": 7,
+    "patternBreakdown": {
+      "rosterAvoidance": 6,
+      "gpsSpoofing": 1,
+      "ghostDelivery": 0,
+      "phantomRoute": 0,
+      "clusterFraud": 0
+    },
+    "estimatedDailyLoss": 1352,
+    "preventedAmount": 1799
+  },
+  {
+    "date": "2026-03-11",
+    "dailyActiveDrivers": 155,
+    "dailyFlaggedDrivers": 9,
+    "totalDeliveries": 848,
+    "totalFraudAlerts": 10,
+    "patternBreakdown": {
+      "rosterAvoidance": 8,
+      "gpsSpoofing": 1,
+      "ghostDelivery": 0,
+      "phantomRoute": 0,
+      "clusterFraud": 1
+    },
+    "estimatedDailyLoss": 1610,
+    "preventedAmount": 1814
+  },
+  {
+    "date": "2026-03-12",
+    "dailyActiveDrivers": 155,
+    "dailyFlaggedDrivers": 9,
+    "totalDeliveries": 953,
+    "totalFraudAlerts": 7,
+    "patternBreakdown": {
+      "rosterAvoidance": 2,
+      "gpsSpoofing": 3,
+      "ghostDelivery": 0,
+      "phantomRoute": 2,
+      "clusterFraud": 0
+    },
+    "estimatedDailyLoss": 1510,
+    "preventedAmount": 1815
+  },
+  {
+    "date": "2026-03-13",
+    "dailyActiveDrivers": 176,
+    "dailyFlaggedDrivers": 8,
+    "totalDeliveries": 1045,
+    "totalFraudAlerts": 8,
+    "patternBreakdown": {
+      "rosterAvoidance": 1,
+      "gpsSpoofing": 0,
+      "ghostDelivery": 4,
+      "phantomRoute": 2,
+      "clusterFraud": 1
+    },
+    "estimatedDailyLoss": 1357,
+    "preventedAmount": 1761
+  },
+  {
+    "date": "2026-03-14",
+    "dailyActiveDrivers": 160,
+    "dailyFlaggedDrivers": 6,
+    "totalDeliveries": 1034,
+    "totalFraudAlerts": 7,
+    "patternBreakdown": {
+      "rosterAvoidance": 6,
+      "gpsSpoofing": 0,
+      "ghostDelivery": 1,
+      "phantomRoute": 0,
+      "clusterFraud": 0
+    },
+    "estimatedDailyLoss": 1550,
+    "preventedAmount": 1901
+  },
+  {
+    "date": "2026-03-15",
+    "dailyActiveDrivers": 182,
+    "dailyFlaggedDrivers": 10,
+    "totalDeliveries": 896,
+    "totalFraudAlerts": 11,
+    "patternBreakdown": {
+      "rosterAvoidance": 6,
+      "gpsSpoofing": 2,
+      "ghostDelivery": 0,
+      "phantomRoute": 3,
+      "clusterFraud": 0
+    },
+    "estimatedDailyLoss": 1394,
+    "preventedAmount": 1734
+  },
+  {
+    "date": "2026-03-16",
+    "dailyActiveDrivers": 163,
+    "dailyFlaggedDrivers": 8,
+    "totalDeliveries": 873,
+    "totalFraudAlerts": 9,
+    "patternBreakdown": {
+      "rosterAvoidance": 9,
+      "gpsSpoofing": 0,
+      "ghostDelivery": 0,
+      "phantomRoute": 0,
+      "clusterFraud": 0
+    },
+    "estimatedDailyLoss": 1561,
+    "preventedAmount": 1696
+  },
+  {
+    "date": "2026-03-17",
+    "dailyActiveDrivers": 150,
+    "dailyFlaggedDrivers": 7,
+    "totalDeliveries": 870,
+    "totalFraudAlerts": 7,
+    "patternBreakdown": {
+      "rosterAvoidance": 1,
+      "gpsSpoofing": 5,
+      "ghostDelivery": 0,
+      "phantomRoute": 0,
+      "clusterFraud": 1
+    },
+    "estimatedDailyLoss": 1479,
+    "preventedAmount": 1934
+  },
+  {
+    "date": "2026-03-18",
+    "dailyActiveDrivers": 178,
+    "dailyFlaggedDrivers": 7,
+    "totalDeliveries": 1053,
+    "totalFraudAlerts": 9,
+    "patternBreakdown": {
+      "rosterAvoidance": 8,
+      "gpsSpoofing": 1,
+      "ghostDelivery": 0,
+      "phantomRoute": 0,
+      "clusterFraud": 0
+    },
+    "estimatedDailyLoss": 1404,
+    "preventedAmount": 1737
+  },
+  {
+    "date": "2026-03-19",
+    "dailyActiveDrivers": 168,
+    "dailyFlaggedDrivers": 9,
+    "totalDeliveries": 1048,
+    "totalFraudAlerts": 7,
+    "patternBreakdown": {
+      "rosterAvoidance": 2,
+      "gpsSpoofing": 0,
+      "ghostDelivery": 1,
+      "phantomRoute": 2,
+      "clusterFraud": 2
+    },
+    "estimatedDailyLoss": 1129,
+    "preventedAmount": 1895
+  },
+  {
+    "date": "2026-03-20",
+    "dailyActiveDrivers": 166,
+    "dailyFlaggedDrivers": 9,
+    "totalDeliveries": 924,
+    "totalFraudAlerts": 10,
+    "patternBreakdown": {
+      "rosterAvoidance": 5,
+      "gpsSpoofing": 4,
+      "ghostDelivery": 1,
+      "phantomRoute": 0,
+      "clusterFraud": 0
+    },
+    "estimatedDailyLoss": 1168,
+    "preventedAmount": 1927
+  },
+  {
+    "date": "2026-03-21",
+    "dailyActiveDrivers": 168,
+    "dailyFlaggedDrivers": 8,
+    "totalDeliveries": 1145,
+    "totalFraudAlerts": 10,
+    "patternBreakdown": {
+      "rosterAvoidance": 1,
+      "gpsSpoofing": 6,
+      "ghostDelivery": 0,
+      "phantomRoute": 3,
+      "clusterFraud": 0
+    },
+    "estimatedDailyLoss": 1332,
+    "preventedAmount": 1945
+  },
+  {
+    "date": "2026-03-22",
+    "dailyActiveDrivers": 175,
+    "dailyFlaggedDrivers": 6,
+    "totalDeliveries": 1147,
+    "totalFraudAlerts": 10,
+    "patternBreakdown": {
+      "rosterAvoidance": 0,
+      "gpsSpoofing": 10,
+      "ghostDelivery": 0,
+      "phantomRoute": 0,
+      "clusterFraud": 0
+    },
+    "estimatedDailyLoss": 1211,
+    "preventedAmount": 2024
+  },
+  {
+    "date": "2026-03-23",
+    "dailyActiveDrivers": 151,
+    "dailyFlaggedDrivers": 7,
+    "totalDeliveries": 877,
+    "totalFraudAlerts": 8,
+    "patternBreakdown": {
+      "rosterAvoidance": 7,
+      "gpsSpoofing": 1,
+      "ghostDelivery": 0,
+      "phantomRoute": 0,
+      "clusterFraud": 0
+    },
+    "estimatedDailyLoss": 1183,
+    "preventedAmount": 2002
+  },
+  {
+    "date": "2026-03-24",
+    "dailyActiveDrivers": 184,
+    "dailyFlaggedDrivers": 8,
+    "totalDeliveries": 1005,
+    "totalFraudAlerts": 7,
+    "patternBreakdown": {
+      "rosterAvoidance": 0,
+      "gpsSpoofing": 1,
+      "ghostDelivery": 1,
+      "phantomRoute": 2,
+      "clusterFraud": 3
+    },
+    "estimatedDailyLoss": 1205,
+    "preventedAmount": 1979
+  },
+  {
+    "date": "2026-03-25",
+    "dailyActiveDrivers": 162,
+    "dailyFlaggedDrivers": 7,
+    "totalDeliveries": 907,
+    "totalFraudAlerts": 10,
+    "patternBreakdown": {
+      "rosterAvoidance": 2,
+      "gpsSpoofing": 2,
+      "ghostDelivery": 5,
+      "phantomRoute": 0,
+      "clusterFraud": 1
+    },
+    "estimatedDailyLoss": 1080,
+    "preventedAmount": 2055
+  },
+  {
+    "date": "2026-03-26",
+    "dailyActiveDrivers": 161,
+    "dailyFlaggedDrivers": 7,
+    "totalDeliveries": 869,
+    "totalFraudAlerts": 8,
+    "patternBreakdown": {
+      "rosterAvoidance": 5,
+      "gpsSpoofing": 1,
+      "ghostDelivery": 0,
+      "phantomRoute": 0,
+      "clusterFraud": 2
+    },
+    "estimatedDailyLoss": 1167,
+    "preventedAmount": 1930
+  },
+  {
+    "date": "2026-03-27",
+    "dailyActiveDrivers": 184,
+    "dailyFlaggedDrivers": 9,
+    "totalDeliveries": 1075,
+    "totalFraudAlerts": 7,
+    "patternBreakdown": {
+      "rosterAvoidance": 3,
+      "gpsSpoofing": 1,
+      "ghostDelivery": 0,
+      "phantomRoute": 2,
+      "clusterFraud": 1
+    },
+    "estimatedDailyLoss": 1359,
+    "preventedAmount": 1966
+  },
+  {
+    "date": "2026-03-28",
+    "dailyActiveDrivers": 179,
+    "dailyFlaggedDrivers": 7,
+    "totalDeliveries": 869,
+    "totalFraudAlerts": 9,
+    "patternBreakdown": {
+      "rosterAvoidance": 5,
+      "gpsSpoofing": 0,
+      "ghostDelivery": 1,
+      "phantomRoute": 1,
+      "clusterFraud": 2
+    },
+    "estimatedDailyLoss": 1007,
+    "preventedAmount": 1932
+  },
+  {
+    "date": "2026-03-29",
+    "dailyActiveDrivers": 161,
+    "dailyFlaggedDrivers": 6,
+    "totalDeliveries": 1167,
+    "totalFraudAlerts": 6,
+    "patternBreakdown": {
+      "rosterAvoidance": 0,
+      "gpsSpoofing": 6,
+      "ghostDelivery": 0,
+      "phantomRoute": 0,
+      "clusterFraud": 0
+    },
+    "estimatedDailyLoss": 1073,
+    "preventedAmount": 2053
+  },
+  {
+    "date": "2026-03-30",
+    "dailyActiveDrivers": 160,
+    "dailyFlaggedDrivers": 8,
+    "totalDeliveries": 926,
+    "totalFraudAlerts": 10,
+    "patternBreakdown": {
+      "rosterAvoidance": 8,
+      "gpsSpoofing": 2,
+      "ghostDelivery": 0,
+      "phantomRoute": 0,
+      "clusterFraud": 0
+    },
+    "estimatedDailyLoss": 1289,
+    "preventedAmount": 2042
+  },
+  {
+    "date": "2026-03-31",
+    "dailyActiveDrivers": 172,
+    "dailyFlaggedDrivers": 8,
+    "totalDeliveries": 970,
+    "totalFraudAlerts": 10,
+    "patternBreakdown": {
+      "rosterAvoidance": 2,
+      "gpsSpoofing": 3,
+      "ghostDelivery": 3,
+      "phantomRoute": 1,
+      "clusterFraud": 1
+    },
+    "estimatedDailyLoss": 1250,
+    "preventedAmount": 1938
+  },
+  {
+    "date": "2026-04-01",
+    "dailyActiveDrivers": 162,
+    "dailyFlaggedDrivers": 5,
+    "totalDeliveries": 910,
+    "totalFraudAlerts": 8,
+    "patternBreakdown": {
+      "rosterAvoidance": 8,
+      "gpsSpoofing": 0,
+      "ghostDelivery": 0,
+      "phantomRoute": 0,
+      "clusterFraud": 0
+    },
+    "estimatedDailyLoss": 1220,
+    "preventedAmount": 2053
+  },
+  {
+    "date": "2026-04-02",
+    "dailyActiveDrivers": 163,
+    "dailyFlaggedDrivers": 7,
+    "totalDeliveries": 1074,
+    "totalFraudAlerts": 7,
+    "patternBreakdown": {
+      "rosterAvoidance": 2,
+      "gpsSpoofing": 3,
+      "ghostDelivery": 1,
+      "phantomRoute": 0,
+      "clusterFraud": 1
+    },
+    "estimatedDailyLoss": 952,
+    "preventedAmount": 2082
+  },
+  {
+    "date": "2026-04-03",
+    "dailyActiveDrivers": 178,
+    "dailyFlaggedDrivers": 7,
+    "totalDeliveries": 989,
+    "totalFraudAlerts": 9,
+    "patternBreakdown": {
+      "rosterAvoidance": 2,
+      "gpsSpoofing": 6,
+      "ghostDelivery": 0,
+      "phantomRoute": 0,
+      "clusterFraud": 1
+    },
+    "estimatedDailyLoss": 1146,
+    "preventedAmount": 2067
+  },
+  {
+    "date": "2026-04-04",
+    "dailyActiveDrivers": 174,
+    "dailyFlaggedDrivers": 6,
+    "totalDeliveries": 845,
+    "totalFraudAlerts": 7,
+    "patternBreakdown": {
+      "rosterAvoidance": 6,
+      "gpsSpoofing": 0,
+      "ghostDelivery": 0,
+      "phantomRoute": 0,
+      "clusterFraud": 1
+    },
+    "estimatedDailyLoss": 1006,
+    "preventedAmount": 2254
+  },
+  {
+    "date": "2026-04-05",
+    "dailyActiveDrivers": 181,
+    "dailyFlaggedDrivers": 7,
+    "totalDeliveries": 838,
+    "totalFraudAlerts": 7,
+    "patternBreakdown": {
+      "rosterAvoidance": 6,
+      "gpsSpoofing": 1,
+      "ghostDelivery": 0,
+      "phantomRoute": 0,
+      "clusterFraud": 0
+    },
+    "estimatedDailyLoss": 1020,
+    "preventedAmount": 2175
+  },
+  {
+    "date": "2026-04-06",
+    "dailyActiveDrivers": 168,
+    "dailyFlaggedDrivers": 7,
+    "totalDeliveries": 879,
+    "totalFraudAlerts": 7,
+    "patternBreakdown": {
+      "rosterAvoidance": 3,
+      "gpsSpoofing": 0,
+      "ghostDelivery": 0,
+      "phantomRoute": 3,
+      "clusterFraud": 1
+    },
+    "estimatedDailyLoss": 1081,
+    "preventedAmount": 2151
+  },
+  {
+    "date": "2026-04-07",
+    "dailyActiveDrivers": 181,
+    "dailyFlaggedDrivers": 7,
+    "totalDeliveries": 835,
+    "totalFraudAlerts": 7,
+    "patternBreakdown": {
+      "rosterAvoidance": 5,
+      "gpsSpoofing": 0,
+      "ghostDelivery": 2,
+      "phantomRoute": 0,
+      "clusterFraud": 0
+    },
+    "estimatedDailyLoss": 1142,
+    "preventedAmount": 2130
+  }
+]
