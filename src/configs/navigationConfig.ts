@@ -125,6 +125,12 @@ const navigationConfig: FuseNavItemType[] = [
 				title: 'Cases',
 				type: 'item',
 				url: '/apps/lofat/cases'
+			},
+			{
+				id: 'lofat-about',
+				title: 'About',
+				type: 'item',
+				url: '/apps/lofat/about'
 			}
 		]
 	},
