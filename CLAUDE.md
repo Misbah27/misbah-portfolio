@@ -7,7 +7,7 @@
 
 ## WHO THIS IS FOR
 Professional engineering portfolio for Misbahuddin Mohammed,
-Senior Software Development Manager, 10+ years at Amazon. Audience is
+Senior Software Development Manager, 11+ years at Amazon. Audience is
 Hiring Managers and Technical Recruiters at senior tech companies (L7+).
 Goal: demonstrate real-world system design, ML/AI at scale, AWS expertise,
 and the ability to enhance existing systems with modern LLM capabilities.
@@ -58,69 +58,19 @@ BEFORE writing any component in any session, you MUST:
 4. Read the navigation config (navigationConfig or FuseNavigation)
 5. Read 2 example page components to understand patterns
 
-HARD RULES — DISCOVERED THROUGH SESSIONS 11-13:
-
-Icons & Components:
+HARD RULES — DISCOVERED THROUGH SESSION 11 ITERATION:
 - ZERO emoji anywhere in the UI — all icons must be FuseSvgIcon with
   heroicons-outline:* or heroicons-solid:* icon names
 - ZERO raw HTML tables — all tabular data uses Fuse DataTable component
   (Material React Table wrapper)
 - ZERO MUI Stepper for wizard steps — use inline Chip components instead
   (Stepper is too tall and breaks single-viewport layout)
-
-Layout & Scrolling:
 - Use FusePageSimple NOT FusePageCarded — Carded creates an unwanted gap
 - Layout mode: fullwidth (not container) on all app pages
-- Footer is GLOBALLY DISABLED via settingsConfig.ts footer.display:false
-  — do not re-enable it
-- ALL FusePageSimple instances MUST use scroll="content" prop AND include
-  '&.FusePageSimple-scroll-content': { height: '100%' } in the styled
-  Root component. Without this, content doesn't scroll independently.
 - No auth guard on any page — public portfolio
 - Remove ALL Fuse boilerplate from toolbar: Configurator panel,
   theme switcher, language switcher, fullscreen toggle
-
-Spacing (validated pattern — do NOT use p-24/gap-24):
-- Page headers: p-6 sm:px-8
-- Page content wrapper: p-6 sm:p-8
-- Grid gaps between cards/charts: gap-6
-- Card internal padding: p-4
-- NEVER use Tailwind p-24/gap-24 (=96px) — these create excessive
-  whitespace. Maximum useful padding is p-8 (32px).
-
-DataTable Defaults (CRITICAL — DataTable.tsx defaults add unwanted columns):
-- EVERY DataTable instance MUST include these props to disable defaults:
-  enableRowSelection={false} enableRowActions={false}
-  enableColumnOrdering={false} enableGrouping={false}
-  enableColumnPinning={false} enableDensityToggle={false}
-  enableHiding={false} enableStickyHeader
-  initialState={{ density: 'compact' }}
-- For read-only tables also add: enableFilters={false}
-  enablePagination={false} enableBottomToolbar={false}
-  enableTopToolbar={false}
-- Reference pattern: QualityStep.tsx DataTable props
-
-Data Persistence (Amplify-compatible):
-- Amplify filesystem is READ-ONLY — NEVER use fs.writeFileSync in API
-  routes. It works locally but fails in production.
-- User-published datasets stored in localStorage via
-  userDatasetStore.ts (catalog entry + row data)
-- Static catalog.json (12 datasets) always loads; user-published
-  datasets are merged on mount via CatalogPage useEffect
-- Wizard uploads capped at 20 rows (MAX_ROWS in UploadStep.tsx)
-  for LLM cost control
-- Publish API is stateless — validates and returns entry, client
-  persists to localStorage
-
-Catalog & Obfuscation:
-- PII data is auto-obfuscated in catalog Preview tab (no toggle) —
-  uses HMAC-SHA256 from obfuscationUtils.ts, styled amber mono font
-- IMAGE_URL columns are always visible in columnVisibility regardless
-  of column index position
-- Obfuscation uses format-preserving HMAC via crypto.subtle.sign
-  with DEMO_SEED = 'DEMO_SEED_2024'
-
-UI Patterns:
+- Compact spacing throughout: p-3/gap-2/mb-2, NEVER mb-8 or larger
 - Loading states use Skeleton components matching exact layout shape —
   never generic spinners
 - Animations: motion.div from motion/react with staggerChildren:0.06,
@@ -144,10 +94,7 @@ DATA FILE LOCATION PATTERN (discovered in Session 11):
 
 Routes:
 - Portfolio landing:  /
-- InboundIQ:          /apps/inboundiq (collapse nav)
-  ├── Dashboard:      /apps/inboundiq
-  ├── Analytics:      /apps/inboundiq/analytics (includes FC map)
-  └── About:          /apps/inboundiq/about
+- InboundIQ:          /apps/inboundiq
 - FreightLens:        /apps/freightlens
 - Nova:               /apps/nova
 - DataOps Suite:      /apps/dataops (collapse nav)
@@ -248,7 +195,7 @@ Domain: Dock door allocation engine. Each FC has 10-15 dock doors (scarce
 resource). System ranks trucks in the yard so ops knows which truck gets
 the next available door — replacing all manual decision-making.
 
-Pages: Dashboard | Analytics (includes FC Network Map) | About
+Pages: Dashboard | Analytics | Map | About
 
 Truck data model — 3 categories in trucks.json:
 
@@ -701,32 +648,63 @@ Editable before saving to case record.
 
 ## PORTFOLIO LANDING PAGE
 Route: /
+Layout: custom full-page (NO Fuse sidebar on this route — separate layout.tsx)
 
-Sections:
-1. Hero: "Misbahuddin Mohammed | Senior Engineering Leader | 10+ Years at Amazon"
-   Tagline: "Building AI-powered logistics and fraud detection systems at scale"
-   CTAs: "Explore My Work" + "View Resume"
-   Subtle animated background
+All copy is locked — do not paraphrase, shorten, or rewrite any text below.
+Tenure is 11+ years (Sep 2014 → present). Total impact is $45M+.
 
-2. Impact Metrics (animated count-up on scroll):
-   $1.2M annual savings | 6.7→2.2hr TAT | $0.6M fraud prevented |
-   107K+ bookings | 12 industries cataloged | 500 hrs/month saved
+SECTION 1 — HERO (full-viewport-height, dark background grey[900]):
+Name: "Misbahuddin Mohammed"
+Title: "Senior Engineering Leader"
+Summary: "11 years at Amazon building and scaling engineering organizations
+across AI/ML, data platforms, and logistics operations. From real-time ML
+pipelines to LLM-powered data infrastructure — leading teams, shipping
+products, and driving $45M+ in combined business impact."
+CTAs: "View Projects" (contained, primary) | "Read Resume" (outlined, white)
 
-3. App Cards (5): InboundIQ | FreightLens | Nova | DataOps Suite | LoFAT
-   Each: name, tagline, 3 tech badges, key achievement, Explore → link
+SECTION 2 — IMPACT NUMBERS (6 stats, dark grey[800]):
+"$45M+"    "Total portfolio impact"       "Cost savings and revenue uplift across all products"
+"3 → 22"   "Engineers grown"              "Across India, Dubai, and Mexico"
+"7"         "Engineers promoted"           "With 12-month evidence-based promo cases"
+"6 regions" "Product deployments"          "IN · AU · SG · DXB · KSA · LATAM"
+"203K+"     "Amazon tables served"         "By AMG metadata platform"
+"150+"      "Interviews conducted"         "Across Amazon hiring initiatives"
+Animated count-up on scroll (IntersectionObserver).
 
-   LoFAT card:
-   "LoFAT — Fraud Detection Platform"
-   "Real-time GPS fraud detection across last-mile delivery fleet"
-   Badges: Python | Kinesis | ML | ReactJS
-   "$0.6M saved | 37 headcount avoided | <90s detection"
+SECTION 3 — PRODUCTS (6 cards, light background):
+Subtitle: "10 years. 6 products. 3 continents."
+Left border accent colors per product:
+  DataOps Suite:#8b5cf6 | Delay Alert:#f59e0b | Heimdall:#0ea5e9
+  DFT:#10b981 | LoFAT:#ef4444 | Reactive Scheduling:#6366f1
+Per card: era Chip + badge Chip + name + tagline + impact stat + 3 tech Chips
+Key impact stats:
+  DataOps: "$1.2M annual savings · 203K+ tables served"
+  Delay Alert: "6 regions · 10-min refresh · replaced manual spreadsheets"
+  Heimdall: "TAT 6.7 → 2.2 hours · P95 SLA met consistently"
+  DFT: "100+ FCs · 6 countries · real-time vs 30-min lag"
+  LoFAT: "$0.6M saved · 37 headcount hires eliminated"
+  Reactive Scheduling: "$800K annual savings · 70% latency reduction"
+Reactive Scheduling "Explore →" scrolls to #career (no /apps/ route).
 
-4. Career Timeline: 2014 Support Engineer → 2016 Manager Web Dev →
-   2018 Senior SDM Corporate Logistics → 2022 Senior SDM PX Central Science
+SECTION 4 — CAREER TIMELINE (dark, 4 milestones):
+  Sep 2014–Mar 2016 | Support Engineer | Corporate Logistics · Hyderabad
+  Apr 2016–Mar 2018 | Manager, Web Dev & Automation | Corporate Logistics · Hyderabad
+  Apr 2018–Apr 2022 | Senior SDM | Corporate Logistics · Hyderabad
+  Apr 2022–Present  | Senior SDM | People Experience & Central Science · Seattle
+See Session 16 prompt for exact highlight copy per milestone.
 
-5. Tech Stack icon grid: all AWS services, languages, AI/ML tools
+SECTION 5 — PEOPLE LEADERSHIP (two-column: stats + principles):
+6 leadership stats + 4 leadership principles.
+Principle copy is locked — see Session 16 prompt for exact text.
 
-6. Footer: LinkedIn | GitHub | misbah_2703@yahoo.com
+SECTION 6 — TECH STACK (6 categories, Chip groups):
+Cloud & Infrastructure | AI/ML | Data Engineering |
+Frontend & Web | Languages | Compliance & Security
+See Session 16 prompt for full skill lists per category.
+
+SECTION 7 — FOOTER (dark):
+LinkedIn | GitHub | misbah_2703@yahoo.com
+"© 2025 Misbahuddin Mohammed · Senior Engineering Leader"
 
 ---
 

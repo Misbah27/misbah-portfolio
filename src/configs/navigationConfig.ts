@@ -2,6 +2,7 @@ import { FuseNavItemType } from '@fuse/core/FuseNavigation/types/FuseNavItemType
 
 /**
  * Navigation configuration for the portfolio sidebar.
+ * Order: DataOps Suite, InboundIQ, Nova, LoFAT, FreightLens
  */
 const navigationConfig: FuseNavItemType[] = [
 	{
@@ -10,96 +11,6 @@ const navigationConfig: FuseNavItemType[] = [
 		type: 'item',
 		icon: 'heroicons-outline:home',
 		url: '/'
-	},
-	{
-		id: 'inboundiq',
-		title: 'InboundIQ',
-		type: 'collapse',
-		icon: 'heroicons-outline:truck',
-		children: [
-			{
-				id: 'inboundiq-dashboard',
-				title: 'Dashboard',
-				type: 'item',
-				url: '/apps/inboundiq'
-			},
-			{
-				id: 'inboundiq-analytics',
-				title: 'Analytics',
-				type: 'item',
-				url: '/apps/inboundiq/analytics'
-			},
-			{
-				id: 'inboundiq-about',
-				title: 'About',
-				type: 'item',
-				url: '/apps/inboundiq/about'
-			}
-		]
-	},
-	{
-		id: 'freightlens',
-		title: 'FreightLens',
-		type: 'collapse',
-		icon: 'heroicons-outline:calendar',
-		children: [
-			{
-				id: 'freightlens-rolling21',
-				title: 'Rolling 21 Days',
-				type: 'item',
-				url: '/apps/freightlens'
-			},
-			{
-				id: 'freightlens-standing',
-				title: 'Standing Appointments',
-				type: 'item',
-				url: '/apps/freightlens/standing'
-			},
-			{
-				id: 'freightlens-fc-metric',
-				title: 'FC Metric',
-				type: 'item',
-				url: '/apps/freightlens/fc-metric'
-			},
-			{
-				id: 'freightlens-admin',
-				title: 'Admin Portal',
-				type: 'item',
-				url: '/apps/freightlens/admin'
-			},
-			{
-				id: 'freightlens-about',
-				title: 'About',
-				type: 'item',
-				url: '/apps/freightlens/about'
-			}
-		]
-	},
-	{
-		id: 'nova',
-		title: 'Nova',
-		type: 'collapse',
-		icon: 'heroicons-outline:bell-alert',
-		children: [
-			{
-				id: 'nova-delay-alert',
-				title: 'Delay Alert',
-				type: 'item',
-				url: '/apps/nova'
-			},
-			{
-				id: 'nova-rescue',
-				title: 'Rescue Planner',
-				type: 'item',
-				url: '/apps/nova/rescue-planner'
-			},
-			{
-				id: 'nova-about',
-				title: 'About',
-				type: 'item',
-				url: '/apps/nova/about'
-			}
-		]
 	},
 	{
 		id: 'dataops',
@@ -140,6 +51,58 @@ const navigationConfig: FuseNavItemType[] = [
 		]
 	},
 	{
+		id: 'inboundiq',
+		title: 'InboundIQ',
+		type: 'collapse',
+		icon: 'heroicons-outline:truck',
+		children: [
+			{
+				id: 'inboundiq-dashboard',
+				title: 'Dashboard',
+				type: 'item',
+				url: '/apps/inboundiq'
+			},
+			{
+				id: 'inboundiq-analytics',
+				title: 'Analytics',
+				type: 'item',
+				url: '/apps/inboundiq/analytics'
+			},
+			{
+				id: 'inboundiq-about',
+				title: 'About',
+				type: 'item',
+				url: '/apps/inboundiq/about'
+			}
+		]
+	},
+	{
+		id: 'nova',
+		title: 'Nova',
+		type: 'collapse',
+		icon: 'heroicons-outline:bell-alert',
+		children: [
+			{
+				id: 'nova-delay-alert',
+				title: 'Delay Alert',
+				type: 'item',
+				url: '/apps/nova'
+			},
+			{
+				id: 'nova-rescue',
+				title: 'Rescue Planner',
+				type: 'item',
+				url: '/apps/nova/rescue-planner'
+			},
+			{
+				id: 'nova-about',
+				title: 'About',
+				type: 'item',
+				url: '/apps/nova/about'
+			}
+		]
+	},
+	{
 		id: 'lofat',
 		title: 'LoFAT',
 		type: 'collapse',
@@ -162,6 +125,44 @@ const navigationConfig: FuseNavItemType[] = [
 				title: 'Cases',
 				type: 'item',
 				url: '/apps/lofat/cases'
+			}
+		]
+	},
+	{
+		id: 'freightlens',
+		title: 'FreightLens',
+		type: 'collapse',
+		icon: 'heroicons-outline:calendar',
+		children: [
+			{
+				id: 'freightlens-rolling21',
+				title: 'Rolling 21 Days',
+				type: 'item',
+				url: '/apps/freightlens'
+			},
+			{
+				id: 'freightlens-standing',
+				title: 'Standing Appointments',
+				type: 'item',
+				url: '/apps/freightlens/standing'
+			},
+			{
+				id: 'freightlens-fc-metric',
+				title: 'FC Metric',
+				type: 'item',
+				url: '/apps/freightlens/fc-metric'
+			},
+			{
+				id: 'freightlens-admin',
+				title: 'Admin Portal',
+				type: 'item',
+				url: '/apps/freightlens/admin'
+			},
+			{
+				id: 'freightlens-about',
+				title: 'About',
+				type: 'item',
+				url: '/apps/freightlens/about'
 			}
 		]
 	}
