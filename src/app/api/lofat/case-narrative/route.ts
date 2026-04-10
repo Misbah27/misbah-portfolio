@@ -79,6 +79,7 @@ Include specific numbers from the data. Professional language. 400 words maximum
 			},
 		});
 	} catch (error) {
+		console.error(`API error in ${import.meta.url}:`, error);
 		return Response.json({ error: 'Case narrative generation failed' }, { status: 500 });
 	}
 }

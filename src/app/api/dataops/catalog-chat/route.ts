@@ -94,6 +94,7 @@ export async function POST(request: Request) {
 
 		return Response.json(parsed);
 	} catch (error) {
+		console.error(`API error in ${import.meta.url}:`, error);
 		clearTimeout(timeout);
 		if ((error as Error).name === 'AbortError') {
 			return Response.json(

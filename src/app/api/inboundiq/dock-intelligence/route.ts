@@ -71,6 +71,7 @@ Give 2-3 specific, actionable recommendations for the next 30 minutes. Name truc
 
 		return Response.json({ result: llmResult, cached: false });
 	} catch (error) {
+		console.error(`API error in ${import.meta.url}:`, error);
 		clearTimeout(timeout);
 		if ((error as Error).name === 'AbortError') {
 			return Response.json(
@@ -78,6 +79,6 @@ Give 2-3 specific, actionable recommendations for the next 30 minutes. Name truc
 				{ status: 408 }
 			);
 		}
-		return Response.json({ error: 'LLM request failed' }, { status: 500 });
+		const msg = error instanceof Error ? error.message : 'LLM request failed'; return Response.json({ error: msg }, { status: 500 });
 	}
 }

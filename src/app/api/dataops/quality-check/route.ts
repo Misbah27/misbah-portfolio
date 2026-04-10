@@ -524,6 +524,7 @@ Return ONLY valid JSON. No prose, no markdown, no backticks.
 
 		return Response.json(report);
 	} catch (error) {
+		console.error(`API error in ${import.meta.url}:`, error);
 		return Response.json({ error: 'Quality check failed' }, { status: 500 });
 	}
 }

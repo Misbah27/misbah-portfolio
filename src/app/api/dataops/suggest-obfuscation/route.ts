@@ -71,6 +71,7 @@ Return ONLY valid JSON. No prose, no markdown, no backticks.
 
 		return Response.json(parsed);
 	} catch (error) {
+		console.error(`API error in ${import.meta.url}:`, error);
 		clearTimeout(timeout);
 		if ((error as Error).name === 'AbortError') {
 			return Response.json(

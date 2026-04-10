@@ -33,6 +33,7 @@ What it means, why it's suspicious, and what legitimate behavior looks like inst
 			result: response.content[0].type === 'text' ? response.content[0].text : '',
 		});
 	} catch (error) {
+		console.error(`API error in ${import.meta.url}:`, error);
 		clearTimeout(timeout);
 		if ((error as Error).name === 'AbortError') {
 			return Response.json({ error: 'Request timed out — try a shorter query' }, { status: 408 });

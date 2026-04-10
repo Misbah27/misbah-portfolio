@@ -57,10 +57,11 @@ Severity: HIGH if daysOverCapacity >= 2 or daysNoCapacity >= 2, MEDIUM otherwise
 
 		return Response.json({ result: risks });
 	} catch (error) {
+		console.error(`API error in ${import.meta.url}:`, error);
 		clearTimeout(timeout);
 		if ((error as Error).name === 'AbortError') {
 			return Response.json({ error: 'Request timed out — try a shorter query' }, { status: 408 });
 		}
-		return Response.json({ error: 'LLM request failed' }, { status: 500 });
+		const msg = error instanceof Error ? error.message : 'LLM request failed'; return Response.json({ error: msg }, { status: 500 });
 	}
 }

@@ -77,6 +77,7 @@ Exactly 4 concise bullet points:
 
 		return Response.json({ result: llmResult, cached: false });
 	} catch (error) {
+		console.error(`API error in ${import.meta.url}:`, error);
 		clearTimeout(timeout);
 		if ((error as Error).name === 'AbortError') {
 			return Response.json({ error: 'Request timed out — try a shorter query' }, { status: 408 });

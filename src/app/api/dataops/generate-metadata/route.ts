@@ -107,6 +107,7 @@ Return ONLY valid JSON. No prose, no markdown, no backticks.`;
 			},
 		});
 	} catch (error) {
+		console.error(`API error in ${import.meta.url}:`, error);
 		return Response.json({ error: 'Metadata generation failed' }, { status: 500 });
 	}
 }

@@ -96,6 +96,7 @@ Reference actual numbers. Formal third-person language. 300 words maximum.`;
 			},
 		});
 	} catch (error) {
+		console.error(`API error in ${import.meta.url}:`, error);
 		return Response.json({ error: 'Investigation analysis failed' }, { status: 500 });
 	}
 }
