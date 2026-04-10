@@ -18,7 +18,7 @@ interface QualityReport {
 
 /**
  * POST /api/dataops/generate-metadata
- * LLM-powered metadata generation: PII detection, lineage, retention, regulatory flags.
+ * LLM-powered metadata generation with streaming response.
  */
 export async function POST(request: Request) {
 	try {
@@ -41,70 +41,71 @@ export async function POST(request: Request) {
 
 		const schemaStr = schema.map((c: Column) => `${c.name}(${c.inferredType}${c.nullable ? ',null' : ''})`).join(', ');
 
-		const sampleStr = JSON.stringify(sampleRows.slice(0, 3), null, 1).slice(0, 1500);
+		// Cap at 5 rows and truncate string values to 50 chars
+		const truncatedRows = sampleRows.slice(0, 5).map((row) => {
+			const truncated: DataRow = {};
+			for (const [key, val] of Object.entries(row)) {
+				truncated[key] = typeof val === 'string' && val.length > 50 ? val.slice(0, 50) + '...' : val;
+			}
+			return truncated;
+		});
 
-		const prompt = `You are a data governance expert. Generate metadata for this ${industryTag} dataset "${datasetName}".
+		const sampleStr = JSON.stringify(truncatedRows, null, 0);
+
+		const prompt = `Data governance expert. Generate metadata for ${industryTag} dataset "${datasetName}".
 
 COLUMNS: ${schemaStr}
-SAMPLE (3 rows): ${sampleStr}
+SAMPLE (5 rows): ${sampleStr}
 ${sqlQuery ? `SQL: ${sqlQuery}\n` : ''}QUALITY ISSUES: ${qualitySummary}
 
-Return a JSON object with these fields:
-- datasetDescription: 2-sentence description
-- businessContext: 1 sentence on who uses this data
-- dataClassification: one of PII|CONFIDENTIAL|INTERNAL|PUBLIC
-- classificationReasoning: 1 sentence why
+Return a JSON object:
+- datasetDescription: 2 sentences
+- businessContext: 1 sentence
+- dataClassification: PII|CONFIDENTIAL|INTERNAL|PUBLIC
+- classificationReasoning: 1 sentence
 - piiColumns: [{column,piiType(DIRECT_IDENTIFIER|QUASI_IDENTIFIER|SENSITIVE_ATTRIBUTE),confidence(0-100)}]
-- columnMetadata: array with one entry per column (${schema.length} total), each: {columnName,description(short),businessMeaning(short),dataType,isPii,piiType(or null),piiConfidence,exampleValues(2 values),nullabilityBehavior,suggestedObfuscationRule(KEEP|FORMAT_PRESERVE|HASH|NULLIFY|GENERALIZE),dataQualityNote,approved:null}
+- columnMetadata: array of ${schema.length} entries, each: {columnName,description,businessMeaning,dataType,isPii,piiType(or null),piiConfidence,exampleValues(2),nullabilityBehavior,suggestedObfuscationRule(KEEP|FORMAT_PRESERVE|HASH|NULLIFY|GENERALIZE),dataQualityNote,approved:null}
 - lineage: {upstreamDatasets[],transformationQuery:null,description}
 - suggestedTags: string[]
 - retentionPolicy: 1 sentence
 - regulatoryFlags: from [GDPR,CCPA,HIPAA,SOX,PCI_DSS,FERPA,NONE]
 
-Use exact column names: ${schema.map((c: Column) => c.name).join(', ')}
-Return ONLY valid JSON, no markdown or extra text.`;
+Exact column names: ${schema.map((c: Column) => c.name).join(', ')}
+Return ONLY valid JSON. No prose, no markdown, no backticks.`;
 
-		const response = await client.messages.create({
+		const stream = client.messages.stream({
 			model: 'claude-sonnet-4-20250514',
 			max_tokens: 8000,
 			messages: [{ role: 'user', content: prompt }],
 		});
 
-		const text = response.content[0].type === 'text' ? response.content[0].text : '';
+		const readableStream = new ReadableStream({
+			async start(controller) {
+				try {
+					for await (const chunk of stream) {
+						if (
+							chunk.type === 'content_block_delta' &&
+							chunk.delta.type === 'text_delta'
+						) {
+							controller.enqueue(
+								new TextEncoder().encode(chunk.delta.text)
+							);
+						}
+					}
+					controller.close();
+				} catch {
+					controller.close();
+				}
+			},
+		});
 
-		// Extract JSON from response
-		const jsonMatch = text.match(/\{[\s\S]*\}/);
-		if (!jsonMatch) {
-			return Response.json({ error: 'Failed to parse LLM response' }, { status: 500 });
-		}
-
-		const metadata = JSON.parse(jsonMatch[0]);
-
-		// Ensure all columns have metadata (fill gaps if LLM missed any)
-		const coveredColumns = new Set(
-			metadata.columnMetadata?.map((c: { columnName: string }) => c.columnName) ?? []
-		);
-		for (const col of schema) {
-			if (!coveredColumns.has(col.name)) {
-				metadata.columnMetadata = metadata.columnMetadata || [];
-				metadata.columnMetadata.push({
-					columnName: col.name,
-					description: `${col.name} field`,
-					businessMeaning: 'Auto-generated — review needed',
-					dataType: col.inferredType,
-					isPii: false,
-					piiType: null,
-					piiConfidence: 0,
-					exampleValues: col.sampleValues.slice(0, 3),
-					nullabilityBehavior: col.nullable ? 'nullable — inferred from data' : 'required — inferred from data',
-					suggestedObfuscationRule: 'KEEP',
-					dataQualityNote: '',
-					approved: null,
-				});
-			}
-		}
-
-		return Response.json(metadata);
+		return new Response(readableStream, {
+			headers: {
+				'Content-Type': 'text/plain; charset=utf-8',
+				'Transfer-Encoding': 'chunked',
+				'Cache-Control': 'no-cache',
+			},
+		});
 	} catch (error) {
 		return Response.json({ error: 'Metadata generation failed' }, { status: 500 });
 	}

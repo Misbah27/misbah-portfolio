@@ -11,6 +11,7 @@ interface PublishRequest {
 		nullable: boolean;
 		piiType: string | null;
 		examples: string[];
+		description?: string;
 	}[];
 	rowCount: number;
 	qualityScore: number;
@@ -58,6 +59,7 @@ export async function POST(request: Request) {
 				nullable: col.nullable,
 				piiType: col.piiType,
 				sampleValues: col.examples || [],
+				description: col.description || undefined,
 			})),
 			rowCount: body.rowCount,
 			classification: body.classification,

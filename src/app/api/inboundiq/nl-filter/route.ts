@@ -7,42 +7,65 @@ const client = new Anthropic();
  * Converts a natural language query into a filtered list of matching ISA/VRID strings.
  */
 export async function POST(request: Request) {
+	const controller = new AbortController();
+	const timeout = setTimeout(() => controller.abort(), 25000);
+
 	try {
 		const { query, yardTrucks } = await request.json();
 
-		const prompt = `You are a yard queue filter engine. Given the following yard trucks as JSON and a natural language query, return ONLY a JSON array of matching isaVrid strings. No explanation, no prose — just a valid JSON array.
+		const compact = yardTrucks.map((t: Record<string, unknown>) => ({
+			isaVrid: t.isaVrid,
+			dmStatus: t.dmStatus,
+			arrivalStatus: t.arrivalStatus,
+			dwellHours: t.dwellHours,
+			apptType: t.apptType,
+			lowInstockPct: t.lowInstockPct,
+			units: t.units,
+			rank: t.rank,
+		}));
+
+		const prompt = `Yard queue filter engine. Return matching isaVrid values from this data.
 
 Yard trucks:
-${JSON.stringify(yardTrucks, null, 0)}
+${JSON.stringify(compact, null, 0)}
 
 Query: "${query}"
 
-Rules:
-- apptType values: HOT, SPD, CARP, AMZL
-- lowInstockPct is 0-80 (higher = more critical)
-- dwellHours is in hours (decimal)
-- arrivalStatus: ON_TIME, LATE, DELAYED, EARLY
-- If the query mentions "instock below X%", match lowInstockPct < X
-- If the query mentions "dwelling over Xh", match dwellHours > X
-- Return all matching isaVrid values as a JSON string array
-- If no trucks match, return an empty array []
+Field reference:
+- apptType: HOT|SPD|CARP|AMZL
+- lowInstockPct: 0-80 (higher = more critical)
+- dwellHours: decimal hours
+- arrivalStatus: ON_TIME|LATE|DELAYED|EARLY
+- "instock below X%" → lowInstockPct < X
+- "dwelling over Xh" → dwellHours > X
 
-Return ONLY a JSON array like ["VRID1","VRID2"]. No markdown, no backticks, no explanation.`;
+Return ONLY valid JSON. No prose, no markdown, no backticks.
+Return a JSON array of matching isaVrid strings: ["VRID1","VRID2"]
+If no matches, return []`;
 
-		const response = await client.messages.create({
-			model: 'claude-sonnet-4-20250514',
-			max_tokens: 1000,
-			messages: [{ role: 'user', content: prompt }],
-		});
+		const response = await client.messages.create(
+			{
+				model: 'claude-sonnet-4-20250514',
+				max_tokens: 1000,
+				messages: [{ role: 'user', content: prompt }],
+			},
+			{ signal: controller.signal }
+		);
+		clearTimeout(timeout);
 
 		const text = response.content[0].type === 'text' ? response.content[0].text : '[]';
-
-		// Parse the JSON array from the response
 		const cleaned = text.trim().replace(/```json\n?/g, '').replace(/```/g, '').trim();
 		const matchingVrids: string[] = JSON.parse(cleaned);
 
 		return Response.json({ result: matchingVrids });
 	} catch (error) {
+		clearTimeout(timeout);
+		if ((error as Error).name === 'AbortError') {
+			return Response.json(
+				{ error: 'Request timed out — try a shorter query' },
+				{ status: 408 }
+			);
+		}
 		return Response.json({ error: 'LLM request failed' }, { status: 500 });
 	}
 }

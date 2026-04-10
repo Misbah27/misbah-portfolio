@@ -66,6 +66,7 @@ export interface DatasetColumn {
 	inferredType: 'STRING' | 'INTEGER' | 'FLOAT' | 'BOOLEAN' | 'DATE' | 'ENUM' | 'ID' | 'URL' | 'IMAGE_URL';
 	nullable: boolean;
 	sampleValues: unknown[];
+	description?: string;
 }
 
 export type DataRow = Record<string, unknown>;

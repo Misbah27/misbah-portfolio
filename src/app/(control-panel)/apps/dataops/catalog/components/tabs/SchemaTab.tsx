@@ -40,7 +40,7 @@ export default function SchemaTab({ entry }: Props) {
 				inferredType: col.inferredType,
 				piiType: pii?.piiType || null,
 				obfuscationRule: pii ? 'FORMAT_PRESERVE' : 'KEEP',
-				description: `${col.nullable ? 'Nullable' : 'Required'} — e.g. ${(col.sampleValues || []).filter(Boolean).slice(0, 2).join(', ') || 'N/A'}`,
+				description: col.description || `${col.nullable ? 'Nullable' : 'Required'} — e.g. ${(col.sampleValues || []).filter(Boolean).slice(0, 2).join(', ') || 'N/A'}`,
 				isPii: !!pii,
 			};
 		});

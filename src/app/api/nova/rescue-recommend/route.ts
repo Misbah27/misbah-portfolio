@@ -7,34 +7,33 @@ const client = new Anthropic();
  * Returns AI recommendation for a specific rescue lane.
  */
 export async function POST(request: Request) {
+	const controller = new AbortController();
+	const timeout = setTimeout(() => controller.abort(), 25000);
+
 	try {
 		const { odPair, delayHours, eddCount, vehicleSize, haulType } = await request.json();
 
-		const prompt = `You are a logistics rescue planning AI. Analyze this delayed shipment and recommend the optimal action.
+		const prompt = `Logistics rescue planning AI. Recommend optimal action for this delayed shipment.
 
-Lane: ${odPair}
-Delay Hours: ${delayHours}
-EDD Package Count: ${eddCount}
-Vehicle Size: ${vehicleSize}
-Haul Type: ${haulType}
+Lane: ${odPair} | Delay: ${delayHours}h | EDD Packages: ${eddCount} | Vehicle: ${vehicleSize} | Haul: ${haulType}
 
 Decision framework:
-- RESCUE: dispatch a replacement vehicle if delay >6hrs AND eddCount >50 AND packages are time-critical
-- DROP: cancel the rescue if delay <2hrs OR eddCount <10 OR the shipment can be absorbed by next scheduled run
-- MERGE: combine with another shipment on the same corridor if vehicle has spare capacity and delay is moderate (2-6hrs)
+- RESCUE: delay >6hrs AND eddCount >50 AND time-critical
+- DROP: delay <2hrs OR eddCount <10 OR absorbable by next run
+- MERGE: moderate delay (2-6hrs), spare capacity on same corridor
 
-Return ONLY a JSON object (no markdown, no backticks):
-{
-  "recommendation": "RESCUE" | "DROP" | "MERGE",
-  "confidence": 75,
-  "reasoning": "2-3 sentence explanation referencing the specific lane, delay hours, and package count"
-}`;
+Return ONLY valid JSON. No prose, no markdown, no backticks.
+{"recommendation":"RESCUE|DROP|MERGE","confidence":75,"reasoning":"2-3 sentences referencing lane, delay, packages."}`;
 
-		const response = await client.messages.create({
-			model: 'claude-sonnet-4-20250514',
-			max_tokens: 1000,
-			messages: [{ role: 'user', content: prompt }],
-		});
+		const response = await client.messages.create(
+			{
+				model: 'claude-sonnet-4-20250514',
+				max_tokens: 1000,
+				messages: [{ role: 'user', content: prompt }],
+			},
+			{ signal: controller.signal }
+		);
+		clearTimeout(timeout);
 
 		const text = response.content[0].type === 'text' ? response.content[0].text : '';
 		const cleaned = text.trim().replace(/```json\n?/g, '').replace(/```/g, '').trim();
@@ -42,6 +41,10 @@ Return ONLY a JSON object (no markdown, no backticks):
 
 		return Response.json({ result });
 	} catch (error) {
+		clearTimeout(timeout);
+		if ((error as Error).name === 'AbortError') {
+			return Response.json({ error: 'Request timed out — try a shorter query' }, { status: 408 });
+		}
 		return Response.json({ error: 'LLM request failed' }, { status: 500 });
 	}
 }

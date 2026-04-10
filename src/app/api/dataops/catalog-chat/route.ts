@@ -13,34 +13,54 @@ interface ChatRequest {
 	history: ChatMessage[];
 }
 
-interface ChatResponse {
-	text: string;
-	datasetCards: string[];
+interface CatalogEntry {
+	datasetId: string;
+	name: string;
+	industryTag: string;
+	description: string;
+	classification: string;
+	piiColumns: unknown[];
+	qualityScore: number;
+	tags: string[];
+	schema?: unknown[];
+	[key: string]: unknown;
 }
 
-const SYSTEM_PROMPT = `You are DataVault, an expert data catalog assistant. You help users discover, understand, and evaluate datasets in the enterprise data catalog.
+// Build compact catalog context at module load — no full schemas
+const compactCatalog = (catalogData as CatalogEntry[]).map((d) => ({
+	datasetId: d.datasetId,
+	name: d.name,
+	industryTag: d.industryTag,
+	description: d.description,
+	classification: d.classification,
+	piiColumnCount: d.piiColumns?.length ?? 0,
+	qualityScore: d.qualityScore,
+	tags: d.tags,
+}));
 
-Here is the complete catalog of datasets:
-${JSON.stringify(catalogData, null, 2)}
+const SYSTEM_PROMPT = `DataVault, an expert data catalog assistant. Help users discover and evaluate datasets.
 
-RULES:
-- Answer questions about datasets, their schemas, quality, PII, lineage, and regulatory compliance.
-- Reference specific dataset names and datasetIds (ds-001 through ds-012) when relevant.
-- When datasets match the user's query, include their datasetIds in the datasetCards array.
-- Be concise but thorough. Use plain language accessible to data engineers and analysts.
-- If asked about something not in the catalog, say so clearly.
+Catalog (${compactCatalog.length} datasets, schema details omitted — ask if needed):
+${JSON.stringify(compactCatalog, null, 0)}
 
-You MUST return ONLY valid JSON with this exact structure, no prose, no markdown:
-{"text": "your answer here", "datasetCards": ["ds-001", "ds-005"]}
+Rules:
+- Reference specific dataset names and datasetIds (ds-001 through ds-012).
+- Include relevant datasetIds in the datasetCards array.
+- Be concise. If asked about columns/schema not shown, say "I have summary info — ask about a specific dataset for details."
 
-The datasetCards array should contain datasetIds of datasets you reference or recommend. Include it even if empty.`;
+Return ONLY valid JSON. No prose, no markdown, no backticks.
+{"text":"your answer","datasetCards":["ds-001"]}`;
 
 export async function POST(request: Request) {
+	const controller = new AbortController();
+	const timeout = setTimeout(() => controller.abort(), 25000);
+
 	try {
 		const body = (await request.json()) as ChatRequest;
 		const { message, history = [] } = body;
 
 		if (!message) {
+			clearTimeout(timeout);
 			return Response.json({ error: 'Message is required' }, { status: 400 });
 		}
 
@@ -52,28 +72,37 @@ export async function POST(request: Request) {
 			{ role: 'user', content: message },
 		];
 
-		const response = await client.messages.create({
-			model: 'claude-sonnet-4-20250514',
-			max_tokens: 1000,
-			system: SYSTEM_PROMPT,
-			messages,
-		});
+		const response = await client.messages.create(
+			{
+				model: 'claude-sonnet-4-20250514',
+				max_tokens: 1000,
+				system: SYSTEM_PROMPT,
+				messages,
+			},
+			{ signal: controller.signal }
+		);
+		clearTimeout(timeout);
 
 		const raw = response.content[0].type === 'text' ? response.content[0].text : '';
 
-		let parsed: ChatResponse;
-
+		let parsed: { text: string; datasetCards: string[] };
 		try {
-			parsed = JSON.parse(raw) as ChatResponse;
+			parsed = JSON.parse(raw);
 		} catch {
 			parsed = { text: raw, datasetCards: [] };
 		}
 
 		return Response.json(parsed);
 	} catch (error) {
-		console.error('Catalog chat error:', error);
+		clearTimeout(timeout);
+		if ((error as Error).name === 'AbortError') {
+			return Response.json(
+				{ text: 'Request timed out — try a shorter query', datasetCards: [] },
+				{ status: 408 }
+			);
+		}
 		return Response.json(
-			{ text: 'I apologize, but I encountered an error processing your request. Please try again.', datasetCards: [] },
+			{ text: 'Service temporarily unavailable. Please try again.', datasetCards: [] },
 			{ status: 500 }
 		);
 	}

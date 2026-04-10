@@ -47,10 +47,12 @@ export default function MetadataStep({ ctx, updateCtx, onNext, onBack }: Metadat
 	const [editingField, setEditingField] = useState<string | null>(null);
 	const [editingColIdx, setEditingColIdx] = useState<number | null>(null);
 	const [editBuffer, setEditBuffer] = useState('');
+	const [streamingText, setStreamingText] = useState('');
 
 	const generateMetadata = useCallback(async () => {
 		setLoading(true);
 		setError('');
+		setStreamingText('');
 		const start = Date.now();
 
 		try {
@@ -68,14 +70,56 @@ export default function MetadataStep({ ctx, updateCtx, onNext, onBack }: Metadat
 			});
 
 			if (!res.ok) throw new Error('Metadata generation failed');
+			if (!res.body) throw new Error('No stream');
 
-			const metadata: GeneratedMetadata = await res.json();
+			const reader = res.body.getReader();
+			const decoder = new TextDecoder();
+			let accumulated = '';
+
+			while (true) {
+				const { done, value } = await reader.read();
+				if (done) break;
+				accumulated += decoder.decode(value, { stream: true });
+				setStreamingText(accumulated);
+			}
+
+			// Parse JSON after stream completes
+			const jsonMatch = accumulated.match(/\{[\s\S]*\}/);
+			if (!jsonMatch) throw new Error('Failed to parse response');
+
+			const metadata: GeneratedMetadata = JSON.parse(jsonMatch[0]);
+
+			// Fill any columns LLM missed
+			const coveredColumns = new Set(
+				metadata.columnMetadata?.map((c) => c.columnName) ?? []
+			);
+			for (const col of ctx.schema) {
+				if (!coveredColumns.has(col.name)) {
+					metadata.columnMetadata = metadata.columnMetadata || [];
+					metadata.columnMetadata.push({
+						columnName: col.name,
+						description: `${col.name} field`,
+						businessMeaning: 'Auto-generated — review needed',
+						dataType: col.inferredType,
+						isPii: false,
+						piiType: null,
+						piiConfidence: 0,
+						exampleValues: col.sampleValues.slice(0, 3) as string[],
+						nullabilityBehavior: col.nullable ? 'nullable' : 'required',
+						suggestedObfuscationRule: 'KEEP',
+						dataQualityNote: '',
+						approved: null,
+					});
+				}
+			}
+
 			setResponseTime(Date.now() - start);
 			updateCtx({ generatedMetadata: metadata });
 		} catch {
 			setError('Metadata generation failed. Please try again.');
 		} finally {
 			setLoading(false);
+			setStreamingText('');
 		}
 	}, [ctx.schema, ctx.rows, ctx.datasetName, ctx.sqlQuery, ctx.industryTag, ctx.qualityReport, updateCtx]);
 
@@ -355,6 +399,11 @@ export default function MetadataStep({ ctx, updateCtx, onNext, onBack }: Metadat
 							</Paper>
 						</div>
 					</div>
+				{streamingText && (
+						<Typography variant="caption" color="text.secondary" className="mt-2 block">
+							Generating metadata... ({streamingText.length.toLocaleString()} chars received)
+						</Typography>
+					)}
 				</motion.div>
 			)}
 

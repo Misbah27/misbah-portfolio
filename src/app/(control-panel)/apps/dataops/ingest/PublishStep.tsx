@@ -62,6 +62,15 @@ export default function PublishStep({ ctx, updateCtx, onBack }: PublishStepProps
 			const classification = ctx.classificationOverride ?? meta.dataClassification;
 			const staticCatalog = catalogJson as DatasetCatalogEntry[];
 			const datasetId = generateNextDatasetId(staticCatalog);
+			// Merge AI-generated column descriptions into schema
+			const colMetaMap = new Map(
+				(meta.columnMetadata || []).map((cm) => [cm.columnName, cm])
+			);
+			const enrichedSchema = ctx.schema.map((col) => {
+				const cm = colMetaMap.get(col.name);
+				return { ...col, description: cm?.description || undefined };
+			});
+
 			const res = await fetch('/api/dataops/publish', {
 				method: 'POST',
 				headers: { 'Content-Type': 'application/json' },
@@ -70,7 +79,7 @@ export default function PublishStep({ ctx, updateCtx, onBack }: PublishStepProps
 					datasetName: ctx.datasetName,
 					industryTag: ctx.industryTag,
 					sqlQuery: ctx.sqlQuery,
-					schema: ctx.schema,
+					schema: enrichedSchema,
 					rowCount: ctx.rows.length,
 					qualityScore: quality.qualityScore,
 					completeness: quality.columnHealth

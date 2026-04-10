@@ -468,32 +468,36 @@ export async function POST(request: Request) {
 		// Run LLM semantic checks
 		let semanticIssues: QualityIssue[] = [];
 		try {
+			const llmController = new AbortController();
+			const llmTimeout = setTimeout(() => llmController.abort(), 25000);
 			const sampleRows = rows.slice(0, 20);
-			const prompt = `You are a data quality expert. Analyze this ${industryTag} dataset "${datasetName}".
+			const prompt = `Data quality expert. Analyze this ${industryTag} dataset "${datasetName}".
 
 Schema: ${JSON.stringify(schema.map((c: Column) => ({ name: c.name, type: c.inferredType })))}
 
-Sample rows (first 20):
-${JSON.stringify(sampleRows, null, 1).slice(0, 3000)}
+Sample (20 rows): ${JSON.stringify(sampleRows, null, 0).slice(0, 2000)}
 
-Already detected deterministic issues:
+Known issues:
 ${deterministicIssues.map((i) => `- ${i.column}: ${i.issueType} — ${i.description}`).join('\n')}
 
-Identify 3-5 ADDITIONAL semantic quality issues that deterministic rules cannot catch:
-1. Business logic violations specific to ${industryTag}
+Identify 3-5 ADDITIONAL semantic issues deterministic rules miss:
+1. ${industryTag}-specific business logic violations
 2. Suspicious value distributions
 3. Column semantic mismatches
 4. Data freshness concerns
-5. Industry-specific anomalies
 
-Return ONLY valid JSON array:
-[{"column":"col_name","issueType":"SEMANTIC","severity":"WARNING","description":"...","affectedRowCount":N,"recommendation":"..."}]`;
+Return ONLY valid JSON. No prose, no markdown, no backticks.
+[{"column":"col","issueType":"SEMANTIC","severity":"WARNING","description":"...","affectedRowCount":0,"recommendation":"..."}]`;
 
-			const response = await client.messages.create({
-				model: 'claude-sonnet-4-20250514',
-				max_tokens: 1000,
-				messages: [{ role: 'user', content: prompt }],
-			});
+			const response = await client.messages.create(
+				{
+					model: 'claude-sonnet-4-20250514',
+					max_tokens: 1000,
+					messages: [{ role: 'user', content: prompt }],
+				},
+				{ signal: llmController.signal }
+			);
+			clearTimeout(llmTimeout);
 
 			const text = response.content[0].type === 'text' ? response.content[0].text : '';
 			const jsonMatch = text.match(/\[[\s\S]*\]/);

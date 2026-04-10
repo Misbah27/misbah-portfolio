@@ -2,57 +2,82 @@ import Anthropic from '@anthropic-ai/sdk';
 
 const client = new Anthropic();
 
+const cache = new Map<string, { result: string; timestamp: number }>();
+const CACHE_TTL_MS = 5 * 60 * 1000;
+
 /**
  * POST /api/inboundiq/dock-intelligence
  * Generates actionable dock operations recommendations based on current yard and dock state.
  */
 export async function POST(request: Request) {
+	const controller = new AbortController();
+	const timeout = setTimeout(() => controller.abort(), 25000);
+
 	try {
-		const { yardQueue, dockedTrucks, fcId, totalDoors } = await request.json();
+		const { yardQueue, dockedTrucks, fcId, totalDoors, forceRefresh } = await request.json();
+
+		const cacheKey = JSON.stringify({ fcId });
+		const cached = cache.get(cacheKey);
+
+		if (!forceRefresh && cached && Date.now() - cached.timestamp < CACHE_TTL_MS) {
+			clearTimeout(timeout);
+			return Response.json({ result: cached.result, cached: true });
+		}
 
 		const occupied = dockedTrucks.length;
 		const available = totalDoors - occupied;
 
-		// Get top 3 yard trucks by rank
-		const top3 = [...yardQueue]
-			.sort((a: { rank: number }, b: { rank: number }) => a.rank - b.rank)
-			.slice(0, 3);
+		const compactYard = yardQueue
+			.slice(0, 30)
+			.map((t: Record<string, unknown>) => ({
+				isaVrid: t.isaVrid,
+				rank: t.rank,
+				apptType: t.apptType,
+				lowInstockPct: t.lowInstockPct,
+				dwellHours: t.dwellHours,
+				units: t.units,
+			}));
 
-		// Get doors freeing soonest
-		const doorsFreeing = dockedTrucks
-			.filter((t: { unloadingEta: string | null }) => t.unloadingEta)
-			.sort((a: { unloadingEta: string }, b: { unloadingEta: string }) =>
-				new Date(a.unloadingEta).getTime() - new Date(b.unloadingEta).getTime()
-			)
-			.slice(0, 2);
+		const compactDocked = dockedTrucks.map((t: Record<string, unknown>) => ({
+			door: t.dockDoor,
+			unloadingEta: t.unloadingEta,
+			apptType: t.apptType,
+		}));
 
-		const prompt = `You are an FC dock operations advisor. Given the following state for ${fcId}:
+		const prompt = `FC dock operations advisor for ${fcId}.
 
-- Total doors: ${totalDoors}, Occupied: ${occupied}, Available: ${available}
-- ${yardQueue.length} trucks waiting in yard queue
+State: ${totalDoors} doors, ${occupied} occupied, ${available} available, ${yardQueue.length} trucks in yard.
 
-Top 3 queue trucks (highest priority):
-${top3.map((t: { isaVrid: string; lowInstockPct: number; apptType: string; dwellHours: number; rank: number }) =>
-	`  #${t.rank} ${t.isaVrid}: lowInstockPct=${t.lowInstockPct}%, apptType=${t.apptType}, dwellHours=${t.dwellHours}h`
-).join('\n')}
+Top yard trucks (by priority):
+${JSON.stringify(compactYard.slice(0, 5), null, 0)}
 
-Doors freeing soonest:
-${doorsFreeing.map((t: { dockDoor: number; isaVrid: string; unloadingEta: string }) =>
-	`  Door ${t.dockDoor} (${t.isaVrid}): ETA ${t.unloadingEta}`
-).join('\n') || '  No ETAs available'}
+Docked trucks:
+${JSON.stringify(compactDocked, null, 0)}
 
-Give 2-3 specific, actionable recommendations for the next 30 minutes of dock operations. Be concrete — name truck ISA/VRID and door numbers. Keep each recommendation to 1-2 sentences. Format as numbered list.`;
+Give 2-3 specific, actionable recommendations for the next 30 minutes. Name truck ISA/VRIDs and door numbers. 1-2 sentences each. Numbered list.`;
 
-		const response = await client.messages.create({
-			model: 'claude-sonnet-4-20250514',
-			max_tokens: 1000,
-			messages: [{ role: 'user', content: prompt }],
-		});
+		const response = await client.messages.create(
+			{
+				model: 'claude-sonnet-4-20250514',
+				max_tokens: 1000,
+				messages: [{ role: 'user', content: prompt }],
+			},
+			{ signal: controller.signal }
+		);
+		clearTimeout(timeout);
 
-		return Response.json({
-			result: response.content[0].type === 'text' ? response.content[0].text : '',
-		});
+		const llmResult = response.content[0].type === 'text' ? response.content[0].text : '';
+		cache.set(cacheKey, { result: llmResult, timestamp: Date.now() });
+
+		return Response.json({ result: llmResult, cached: false });
 	} catch (error) {
+		clearTimeout(timeout);
+		if ((error as Error).name === 'AbortError') {
+			return Response.json(
+				{ error: 'Request timed out — try a shorter query' },
+				{ status: 408 }
+			);
+		}
 		return Response.json({ error: 'LLM request failed' }, { status: 500 });
 	}
 }

@@ -3,51 +3,80 @@ import Anthropic from '@anthropic-ai/sdk';
 const client = new Anthropic();
 
 /**
- * POST /api/lofat/case-narrative — Formal case report for HR/legal review.
+ * POST /api/lofat/case-narrative — Streaming formal case report for HR/legal review.
  */
 export async function POST(request: Request) {
 	try {
 		const body = await request.json();
 		const { caseData, driver, evidence } = body;
 
-		const prompt = `Draft a formal case report for HR and legal review. Use the driver's name (${driver.name}) throughout. Write in formal third-person.
+		// Compact driver profile
+		const driverProfile = {
+			driverId: driver.driverId,
+			name: driver.name,
+			zone: driver.zone,
+			fraudScore: driver.fraudScore,
+			status: driver.status,
+			hourlyRate: driver.hourlyRate,
+			totalEarnings: driver.totalEarnings,
+			flaggedShifts: driver.flaggedShifts,
+			customerComplaintRate: driver.customerComplaintRate,
+			deliveriesCompleted: driver.deliveriesCompleted,
+			deliveriesAttempted: driver.deliveriesAttempted,
+		};
 
-CASE DETAILS:
-${JSON.stringify(caseData, null, 2)}
+		// Top 5 evidence items if evidence is an array, otherwise use as string
+		const evidenceSummary = Array.isArray(evidence)
+			? evidence.slice(0, 5).map((e: string) => e).join('\n')
+			: String(evidence).slice(0, 1000);
 
-DRIVER PROFILE:
-${JSON.stringify(driver, null, 2)}
+		const prompt = `Draft a formal case report for HR/legal review. Use ${driver.name}'s name throughout. Formal third-person.
 
-EVIDENCE SUMMARY:
-${evidence}
+CASE: ${JSON.stringify(caseData, null, 0)}
+DRIVER: ${JSON.stringify(driverProfile, null, 0)}
+EVIDENCE: ${evidenceSummary}
 
-Structure the report with these sections:
+Sections:
+1. INCIDENT SUMMARY — what happened, dates, fraud pattern detected.
+2. EVIDENCE — specific data anomalies with numbers (fraud score, delivery rates, GPS, complaints, financial).
+3. POLICY VIOLATIONS — which policies violated (attendance fraud, GPS tampering, etc).
+4. FINANCIAL IMPACT — estimated fraud: hourlyRate × flaggedShifts × 8hrs, total payroll impact.
+5. RECOMMENDED ACTION — termination/suspension/legal referral/monitoring with justification.
 
-INCIDENT SUMMARY
-What happened, relevant dates, the fraud pattern detected.
+Include specific numbers from the data. Professional language. 400 words maximum.`;
 
-EVIDENCE
-Specific data anomalies with numbers — fraud score, delivery completion rates, GPS anomalies, complaint rates, financial figures.
-
-POLICY VIOLATIONS
-Which company policies were violated (attendance fraud, service manipulation, GPS tampering, coordinated fraud).
-
-FINANCIAL IMPACT
-Estimated fraud amount, hourly rate, total hours of suspected fraudulent activity, total payroll impact.
-
-RECOMMENDED ACTION
-Specific recommendation: termination, suspension, legal referral, or monitoring with justification.
-
-Write professionally. Include specific numbers from the data. This document may be used in legal proceedings.`;
-
-		const response = await client.messages.create({
+		const stream = client.messages.stream({
 			model: 'claude-sonnet-4-20250514',
 			max_tokens: 1000,
 			messages: [{ role: 'user', content: prompt }],
 		});
 
-		return Response.json({
-			result: response.content[0].type === 'text' ? response.content[0].text : '',
+		const readableStream = new ReadableStream({
+			async start(controller) {
+				try {
+					for await (const chunk of stream) {
+						if (
+							chunk.type === 'content_block_delta' &&
+							chunk.delta.type === 'text_delta'
+						) {
+							controller.enqueue(
+								new TextEncoder().encode(chunk.delta.text)
+							);
+						}
+					}
+					controller.close();
+				} catch {
+					controller.close();
+				}
+			},
+		});
+
+		return new Response(readableStream, {
+			headers: {
+				'Content-Type': 'text/plain; charset=utf-8',
+				'Transfer-Encoding': 'chunked',
+				'Cache-Control': 'no-cache',
+			},
 		});
 	} catch (error) {
 		return Response.json({ error: 'Case narrative generation failed' }, { status: 500 });

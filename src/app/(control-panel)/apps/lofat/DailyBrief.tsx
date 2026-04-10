@@ -29,10 +29,12 @@ function DailyBrief({ drivers, metrics }: DailyBriefProps) {
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState(false);
 	const [generatedAt, setGeneratedAt] = useState('');
+	const [isCached, setIsCached] = useState(false);
 
-	const fetchBrief = useCallback(async () => {
+	const fetchBrief = useCallback(async (forceRefresh = false) => {
 		setLoading(true);
 		setError(false);
+		setIsCached(false);
 		try {
 			const res = await fetch('/api/lofat/daily-brief', {
 				method: 'POST',
@@ -41,14 +43,21 @@ function DailyBrief({ drivers, metrics }: DailyBriefProps) {
 					drivers,
 					shiftMetrics: metrics,
 					date: new Date().toISOString().slice(0, 10),
+					forceRefresh,
 				}),
 			});
+			if (res.status === 408) {
+				setError(true);
+				setBriefText('');
+				return;
+			}
 			const data = await res.json();
 			if (data.error) {
 				setError(true);
 				setBriefText('');
 			} else {
 				setBriefText(data.result);
+				setIsCached(!!data.cached);
 				setGeneratedAt(
 					new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: false })
 				);
@@ -80,7 +89,16 @@ function DailyBrief({ drivers, metrics }: DailyBriefProps) {
 					<Chip icon={<AutoAwesomeIcon />} label="AI-Enhanced" size="small" color="secondary" variant="outlined" sx={{ height: 20, fontSize: '0.6rem' }} />
 					{generatedAt && (
 						<Typography variant="caption" color="text.secondary" className="ml-auto">
-							Generated at {generatedAt}
+							{isCached ? 'Cached' : 'Generated'} at {generatedAt}
+							{isCached && (
+								<Button
+									size="small"
+									onClick={() => fetchBrief(true)}
+									sx={{ textTransform: 'none', fontSize: '0.6rem', ml: 1, minWidth: 0, p: '0 4px' }}
+								>
+									Refresh
+								</Button>
+							)}
 						</Typography>
 					)}
 				</div>
@@ -99,7 +117,7 @@ function DailyBrief({ drivers, metrics }: DailyBriefProps) {
 						<Typography variant="body2" color="text.secondary">
 							Brief unavailable — LLM service temporarily unreachable.
 						</Typography>
-						<Button size="small" onClick={fetchBrief} sx={{ textTransform: 'none', fontSize: '0.7rem' }}>
+						<Button size="small" onClick={() => fetchBrief()} sx={{ textTransform: 'none', fontSize: '0.7rem' }}>
 							Retry
 						</Button>
 					</div>

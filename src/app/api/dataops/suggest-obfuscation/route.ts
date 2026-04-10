@@ -20,45 +20,48 @@ interface RequestBody {
 }
 
 export async function POST(request: Request) {
+	const controller = new AbortController();
+	const timeout = setTimeout(() => controller.abort(), 25000);
+
 	try {
 		const body = (await request.json()) as RequestBody;
 		const { columns, industryTag } = body;
 
 		if (!columns || columns.length === 0) {
+			clearTimeout(timeout);
 			return Response.json({ error: 'Columns are required' }, { status: 400 });
 		}
 
-		const prompt = `You are a data privacy engineer specializing in ${industryTag} data. For each PII column below, suggest the most appropriate format-preserving obfuscation rule.
+		// Cap at 20 columns
+		const cappedColumns = columns.slice(0, 20);
 
-Columns:
-${JSON.stringify(columns, null, 2)}
+		const prompt = `Data privacy engineer for ${industryTag} data. Suggest obfuscation rules for each PII column.
 
-Rules available:
-- FORMAT_PRESERVE: Replace with a value that looks like the original (same format). Best for emails, phones, SSNs, names, addresses, IDs.
-- HASH: One-way cryptographic hash. Best for internal identifiers that need consistency but no format preservation.
-- NULLIFY: Replace with null. Use sparingly — only for columns with no analytical value when obfuscated.
-- GENERALIZE: Replace with a broader category (e.g., exact age → age range, full address → city only). Good for quasi-identifiers.
-- KEEP: Do not obfuscate. Only for non-PII columns.
+Columns: ${JSON.stringify(cappedColumns, null, 0)}
 
-Return ONLY valid JSON, no prose, no markdown:
-{"suggestions": [{"column": "columnName", "rule": "FORMAT_PRESERVE", "reasoning": "one sentence explanation"}]}`;
+Rules: FORMAT_PRESERVE (same format, best for emails/phones/SSNs/names/addresses/IDs), HASH (one-way, for internal IDs), NULLIFY (replace with null, sparingly), GENERALIZE (broader category, for quasi-identifiers), KEEP (non-PII only).
 
-		const response = await client.messages.create({
-			model: 'claude-sonnet-4-20250514',
-			max_tokens: 1000,
-			messages: [{ role: 'user', content: prompt }],
-		});
+Return ONLY valid JSON. No prose, no markdown, no backticks.
+{"suggestions":[{"column":"name","rule":"FORMAT_PRESERVE","reasoning":"1 sentence"}]}`;
+
+		const response = await client.messages.create(
+			{
+				model: 'claude-sonnet-4-20250514',
+				max_tokens: 1000,
+				messages: [{ role: 'user', content: prompt }],
+			},
+			{ signal: controller.signal }
+		);
+		clearTimeout(timeout);
 
 		const raw = response.content[0].type === 'text' ? response.content[0].text : '';
 
 		let parsed: { suggestions: SuggestionOutput[] };
-
 		try {
 			parsed = JSON.parse(raw) as { suggestions: SuggestionOutput[] };
 		} catch {
-			// Fallback: return KEEP for all columns
 			parsed = {
-				suggestions: columns.map((c) => ({
+				suggestions: cappedColumns.map((c) => ({
 					column: c.name,
 					rule: 'KEEP' as const,
 					reasoning: 'LLM response could not be parsed — defaulting to KEEP.',
@@ -68,15 +71,16 @@ Return ONLY valid JSON, no prose, no markdown:
 
 		return Response.json(parsed);
 	} catch (error) {
-		console.error('Suggest obfuscation error:', error);
-		// Graceful fallback
-		const body = (await request.clone().json().catch(() => ({ columns: [] }))) as RequestBody;
+		clearTimeout(timeout);
+		if ((error as Error).name === 'AbortError') {
+			return Response.json(
+				{ error: 'Request timed out', suggestions: [] },
+				{ status: 408 }
+			);
+		}
 		return Response.json({
-			suggestions: (body.columns || []).map((c: ColumnInput) => ({
-				column: c.name,
-				rule: 'KEEP',
-				reasoning: 'Service temporarily unavailable — defaulting to KEEP.',
-			})),
-		});
+			suggestions: [],
+			error: 'Service temporarily unavailable',
+		}, { status: 500 });
 	}
 }

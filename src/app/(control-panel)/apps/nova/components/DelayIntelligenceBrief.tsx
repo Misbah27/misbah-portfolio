@@ -26,15 +26,18 @@ interface BriefResult {
 
 /**
  * AI-Enhanced Delay Intelligence Brief — auto-loads when Delay Alert page mounts.
+ * Supports server-side caching with forceRefresh bypass and 408 timeout handling.
  */
 function DelayIntelligenceBrief({ alerts }: DelayIntelligenceBriefProps) {
 	const [brief, setBrief] = useState<BriefResult | null>(null);
 	const [loading, setLoading] = useState(false);
-	const [error, setError] = useState(false);
+	const [error, setError] = useState<string | false>(false);
 	const [generatedAt, setGeneratedAt] = useState('');
 	const [responseTime, setResponseTime] = useState(0);
+	const [isCached, setIsCached] = useState(false);
+	const [cachedAt, setCachedAt] = useState<number | null>(null);
 
-	const fetchBrief = useCallback(async () => {
+	const fetchBrief = useCallback(async (forceRefresh = false) => {
 		setLoading(true);
 		setError(false);
 		const start = Date.now();
@@ -42,15 +45,27 @@ function DelayIntelligenceBrief({ alerts }: DelayIntelligenceBriefProps) {
 			const res = await fetch('/api/nova/delay-brief', {
 				method: 'POST',
 				headers: { 'Content-Type': 'application/json' },
-				body: JSON.stringify({ vehicles: alerts }),
+				body: JSON.stringify({ vehicles: alerts, forceRefresh }),
 			});
+			if (res.status === 408) {
+				setError('Request timed out — try again in a moment');
+				return;
+			}
 			if (!res.ok) throw new Error('API error');
 			const data = await res.json();
 			setBrief(data.result);
 			setResponseTime(Date.now() - start);
 			setGeneratedAt(new Date().toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', second: '2-digit' }));
+
+			if (data.cached) {
+				setIsCached(true);
+				setCachedAt(Date.now());
+			} else {
+				setIsCached(false);
+				setCachedAt(null);
+			}
 		} catch {
-			setError(true);
+			setError('Failed to generate delay intelligence brief');
 		} finally {
 			setLoading(false);
 		}
@@ -61,6 +76,13 @@ function DelayIntelligenceBrief({ alerts }: DelayIntelligenceBriefProps) {
 			fetchBrief();
 		}
 	}, []);  // eslint-disable-line react-hooks/exhaustive-deps
+
+	const getCachedAgoText = (): string => {
+		if (!cachedAt) return '';
+		const mins = Math.round((Date.now() - cachedAt) / 60000);
+		if (mins < 1) return 'Cached just now';
+		return `Cached ${mins} min${mins === 1 ? '' : 's'} ago`;
+	};
 
 	if (loading) {
 		return (
@@ -81,10 +103,10 @@ function DelayIntelligenceBrief({ alerts }: DelayIntelligenceBriefProps) {
 				<div className="flex items-center gap-2">
 					<FuseSvgIcon size={20} sx={{ color: '#ef4444' }}>heroicons-outline:exclamation-triangle</FuseSvgIcon>
 					<Typography variant="body2" color="text.secondary">
-						Failed to generate delay intelligence brief
+						{typeof error === 'string' ? error : 'Failed to generate delay intelligence brief'}
 					</Typography>
 				</div>
-				<Button size="small" onClick={fetchBrief} startIcon={<FuseSvgIcon size={16}>heroicons-outline:arrow-path</FuseSvgIcon>} sx={{ textTransform: 'none' }}>
+				<Button size="small" onClick={() => fetchBrief(true)} startIcon={<FuseSvgIcon size={16}>heroicons-outline:arrow-path</FuseSvgIcon>} sx={{ textTransform: 'none' }}>
 					Retry
 				</Button>
 			</Paper>
@@ -104,8 +126,18 @@ function DelayIntelligenceBrief({ alerts }: DelayIntelligenceBriefProps) {
 					<div className="flex items-center gap-2">
 						<Typography variant="caption" color="text.secondary">
 							Generated at {generatedAt} ({(responseTime / 1000).toFixed(1)}s)
+							{isCached && (
+								<>
+									{' '}&middot; {getCachedAgoText()}
+								</>
+							)}
 						</Typography>
-						<Button size="small" onClick={fetchBrief} sx={{ minWidth: 0, p: 0.5 }} title="Refresh">
+						<Button
+							size="small"
+							onClick={() => fetchBrief(true)}
+							sx={{ minWidth: 0, p: 0.5 }}
+							title={isCached ? 'Refresh (bypass cache)' : 'Refresh'}
+						>
 							<FuseSvgIcon size={16}>heroicons-outline:arrow-path</FuseSvgIcon>
 						</Button>
 					</div>

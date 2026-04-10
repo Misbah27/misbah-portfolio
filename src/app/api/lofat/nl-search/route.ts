@@ -4,54 +4,46 @@ const client = new Anthropic();
 
 /**
  * POST /api/lofat/nl-search — Natural language driver search.
- * Returns JSON array of matching driverIds.
  */
 export async function POST(request: Request) {
-	try {
-		const body = await request.json();
-		const { query, drivers } = body;
+	const controller = new AbortController();
+	const timeout = setTimeout(() => controller.abort(), 25000);
 
-		const driverSummaries = drivers.map((d: Record<string, unknown>) => ({
+	try {
+		const { query, drivers } = await request.json();
+
+		const compact = drivers.map((d: Record<string, unknown>) => ({
 			driverId: d.driverId,
 			name: d.name,
 			zone: d.zone,
-			status: d.status,
 			fraudScore: d.fraudScore,
 			primaryFraudPattern: d.primaryFraudPattern,
-			vehicleType: d.vehicleType,
-			lastFlaggedDate: d.lastFlaggedDate,
-			customerComplaintRate: d.customerComplaintRate,
-			onTimeRate: d.onTimeRate,
-			deliveriesCompleted: d.deliveriesCompleted,
-			deliveriesAttempted: d.deliveriesAttempted,
+			status: d.status,
 		}));
 
-		const prompt = `You are a fraud detection search engine. Given the user query and the driver dataset below, return ONLY a JSON array of matching driverIds. No prose, no explanation — just the JSON array.
+		const prompt = `Fraud detection search engine. Return matching driverIds from this dataset.
 
-USER QUERY: "${query}"
+Query: "${query}"
 
-DRIVERS:
-${JSON.stringify(driverSummaries, null, 1)}
+Drivers (${compact.length}):
+${JSON.stringify(compact, null, 0)}
 
-Pattern name mappings:
-- "order dodger" / "roster avoidance" = ROSTER_AVOIDANCE
-- "GPS spoofing" / "spoofer" = GPS_SPOOFING
-- "ghost delivery" / "ghost" = GHOST_DELIVERY
-- "phantom route" / "teleport" = PHANTOM_ROUTE
-- "cluster fraud" / "coordinated" = CLUSTER_FRAUD
+Pattern mappings: "order dodger"/"roster avoidance"=ROSTER_AVOIDANCE, "GPS spoofing"/"spoofer"=GPS_SPOOFING, "ghost delivery"/"ghost"=GHOST_DELIVERY, "phantom route"/"teleport"=PHANTOM_ROUTE, "cluster fraud"/"coordinated"=CLUSTER_FRAUD
 
-Zone mappings:
-- "Seattle" = Seattle-North or Seattle-South
-- "Chicago" = Chicago-Loop or Chicago-North
-- "LA" / "Los Angeles" = LA-Westside or LA-Valley
+Zone mappings: "Seattle"=Seattle-North/Seattle-South, "Chicago"=Chicago-Loop/Chicago-North, "LA"/"Los Angeles"=LA-Westside/LA-Valley
 
-Return ONLY a valid JSON array of driverId strings. Example: ["DRV-10141","DRV-10145"]`;
+Return ONLY valid JSON. No prose, no markdown, no backticks.
+["DRV-10141","DRV-10145"]`;
 
-		const response = await client.messages.create({
-			model: 'claude-sonnet-4-20250514',
-			max_tokens: 1000,
-			messages: [{ role: 'user', content: prompt }],
-		});
+		const response = await client.messages.create(
+			{
+				model: 'claude-sonnet-4-20250514',
+				max_tokens: 1000,
+				messages: [{ role: 'user', content: prompt }],
+			},
+			{ signal: controller.signal }
+		);
+		clearTimeout(timeout);
 
 		const text = response.content[0].type === 'text' ? response.content[0].text : '[]';
 		const match = text.match(/\[[\s\S]*\]/);
@@ -59,6 +51,10 @@ Return ONLY a valid JSON array of driverId strings. Example: ["DRV-10141","DRV-1
 
 		return Response.json({ driverIds });
 	} catch (error) {
+		clearTimeout(timeout);
+		if ((error as Error).name === 'AbortError') {
+			return Response.json({ error: 'Request timed out — try a shorter query', driverIds: [] }, { status: 408 });
+		}
 		return Response.json({ error: 'Search failed', driverIds: [] }, { status: 500 });
 	}
 }

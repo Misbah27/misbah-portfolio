@@ -158,6 +158,7 @@ function CasesPage() {
 		if (!selectedCase) return;
 		setNarrativeLoading(true);
 		setNarrativeOpen(true);
+		setNarrativeText('');
 		try {
 			const driver = drivers.find((d) => d.driverId === selectedCase.driverId);
 			const res = await fetch('/api/lofat/case-narrative', {
@@ -169,8 +170,20 @@ function CasesPage() {
 					evidence: selectedCase.evidenceSummary,
 				}),
 			});
-			const data = await res.json();
-			setNarrativeText(data.result || data.error || 'Failed to generate narrative.');
+
+			if (!res.ok) throw new Error('Failed');
+			if (!res.body) throw new Error('No stream');
+
+			const reader = res.body.getReader();
+			const decoder = new TextDecoder();
+			let accumulated = '';
+
+			while (true) {
+				const { done, value } = await reader.read();
+				if (done) break;
+				accumulated += decoder.decode(value, { stream: true });
+				setNarrativeText(accumulated);
+			}
 		} catch {
 			setNarrativeText('Failed to generate narrative. Please try again.');
 		} finally {

@@ -2,40 +2,68 @@ import Anthropic from '@anthropic-ai/sdk';
 
 const client = new Anthropic();
 
+interface RollingEntry {
+	utilizationPct: number;
+	totalUnitsLeft: number;
+	[key: string]: unknown;
+}
+
 /**
  * POST /api/freightlens/forecast-summary
  * Returns an AI-generated capacity forecast summary for the rolling 21-day view.
  */
 export async function POST(request: Request) {
+	const controller = new AbortController();
+	const timeout = setTimeout(() => controller.abort(), 25000);
+
 	try {
 		const { rollingData, selectedFCs } = await request.json();
 
-		const prompt = `You are a senior freight capacity analyst. Analyze the following Rolling 21-day scheduling data and produce a brief capacity intelligence summary.
+		// Aggregate stats instead of raw rows
+		const allEntries: { fcId: string; utilizationPct: number; totalUnitsLeft: number }[] = [];
+		for (const [fcId, entries] of Object.entries(rollingData as Record<string, RollingEntry[]>)) {
+			for (const e of entries) {
+				allEntries.push({ fcId, utilizationPct: e.utilizationPct, totalUnitsLeft: e.totalUnitsLeft });
+			}
+		}
 
-Data (FC → daily entries with bmPortal, vendorScheduled, saBlocked, saScheduled, saUnitsLeft, totalUnitsLeft, utilizationPct):
-${JSON.stringify(rollingData, null, 0)}
+		const totalFcDays = allEntries.length;
+		const overScheduled = allEntries.filter((e) => e.utilizationPct > 100).length;
+		const noCapacity = allEntries.filter((e) => e.totalUnitsLeft === 0).length;
+		const avgUtil = Math.round(allEntries.reduce((s, e) => s + e.utilizationPct, 0) / totalFcDays);
+		const overPct = Math.round((overScheduled / totalFcDays) * 100);
 
-Selected FCs: ${JSON.stringify(selectedFCs)}
+		// Per-FC risk scores
+		const fcRisks = Object.entries(rollingData as Record<string, RollingEntry[]>).map(([fcId, entries]) => ({
+			fcId,
+			avgUtil: Math.round(entries.reduce((s, e) => s + e.utilizationPct, 0) / entries.length),
+			overDays: entries.filter((e) => e.utilizationPct > 100).length,
+		}));
 
-Evaluate overall network health based on:
-- How many FC-days have utilizationPct > 100% (over-scheduled)
-- How many FC-days have totalUnitsLeft = 0 (no remaining capacity)
-- Trends: is utilization increasing or decreasing over the 21-day window
-- Which FCs are most at risk
+		const prompt = `Senior freight capacity analyst. Produce a capacity intelligence summary from these aggregates.
 
-Return ONLY valid JSON (no markdown, no backticks):
-{"health":"HEALTHY|AT_RISK|CRITICAL","topConcern":"1 sentence describing the biggest concern across the network","recommendation":"1 sentence with a specific operational recommendation"}
+Network stats (21-day window, ${(selectedFCs as string[]).length} FCs):
+- Total FC-days: ${totalFcDays}
+- Over-scheduled FC-days: ${overScheduled} (${overPct}%)
+- Zero-capacity FC-days: ${noCapacity}
+- Avg utilization: ${avgUtil}%
 
-Health classification:
-- HEALTHY: <10% of FC-days are over-scheduled
-- AT_RISK: 10-30% of FC-days are over-scheduled
-- CRITICAL: >30% of FC-days are over-scheduled`;
+Per-FC risk: ${JSON.stringify(fcRisks, null, 0)}
 
-		const response = await client.messages.create({
-			model: 'claude-sonnet-4-20250514',
-			max_tokens: 1000,
-			messages: [{ role: 'user', content: prompt }],
-		});
+Return ONLY valid JSON. No prose, no markdown, no backticks.
+{"health":"HEALTHY|AT_RISK|CRITICAL","topConcern":"1 sentence","recommendation":"1 sentence"}
+
+Health: HEALTHY if <10% over-scheduled, AT_RISK if 10-30%, CRITICAL if >30%.`;
+
+		const response = await client.messages.create(
+			{
+				model: 'claude-sonnet-4-20250514',
+				max_tokens: 1000,
+				messages: [{ role: 'user', content: prompt }],
+			},
+			{ signal: controller.signal }
+		);
+		clearTimeout(timeout);
 
 		const text = response.content[0].type === 'text' ? response.content[0].text : '{}';
 		const cleaned = text.trim().replace(/```json\n?/g, '').replace(/```/g, '').trim();
@@ -47,6 +75,10 @@ Health classification:
 			recommendation: result.recommendation || '',
 		});
 	} catch (error) {
+		clearTimeout(timeout);
+		if ((error as Error).name === 'AbortError') {
+			return Response.json({ error: 'Request timed out — try a shorter query' }, { status: 408 });
+		}
 		return Response.json({ error: 'LLM request failed' }, { status: 500 });
 	}
 }

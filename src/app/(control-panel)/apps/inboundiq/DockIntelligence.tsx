@@ -30,24 +30,42 @@ function DockIntelligence({ yardQueue, dockedTrucks, fcId, totalDoors }: DockInt
 	const [error, setError] = useState(false);
 	const [responseTime, setResponseTime] = useState<number | null>(null);
 	const [timestamp, setTimestamp] = useState<string | null>(null);
+	const [isCached, setIsCached] = useState(false);
 
-	const fetchIntel = useCallback(async () => {
+	const fetchIntel = useCallback(async (forceRefresh = false) => {
 		setLoading(true);
 		setError(false);
+		setIsCached(false);
 		const start = Date.now();
 
 		try {
 			const res = await fetch('/api/inboundiq/dock-intelligence', {
 				method: 'POST',
 				headers: { 'Content-Type': 'application/json' },
-				body: JSON.stringify({ yardQueue, dockedTrucks, fcId, totalDoors }),
+				body: JSON.stringify({ yardQueue, dockedTrucks, fcId, totalDoors, forceRefresh }),
 			});
+
+			if (res.status === 408) {
+				const data = await res.json();
+				setError(true);
+				setResult(data.error || 'Request timed out');
+				setLoading(false);
+				return;
+			}
 
 			if (!res.ok) throw new Error('Failed');
 			const data = await res.json();
+
 			setResult(data.result);
-			setResponseTime(Date.now() - start);
-			setTimestamp(new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' }));
+			setIsCached(!!data.cached);
+
+			if (data.cached) {
+				setTimestamp('cached');
+				setResponseTime(null);
+			} else {
+				setResponseTime(Date.now() - start);
+				setTimestamp(new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' }));
+			}
 		} catch {
 			setError(true);
 		} finally {
@@ -63,6 +81,7 @@ function DockIntelligence({ yardQueue, dockedTrucks, fcId, totalDoors }: DockInt
 			setResult(null);
 			setResponseTime(null);
 			setTimestamp(null);
+			setIsCached(false);
 		}
 	}, [enabled, fcId]); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -112,7 +131,7 @@ function DockIntelligence({ yardQueue, dockedTrucks, fcId, totalDoors }: DockInt
 					</Typography>
 				</Box>
 				<Box className="flex items-center gap-1">
-					<IconButton size="small" onClick={fetchIntel} disabled={loading} title="Refresh">
+					<IconButton size="small" onClick={() => fetchIntel(true)} disabled={loading} title="Refresh">
 						<RefreshIcon sx={{ fontSize: 16 }} />
 					</IconButton>
 					<Switch size="small" checked={enabled} onChange={handleToggle} />
@@ -130,15 +149,15 @@ function DockIntelligence({ yardQueue, dockedTrucks, fcId, totalDoors }: DockInt
 			{error && !loading && (
 				<Box className="text-center py-2">
 					<Typography variant="caption" color="error" className="block mb-1">
-						Failed to generate recommendations
+						{result || 'Failed to generate recommendations'}
 					</Typography>
-					<Button size="small" variant="outlined" onClick={fetchIntel}>
+					<Button size="small" variant="outlined" onClick={() => fetchIntel(true)}>
 						Retry
 					</Button>
 				</Box>
 			)}
 
-			{result && !loading && (
+			{result && !loading && !error && (
 				<>
 					<Typography
 						variant="body2"
@@ -147,10 +166,26 @@ function DockIntelligence({ yardQueue, dockedTrucks, fcId, totalDoors }: DockInt
 						{result}
 					</Typography>
 					<Box className="flex items-center justify-between mt-2">
-						{timestamp && (
-							<Typography variant="caption" color="text.secondary">
-								Generated at {timestamp}
-							</Typography>
+						{isCached ? (
+							<Box className="flex items-center gap-1">
+								<Typography variant="caption" color="text.secondary">
+									Cached
+								</Typography>
+								<Button
+									size="small"
+									variant="text"
+									onClick={() => fetchIntel(true)}
+									sx={{ minWidth: 0, p: 0, fontSize: '0.7rem', textTransform: 'none' }}
+								>
+									Refresh
+								</Button>
+							</Box>
+						) : (
+							timestamp && (
+								<Typography variant="caption" color="text.secondary">
+									Generated at {timestamp}
+								</Typography>
+							)
 						)}
 						{responseTime !== null && (
 							<Typography variant="caption" color="text.secondary">

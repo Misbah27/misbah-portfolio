@@ -169,6 +169,7 @@ function DriverInvestigationPage() {
 		if (!driver) return;
 		setAnalysisLoading(true);
 		setAnalysisOpen(true);
+		setAnalysisText('');
 		try {
 			const res = await fetch('/api/lofat/investigate', {
 				method: 'POST',
@@ -180,8 +181,20 @@ function DriverInvestigationPage() {
 					flaggedShifts: driver.flaggedShifts,
 				}),
 			});
-			const data = await res.json();
-			setAnalysisText(data.result || data.error || 'Analysis unavailable.');
+
+			if (!res.ok) throw new Error('Failed');
+			if (!res.body) throw new Error('No stream');
+
+			const reader = res.body.getReader();
+			const decoder = new TextDecoder();
+			let accumulated = '';
+
+			while (true) {
+				const { done, value } = await reader.read();
+				if (done) break;
+				accumulated += decoder.decode(value, { stream: true });
+				setAnalysisText(accumulated);
+			}
 		} catch {
 			setAnalysisText('Investigation analysis failed. Please try again.');
 		} finally {
