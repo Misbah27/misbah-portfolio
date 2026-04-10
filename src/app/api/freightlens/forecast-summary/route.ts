@@ -1,4 +1,5 @@
 import Anthropic from '@anthropic-ai/sdk';
+import { rateLimitResponse } from '@/lib/rate-limit';
 
 const client = new Anthropic();
 
@@ -13,6 +14,8 @@ interface RollingEntry {
  * Returns an AI-generated capacity forecast summary for the rolling 21-day view.
  */
 export async function POST(request: Request) {
+	const limited = rateLimitResponse(request);
+	if (limited) return limited;
 	const controller = new AbortController();
 	const timeout = setTimeout(() => controller.abort(), 25000);
 

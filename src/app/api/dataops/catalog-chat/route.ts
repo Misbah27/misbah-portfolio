@@ -1,5 +1,6 @@
 import Anthropic from '@anthropic-ai/sdk';
 import catalogData from '@/data/dataops/catalog.json';
+import { rateLimitResponse } from '@/lib/rate-limit';
 
 const client = new Anthropic();
 
@@ -52,6 +53,8 @@ Return ONLY valid JSON. No prose, no markdown, no backticks.
 {"text":"your answer","datasetCards":["ds-001"]}`;
 
 export async function POST(request: Request) {
+	const limited = rateLimitResponse(request);
+	if (limited) return limited;
 	const controller = new AbortController();
 	const timeout = setTimeout(() => controller.abort(), 25000);
 

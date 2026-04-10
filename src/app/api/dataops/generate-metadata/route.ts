@@ -1,4 +1,5 @@
 import Anthropic from '@anthropic-ai/sdk';
+import { rateLimitResponse } from '@/lib/rate-limit';
 
 const client = new Anthropic();
 
@@ -21,6 +22,8 @@ interface QualityReport {
  * LLM-powered metadata generation with streaming response.
  */
 export async function POST(request: Request) {
+	const limited = rateLimitResponse(request);
+	if (limited) return limited;
 	try {
 		const { schema, sampleRows, datasetName, sqlQuery, industryTag, qualityReport } =
 			(await request.json()) as {

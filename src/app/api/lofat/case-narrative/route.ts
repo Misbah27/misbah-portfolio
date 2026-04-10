@@ -1,4 +1,5 @@
 import Anthropic from '@anthropic-ai/sdk';
+import { rateLimitResponse } from '@/lib/rate-limit';
 
 const client = new Anthropic();
 
@@ -6,6 +7,8 @@ const client = new Anthropic();
  * POST /api/lofat/case-narrative — Streaming formal case report for HR/legal review.
  */
 export async function POST(request: Request) {
+	const limited = rateLimitResponse(request);
+	if (limited) return limited;
 	try {
 		const body = await request.json();
 		const { caseData, driver, evidence } = body;

@@ -1,4 +1,5 @@
 import Anthropic from '@anthropic-ai/sdk';
+import { rateLimitResponse } from '@/lib/rate-limit';
 
 const client = new Anthropic();
 
@@ -458,6 +459,8 @@ function computeQualityScore(issues: QualityIssue[]): number {
 /* ------------------------------------------------------------------ */
 
 export async function POST(request: Request) {
+	const limited = rateLimitResponse(request);
+	if (limited) return limited;
 	try {
 		const { schema, rows, datasetName, industryTag } = await request.json();
 
