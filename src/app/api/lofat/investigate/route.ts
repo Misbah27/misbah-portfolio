@@ -1,6 +1,11 @@
 import Anthropic from '@anthropic-ai/sdk';
 import { rateLimitResponse } from '@/lib/rate-limit';
 
+// Override Amplify SSR Lambda's 30s default. Streaming routes don't get the
+// implicit AbortController timeout the other LLM routes use, so without this
+// a slow Sonnet response would 499 mid-stream at exactly 30s.
+export const maxDuration = 30;
+
 const client = new Anthropic();
 
 /**
@@ -9,6 +14,11 @@ const client = new Anthropic();
 export async function POST(request: Request) {
 	const limited = rateLimitResponse(request);
 	if (limited) return limited;
+
+	// Fail cleanly at 25s before Lambda hard-kills at 30s.
+	const controller = new AbortController();
+	const timeout = setTimeout(() => controller.abort(), 25_000);
+
 	try {
 		const body = await request.json();
 		const { driver, recentDeliveries, fraudPattern, flaggedShifts, gpsTrace } = body;
@@ -65,28 +75,33 @@ Provide a structured report:
 
 Reference actual numbers. Formal third-person language. 300 words maximum.`;
 
-		const stream = client.messages.stream({
-			model: 'claude-sonnet-4-20250514',
-			max_tokens: 1000,
-			messages: [{ role: 'user', content: prompt }],
-		});
+		const stream = client.messages.stream(
+			{
+				model: 'claude-sonnet-4-20250514',
+				max_tokens: 1000,
+				messages: [{ role: 'user', content: prompt }],
+			},
+			{ signal: controller.signal }
+		);
 
 		const readableStream = new ReadableStream({
-			async start(controller) {
+			async start(ctrl) {
 				try {
 					for await (const chunk of stream) {
 						if (
 							chunk.type === 'content_block_delta' &&
 							chunk.delta.type === 'text_delta'
 						) {
-							controller.enqueue(
+							ctrl.enqueue(
 								new TextEncoder().encode(chunk.delta.text)
 							);
 						}
 					}
-					controller.close();
+					ctrl.close();
 				} catch {
-					controller.close();
+					ctrl.close();
+				} finally {
+					clearTimeout(timeout);
 				}
 			},
 		});
@@ -99,6 +114,7 @@ Reference actual numbers. Formal third-person language. 300 words maximum.`;
 			},
 		});
 	} catch (error) {
+		clearTimeout(timeout);
 		console.error(`API error in ${import.meta.url}:`, error);
 		return Response.json({ error: 'Investigation analysis failed' }, { status: 500 });
 	}

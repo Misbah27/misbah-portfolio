@@ -79,7 +79,15 @@ export async function POST(request: Request) {
 			{
 				model: 'claude-sonnet-4-20250514',
 				max_tokens: 1000,
-				system: SYSTEM_PROMPT,
+				// The 12-dataset catalog is identical on every chat turn — cache it
+				// so follow-up turns within the 5-min TTL read tokens at ~10% the cost.
+				system: [
+					{
+						type: 'text',
+						text: SYSTEM_PROMPT,
+						cache_control: { type: 'ephemeral' },
+					},
+				],
 				messages,
 			},
 			{ signal: controller.signal }

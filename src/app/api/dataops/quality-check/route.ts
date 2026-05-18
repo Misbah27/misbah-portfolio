@@ -3,6 +3,37 @@ import { rateLimitResponse } from '@/lib/rate-limit';
 
 const client = new Anthropic();
 
+// Static rubric for the LLM semantic-quality pass — cached with cache_control:ephemeral
+// on the system block. Re-running quality-check on a second dataset within 5 minutes
+// reads these tokens at ~10% of the input cost.
+const SEMANTIC_SYSTEM_PROMPT = `You are a senior data quality expert. Your job is to identify SEMANTIC data quality issues that pattern-matching rules cannot detect.
+
+INPUT: For each dataset you receive:
+- The schema (columns + inferred types)
+- A 20-row sample
+- A list of issues already detected by deterministic rules — do NOT repeat these
+
+OUTPUT: 3-5 ADDITIONAL semantic issues across these categories:
+1. Industry-specific business logic violations (e.g. healthcare appointments where the patient was billed before the appointment date, marketing campaigns with negative ROAS, financial transactions in deprecated currencies)
+2. Suspicious value distributions (e.g. salary bands clustered at a single round number, GPS coordinates clustered at one point, timestamps clustered at exactly midnight)
+3. Column semantic mismatches (e.g. a column called "email" containing values that look like phone numbers, a column called "amount" containing dates)
+4. Data freshness concerns (e.g. dates that suggest the snapshot is stale, missing recent records, all records dated in the same week)
+
+SEVERITY GUIDELINES:
+- CRITICAL: violates a hard business rule, makes the data unsafe to use downstream
+- WARNING: suspicious pattern, likely a defect worth investigating
+- INFO: minor concern, worth noting but not blocking
+
+OUTPUT FORMAT: Return ONLY a valid JSON array. No prose, no markdown, no backticks. Each element:
+{
+  "column": "column name or '(all)' for row-level issues",
+  "issueType": "SEMANTIC",
+  "severity": "CRITICAL" | "WARNING" | "INFO",
+  "description": "one-sentence factual description with specific numbers from the sample",
+  "affectedRowCount": 0,
+  "recommendation": "one-sentence actionable fix"
+}`;
+
 interface Column {
 	name: string;
 	inferredType: string;
@@ -474,29 +505,28 @@ export async function POST(request: Request) {
 			const llmController = new AbortController();
 			const llmTimeout = setTimeout(() => llmController.abort(), 25000);
 			const sampleRows = rows.slice(0, 20);
-			const prompt = `Data quality expert. Analyze this ${industryTag} dataset "${datasetName}".
+			const userMessage = `Industry: ${industryTag}
+Dataset: "${datasetName}"
 
-Schema: ${JSON.stringify(schema.map((c: Column) => ({ name: c.name, type: c.inferredType })))}
+SCHEMA: ${JSON.stringify(schema.map((c: Column) => ({ name: c.name, type: c.inferredType })))}
 
-Sample (20 rows): ${JSON.stringify(sampleRows, null, 0).slice(0, 2000)}
+SAMPLE (20 rows): ${JSON.stringify(sampleRows, null, 0).slice(0, 2000)}
 
-Known issues:
-${deterministicIssues.map((i) => `- ${i.column}: ${i.issueType} — ${i.description}`).join('\n')}
-
-Identify 3-5 ADDITIONAL semantic issues deterministic rules miss:
-1. ${industryTag}-specific business logic violations
-2. Suspicious value distributions
-3. Column semantic mismatches
-4. Data freshness concerns
-
-Return ONLY valid JSON. No prose, no markdown, no backticks.
-[{"column":"col","issueType":"SEMANTIC","severity":"WARNING","description":"...","affectedRowCount":0,"recommendation":"..."}]`;
+ALREADY DETECTED BY DETERMINISTIC RULES (do not repeat):
+${deterministicIssues.map((i) => `- ${i.column}: ${i.issueType} — ${i.description}`).join('\n') || '(none)'}`;
 
 			const response = await client.messages.create(
 				{
 					model: 'claude-sonnet-4-20250514',
 					max_tokens: 1000,
-					messages: [{ role: 'user', content: prompt }],
+					system: [
+						{
+							type: 'text',
+							text: SEMANTIC_SYSTEM_PROMPT,
+							cache_control: { type: 'ephemeral' },
+						},
+					],
+					messages: [{ role: 'user', content: userMessage }],
 				},
 				{ signal: llmController.signal }
 			);

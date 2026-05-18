@@ -170,6 +170,11 @@ function DriverInvestigationPage() {
 		setAnalysisLoading(true);
 		setAnalysisOpen(true);
 		setAnalysisText('');
+
+		// Match the server's maxDuration=30 budget — abort cleanly if it stalls.
+		const controller = new AbortController();
+		const timeout = setTimeout(() => controller.abort(), 30_000);
+
 		try {
 			const res = await fetch('/api/lofat/investigate', {
 				method: 'POST',
@@ -180,6 +185,7 @@ function DriverInvestigationPage() {
 					fraudPattern: driver.primaryFraudPattern,
 					flaggedShifts: driver.flaggedShifts,
 				}),
+				signal: controller.signal,
 			});
 
 			if (!res.ok) throw new Error('Failed');
@@ -195,9 +201,14 @@ function DriverInvestigationPage() {
 				accumulated += decoder.decode(value, { stream: true });
 				setAnalysisText(accumulated);
 			}
-		} catch {
-			setAnalysisText('Investigation analysis failed. Please try again.');
+		} catch (err) {
+			if ((err as Error).name === 'AbortError') {
+				setAnalysisText('Investigation timed out after 30s. Please retry.');
+			} else {
+				setAnalysisText('Investigation analysis failed. Please try again.');
+			}
 		} finally {
+			clearTimeout(timeout);
 			setAnalysisLoading(false);
 		}
 	}, [driver, deliveries]);

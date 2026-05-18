@@ -55,6 +55,12 @@ export default function MetadataStep({ ctx, updateCtx, onNext, onBack }: Metadat
 		setStreamingText('');
 		const start = Date.now();
 
+		// Match the server's maxDuration=60 budget. If the server stalls past this,
+		// abort cleanly so the user sees a friendly retry message instead of a
+		// half-streamed JSON parse failure.
+		const controller = new AbortController();
+		const timeout = setTimeout(() => controller.abort(), 60_000);
+
 		try {
 			const res = await fetch('/api/dataops/generate-metadata', {
 				method: 'POST',
@@ -67,6 +73,7 @@ export default function MetadataStep({ ctx, updateCtx, onNext, onBack }: Metadat
 					industryTag: ctx.industryTag,
 					qualityReport: ctx.qualityReport,
 				}),
+				signal: controller.signal,
 			});
 
 			if (!res.ok) throw new Error('Metadata generation failed');
@@ -115,9 +122,14 @@ export default function MetadataStep({ ctx, updateCtx, onNext, onBack }: Metadat
 
 			setResponseTime(Date.now() - start);
 			updateCtx({ generatedMetadata: metadata });
-		} catch {
-			setError('Metadata generation failed. Please try again.');
+		} catch (err) {
+			if ((err as Error).name === 'AbortError') {
+				setError('Metadata generation timed out after 60s. The dataset may be too large — try splitting it or retry.');
+			} else {
+				setError('Metadata generation failed. Please try again.');
+			}
 		} finally {
+			clearTimeout(timeout);
 			setLoading(false);
 			setStreamingText('');
 		}
